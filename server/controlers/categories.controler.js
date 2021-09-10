@@ -78,3 +78,14 @@ exports.getSingle = async (req, res) => {
       .send({ message: "Categories delete error", info: error.message });
   }
 };
+
+exports.deleteAll = async (req, res) => {
+  try {
+    const { rows } = await db.query(`DELETE FROM CATEGORIES`);
+    res.status(200).send({ message: `All categories were deleted!` });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Categories deleteAll error", info: error.message });
+  }
+};
