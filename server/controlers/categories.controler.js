@@ -1,91 +1,74 @@
-const db = require("../config/database");
+const {
+  getHelper,
+  updateHelper,
+  addHelper,
+  deleteHelper,
+} = require("../helpers/index");
 
-exports.getAll = async (req, res) => {
-  try {
-    const { rows } = await db.query("SELECT NAME FROM CATEGORIES");
-    res.status(200).send(rows);
-  } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Categories getAll error", info: error.message });
-  }
+exports.getAll = (req, res) => {
+  getHelper(
+    "SELECT NAME FROM CATEGORIES",
+    "Categories getAll error",
+    res,
+    false
+  );
 };
 
-exports.getPrimary = async (req, res) => {
-  try {
-    const { rows } = await db.query(
-      "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE"
-    );
-    res.status(200).send(rows);
-  } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Categories getPrimary error", info: error.message });
-  }
+exports.getPrimary = (req, res) => {
+  getHelper(
+    "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
+    "Categories getPrimary error",
+    res,
+    false
+  );
 };
 
-exports.add = async (req, res) => {
+exports.getSingle = (req, res) => {
+  const { id } = req.params;
+  getHelper(
+    `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
+    "Categories delete error",
+    res,
+    true
+  );
+};
+
+exports.add = (req, res) => {
   const { name, show, parent } = req.body;
-  try {
-    const { rows } = await db.query(
-      "INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ($1,$2,$3)",
-      [name, show, parent]
-    );
-    res.status(201).send({ message: `Category ${name} created!` });
-  } catch (error) {
+  addHelper(
+    `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
+    `Category ${name} created!`,
+    "Categories add error",
     res
-      .status(500)
-      .send({ message: "Categories add error", info: error.message });
-  }
+  );
 };
 
-exports.update = async (req, res) => {
+exports.update = (req, res) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
-  try {
-    const { rows } = await db.query(
-      `UPDATE CATEGORIES SET NAME=$1, SHOW=$2, PARENT=$3 WHERE ID=${id}`,
-      [name, show, parent]
-    );
-    res.status(200).send({ message: `Category ${name} updated!` });
-  } catch (error) {
+  updateHelper(
+    `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent} WHERE ID=${id}`,
+    `Category ${name} updated!`,
+    "Categories update error",
     res
-      .status(500)
-      .send({ message: "Categories update error", info: error.message });
-  }
+  );
 };
 
 exports.delete = async (req, res) => {
   const { id } = req.params;
-  try {
-    const { rows } = await db.query(`DELETE FROM CATEGORIES WHERE ID=${id}`);
-    res.status(200).send({ message: `Category was deleted!` });
-  } catch (error) {
+  deleteHelper(
+    `DELETE FROM CATEGORIES WHERE ID=${id}`,
+    `Category was deleted!`,
+    "Categories delete error",
     res
-      .status(500)
-      .send({ message: "Categories delete error", info: error.message });
-  }
-};
-
-exports.getSingle = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const { rows } = await db.query(`SELECT *  FROM CATEGORIES WHERE ID=${id}`);
-    res.status(200).send(rows[0]);
-  } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Categories delete error", info: error.message });
-  }
+  );
 };
 
 exports.deleteAll = async (req, res) => {
-  try {
-    const { rows } = await db.query(`DELETE FROM CATEGORIES`);
-    res.status(200).send({ message: `All categories were deleted!` });
-  } catch (error) {
+  updateHelper(
+    `DELETE FROM CATEGORIES`,
+    `All categories were deleted!`,
+    "Categories deleteAll error",
     res
-      .status(500)
-      .send({ message: "Categories deleteAll error", info: error.message });
-  }
+  );
 };
