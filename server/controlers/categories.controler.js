@@ -71,7 +71,7 @@ exports.getSingle = async (req, res) => {
   const { id } = req.params;
   try {
     const { rows } = await db.query(`SELECT *  FROM CATEGORIES WHERE ID=${id}`);
-    res.status(201).send(rows[0]);
+    res.status(200).send(rows[0]);
   } catch (error) {
     res
       .status(500)
