@@ -74,3 +74,20 @@ exports.deleteAll = async (req, res) => {
       .send({ message: "Dishes deleteAll error", info: error.message });
   }
 };
+
+exports.getAllFromCategory = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { rows } = await db.query(
+      `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id})`
+    );
+    res.status(200).send(rows);
+  } catch (error) {
+    res
+      .status(500)
+      .send({
+        message: "Dishes getAllFromCategory error",
+        info: error.message,
+      });
+  }
+};
