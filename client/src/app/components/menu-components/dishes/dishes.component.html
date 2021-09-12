@@ -1,5 +1,9 @@
 <section class="dishes">
-  <div class="container dishes-container">
-    <div class="dishItem">{{ selectedCategoryName }}</div>
+  <div class="container dishes-container" [ngSwitch]="selectedCategoryName">
+    <app-single-category *ngSwitchCase="'All'"></app-single-category>
+    <app-dishes-list
+      *ngSwitchDefault
+      [category]="selectedCategoryName"
+    ></app-dishes-list>
   </div>
 </section>
