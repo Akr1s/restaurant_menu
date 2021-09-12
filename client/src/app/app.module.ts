@@ -9,9 +9,10 @@ import { Header } from './components/shared/header/header.component';
 import { Error404 } from './components/shared/error404/error404.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { CategoriesComponent } from './components/menu-components/categories/categories.component';
+import { DishesComponent } from './components/menu-components/dishes/dishes.component';
 
 @NgModule({
-  declarations: [AppComponent, Admin, Menu, Header, Error404, FooterComponent, CategoriesComponent],
+  declarations: [AppComponent, Admin, Menu, Header, Error404, FooterComponent, CategoriesComponent, DishesComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
