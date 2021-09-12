@@ -1,0 +1,17 @@
+<nav>
+  <div class="container nav-container">
+    <ul class="categories-horizontal">
+      <li *ngFor="let category of primaryCategoriesList">
+        {{ category.name }}
+      </li>
+    </ul>
+    <select class="dropdown">
+      <option
+        *ngFor="let category of primaryCategoriesList"
+        [value]="category.name"
+      >
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+</nav>

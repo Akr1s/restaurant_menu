@@ -8,9 +8,10 @@ import { Admin } from './pages/admin/admin.component';
 import { Header } from './components/shared/header/header.component';
 import { Error404 } from './components/shared/error404/error404.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { CategoriesComponent } from './components/menu-components/categories/categories.component';
 
 @NgModule({
-  declarations: [AppComponent, Admin, Menu, Header, Error404, FooterComponent],
+  declarations: [AppComponent, Admin, Menu, Header, Error404, FooterComponent, CategoriesComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
