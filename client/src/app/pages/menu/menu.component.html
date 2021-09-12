@@ -1,3 +1,7 @@
 <app-header [info]="true"></app-header>
-<app-categories></app-categories>
+<app-categories
+  [selectedCategoryName]="selectedCategoryName"
+  (categoryChangeEvent)="changeCategory($event)"
+></app-categories>
+<app-dishes [selectedCategoryName]="selectedCategoryName"></app-dishes>
 <app-footer></app-footer>

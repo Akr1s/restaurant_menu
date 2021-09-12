@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class Menu {}
+export class Menu {
+  selectedCategoryName: string = 'All';
+
+  changeCategory(category: string) {
+    this.selectedCategoryName = category;
+  }
+}

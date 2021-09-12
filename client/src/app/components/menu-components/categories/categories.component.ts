@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Category } from 'src/models/category.model';
 
 @Component({
@@ -7,6 +7,8 @@ import { Category } from 'src/models/category.model';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
+  @Input() selectedCategoryName: string;
+
   primaryCategoriesList: Category[] = [
     { name: 'All' },
     { name: 'First courses' },
@@ -18,6 +20,23 @@ export class CategoriesComponent implements OnInit {
     { name: 'First courses' },
     { name: 'Beverages' },
   ];
+
+  @Output() categoryChangeEvent = new EventEmitter<string>();
+
+  emitCategoryName(name: string) {
+    this.categoryChangeEvent.emit(name);
+  }
+
+  changeCategory(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    if (target) {
+      this.emitCategoryName(target.value);
+    }
+  }
+
+  changeCategoryFromNav(name: string) {
+    this.emitCategoryName(name);
+  }
 
   constructor() {}
 
