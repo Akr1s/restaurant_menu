@@ -6,69 +6,69 @@ const {
 } = require("../helpers/index");
 
 exports.getAll = (req, res) => {
-  getHelper(
-    "SELECT NAME FROM CATEGORIES",
-    "Categories getAll error",
-    res,
-    false
-  );
+  const options = {
+    query: "SELECT NAME FROM CATEGORIES",
+    errorMessage: "Categories getAll error",
+    single: false,
+  };
+  getHelper(options, res);
 };
 
 exports.getPrimary = (req, res) => {
-  getHelper(
-    "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
-    "Categories getPrimary error",
-    res,
-    false
-  );
+  const options = {
+    query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
+    errorMessage: "Categories getPrimary error",
+    single: false,
+  };
+  getHelper(options, res);
 };
 
 exports.getSingle = (req, res) => {
   const { id } = req.params;
-  getHelper(
-    `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
-    "Categories delete error",
-    res,
-    true
-  );
+  const options = {
+    query: `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
+    errorMessage: "Categories getSingle error",
+    single: true,
+  };
+  getHelper(options, res);
 };
 
 exports.add = (req, res) => {
   const { name, show, parent } = req.body;
-  addHelper(
-    `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
-    `Category ${name} created!`,
-    "Categories add error",
-    res
-  );
+  const options = {
+    query: `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
+    successMessage: `Category ${name} created!`,
+    errorMessage: "Categories add error",
+  };
+  addHelper(options, res);
 };
 
 exports.update = (req, res) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
-  updateHelper(
-    `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent} WHERE ID=${id}`,
-    `Category ${name} updated!`,
-    "Categories update error",
-    res
-  );
+  const options = {
+    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent} WHERE ID=${id}`,
+    successMessage: `Category ${name} updated!`,
+    errorMessage: "Categories update error",
+  };
+  updateHelper(options, res);
 };
 
 exports.delete = async (req, res) => {
   const { id } = req.params;
-  deleteHelper(
-    `DELETE FROM CATEGORIES WHERE ID=${id}`,
-    `Category was deleted!`,
-    "Categories delete error",
-    res
-  );
+  const options = {
+    query: `DELETE FROM CATEGORIES WHERE ID=${id}`,
+    successMessage: `Category was deleted!`,
+    errorMessage: "Categories delete error",
+  };
+  deleteHelper(options, res);
 };
 
 exports.deleteAll = async (req, res) => {
-  updateHelper(
-    `DELETE FROM CATEGORIES`,
-    `All categories were deleted!`,
-    "Categories deleteAll error",
-    res
-  );
+  const options = {
+    query: `DELETE FROM CATEGORIES`,
+    successMessage: `All categories were deleted!`,
+    errorMessage: "Categories deleteAll error",
+  };
+  updateHelper(options, res);
 };

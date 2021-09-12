@@ -1,28 +1,38 @@
 const { getHelper, updateHelper } = require("../helpers/index");
 
 exports.getAll = (req, res) => {
-  getHelper("SELECT * FROM INFO LIMIT 1", "Info getAll error", res, true);
+  const options = {
+    query: "SELECT * FROM INFO LIMIT 1",
+    errorMessage: "Info getAll error",
+    single: true,
+  };
+  getHelper(options, res);
 };
 
 exports.getTitle = (req, res) => {
-  getHelper("SELECT TITLE FROM INFO", "Info getTitle error", res, true);
+  const options = {
+    query: "SELECT TITLE FROM INFO",
+    errorMessage: "Info getTitle error",
+    single: true,
+  };
+  getHelper(options, res);
 };
 
 exports.getRestInfo = (req, res) => {
-  getHelper(
-    "SELECT ADDRESS, TEL, WIFI FROM INFO",
-    "Info getRestInfo error",
-    res,
-    true
-  );
+  const options = {
+    query: "SELECT ADDRESS, TEL, WIFI FROM INFO",
+    errorMessage: "Info getRestInfo error",
+    single: true,
+  };
+  getHelper(options, res);
 };
 
 exports.updateInfo = (req, res) => {
   const { title, address, tel, wifi } = req.body;
-  updateHelper(
-    `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
-    "Information was succesfully updated!",
-    "Info updateInfo error",
-    res
-  );
+  const options = {
+    query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
+    successMessage: "Information was succesfully updated!",
+    errorMessage: "Info updateInfo error",
+  };
+  updateHelper(options, res);
 };

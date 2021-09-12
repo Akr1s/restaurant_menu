@@ -1,6 +1,6 @@
 const db = require("../config/database");
 
-const getHelper = async (query, errorMessage, res, single) => {
+const getHelper = async ({ query, errorMessage, single } = options, res) => {
   try {
     const { rows } = await db.query(query);
     const data = single ? rows[0] : rows;
@@ -10,7 +10,10 @@ const getHelper = async (query, errorMessage, res, single) => {
   }
 };
 
-const addHelper = async (query, successMessage, errorMessage, res) => {
+const addHelper = async (
+  { query, successMessage, errorMessage } = options,
+  res
+) => {
   try {
     const { rows } = await db.query(query);
     res.status(201).send({ message: successMessage });
@@ -21,7 +24,10 @@ const addHelper = async (query, successMessage, errorMessage, res) => {
   }
 };
 
-const updateHelper = async (query, successMessage, errorMessage, res) => {
+const updateHelper = async (
+  { query, successMessage, errorMessage } = options,
+  res
+) => {
   try {
     const { rows } = db.query(query);
     res.status(200).send({ message: successMessage });
@@ -30,7 +36,10 @@ const updateHelper = async (query, successMessage, errorMessage, res) => {
   }
 };
 
-const deleteHelper = async (query, successMessage, errorMessage, res) => {
+const deleteHelper = async (
+  { query, successMessage, errorMessage } = options,
+  res
+) => {
   try {
     const { rows } = await db.query(query);
     res.status(200).send({ message: successMessage });
