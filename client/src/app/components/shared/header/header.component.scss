@@ -1,0 +1,37 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #eb862c;
+  align-items: center;
+
+  h1,
+  p.info {
+    margin: 0;
+  }
+  h1,
+  p.info {
+    font-size: 36px;
+  }
+
+  p.info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    icon {
+      color: white;
+    }
+  }
+  p.hide {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header-container {
+    h1,
+    p.info {
+      font-size: 24px;
+    }
+  }
+}
