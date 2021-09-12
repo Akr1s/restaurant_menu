@@ -1,1 +1,13 @@
-<p>dish-item works!</p>
+<div class="dish-item">
+  <div class="poster"><img [src]="dish.img" [alt]="dish.name" /></div>
+  <div class="description">
+    <h3>{{ dish.name }}</h3>
+    <p class="description-text">{{ dish.description }}</p>
+    <div class="details">
+      <p class="category">getCategory: {{ dish.category }}</p>
+      <ul class="weights">
+        <li *ngFor="let item of dish.weights | keyvalue">{{ item.key }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

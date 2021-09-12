@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Dish } from 'src/models/dish.model';
 
 @Component({
   selector: 'app-dish-item',
   templateUrl: './dish-item.component.html',
-  styleUrls: ['./dish-item.component.scss']
+  styleUrls: ['./dish-item.component.scss'],
 })
 export class DishItemComponent implements OnInit {
+  @Input() dish: Dish;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

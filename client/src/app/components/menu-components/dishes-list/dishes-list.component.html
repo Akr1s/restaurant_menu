@@ -1,1 +1,3 @@
-<p>{{ category }}</p>
+<div class="dishes-list">
+  <app-dish-item [dish]="dish" *ngFor="let dish of dishesList"></app-dish-item>
+</div>
