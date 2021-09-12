@@ -14,6 +14,15 @@ exports.getAll = (req, res) => {
   getHelper(options, res);
 };
 
+exports.getAllVisible = (req, res) => {
+  const options = {
+    query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
+    errorMessage: "Dishes getAllVisible error",
+    single: false,
+  };
+  getHelper(options, res);
+};
+
 exports.getSingle = (req, res) => {
   const { id } = req.params;
   const options = {
@@ -27,7 +36,7 @@ exports.getSingle = (req, res) => {
 exports.getAllFromCategory = (req, res) => {
   const { id } = req.params;
   const options = {
-    query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id})`,
+    query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id}) AND SHOW=TRUE`,
     errorMessage: "Dishes getAllFromCategory error",
     single: false,
   };
