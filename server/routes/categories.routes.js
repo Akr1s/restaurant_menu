@@ -7,6 +7,5 @@ router.put("/:id", controler.update);
 router.delete("/:id", controler.delete);
 router.get("/:id", controler.getSingle);
 router.get("/", controler.getAll);
-router.delete("/", controler.deleteAll);
 
 module.exports = router;

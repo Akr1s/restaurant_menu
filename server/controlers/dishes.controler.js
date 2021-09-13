@@ -77,12 +77,3 @@ exports.delete = (req, res) => {
   };
   deleteHelper(options, res);
 };
-
-exports.deleteAll = (req, res) => {
-  const options = {
-    query: `DELETE FROM DISHES`,
-    successMessage: `All dishes were deleted!`,
-    errorMessage: "Dishes deleteAll error",
-  };
-  deleteHelper(options, res);
-};

@@ -63,12 +63,3 @@ exports.delete = async (req, res) => {
   };
   deleteHelper(options, res);
 };
-
-exports.deleteAll = async (req, res) => {
-  const options = {
-    query: `DELETE FROM CATEGORIES`,
-    successMessage: `All categories were deleted!`,
-    errorMessage: "Categories deleteAll error",
-  };
-  updateHelper(options, res);
-};
