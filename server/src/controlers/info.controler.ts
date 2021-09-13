@@ -1,4 +1,4 @@
-import { getHelper, updateHelper } from "../helpers/index";
+import { getHelper, updateHelper } from "../helpers/common";
 import { Response, Request } from "express";
 
 const getAll = (req: Request, res: Response) => {

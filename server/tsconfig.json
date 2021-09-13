@@ -3,7 +3,7 @@
     "target": "ES2015",
     "rootDir": "./src",
     "outDir": "./build",
-    "module": "commonjs",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

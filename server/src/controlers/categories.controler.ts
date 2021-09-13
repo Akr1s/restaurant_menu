@@ -3,7 +3,7 @@ import {
   updateHelper,
   addHelper,
   deleteHelper,
-} from "../helpers/index";
+} from "../helpers/common";
 import { Request, Response } from "express";
 
 const getAll = (req: Request, res: Response) => {
