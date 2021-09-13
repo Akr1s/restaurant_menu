@@ -28,7 +28,7 @@ const addDataToDatabase = async (options: OptionsInterface, res: Response) => {
   } catch (error: any) {
     res
       .status(STATUS_CODES.ERROR)
-      .send({ message: errorMessage, info: error.message, stack: error.stack });
+      .send({ message: errorMessage, info: error.message });
   }
 };
 

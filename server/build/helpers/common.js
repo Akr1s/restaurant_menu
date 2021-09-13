@@ -35,7 +35,7 @@ const addDataToDatabase = (options, res) => __awaiter(void 0, void 0, void 0, fu
     catch (error) {
         res
             .status(statusCodes_1.STATUS_CODES.ERROR)
-            .send({ message: errorMessage, info: error.message, stack: error.stack });
+            .send({ message: errorMessage, info: error.message });
     }
 });
 exports.addDataToDatabase = addDataToDatabase;
