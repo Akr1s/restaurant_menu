@@ -11,15 +11,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteDataFromDatabase = exports.updateDataInDatabase = exports.addDataToDatabase = exports.getDataFromDatabase = void 0;
 const database_1 = require("../config/database");
+const statusCodes_1 = require("../constants/statusCodes");
 const getDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query, errorMessage, single } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
         const data = single ? rows[0] : rows;
-        res.status(200).send(data);
+        res.status(statusCodes_1.STATUS_CODES.OK).send(data);
     }
     catch (error) {
-        res.status(500).send({ message: errorMessage, info: error.message });
+        res
+            .status(statusCodes_1.STATUS_CODES.ERROR)
+            .send({ message: errorMessage, info: error.message });
     }
 });
 exports.getDataFromDatabase = getDataFromDatabase;
@@ -27,11 +30,11 @@ const addDataToDatabase = (options, res) => __awaiter(void 0, void 0, void 0, fu
     const { query, successMessage, errorMessage } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(201).send({ message: successMessage });
+        res.status(statusCodes_1.STATUS_CODES.CREATED).send({ message: successMessage });
     }
     catch (error) {
         res
-            .status(500)
+            .status(statusCodes_1.STATUS_CODES.ERROR)
             .send({ message: errorMessage, info: error.message, stack: error.stack });
     }
 });
@@ -40,10 +43,12 @@ const updateDataInDatabase = (options, res) => __awaiter(void 0, void 0, void 0,
     const { query, successMessage, errorMessage } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(200).send({ message: successMessage });
+        res.status(statusCodes_1.STATUS_CODES.OK).send({ message: successMessage });
     }
     catch (error) {
-        res.status(500).send({ message: errorMessage, info: error.message });
+        res
+            .status(statusCodes_1.STATUS_CODES.ERROR)
+            .send({ message: errorMessage, info: error.message });
     }
 });
 exports.updateDataInDatabase = updateDataInDatabase;
@@ -51,10 +56,12 @@ const deleteDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 
     const { query, successMessage, errorMessage } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(200).send({ message: successMessage });
+        res.status(statusCodes_1.STATUS_CODES.OK).send({ message: successMessage });
     }
     catch (error) {
-        res.status(500).send({ message: errorMessage, info: error.message });
+        res
+            .status(statusCodes_1.STATUS_CODES.ERROR)
+            .send({ message: errorMessage, info: error.message });
     }
 });
 exports.deleteDataFromDatabase = deleteDataFromDatabase;
