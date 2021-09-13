@@ -1,11 +1,12 @@
-const {
+import {
   getHelper,
   updateHelper,
   addHelper,
   deleteHelper,
-} = require("../helpers/index");
+} from "../helpers/index";
+import { Request, Response } from "express";
 
-exports.getAll = (req, res) => {
+const getAll = (req: Request, res: Response) => {
   const options = {
     query: "SELECT NAME FROM CATEGORIES",
     errorMessage: "Categories getAll error",
@@ -14,7 +15,7 @@ exports.getAll = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getPrimary = (req, res) => {
+const getPrimary = (req: Request, res: Response) => {
   const options = {
     query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
     errorMessage: "Categories getPrimary error",
@@ -23,7 +24,7 @@ exports.getPrimary = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getSingle = (req, res) => {
+const getSingle = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
@@ -33,7 +34,7 @@ exports.getSingle = (req, res) => {
   getHelper(options, res);
 };
 
-exports.add = (req, res) => {
+const add = (req: Request, res: Response) => {
   const { name, show, parent } = req.body;
   const options = {
     query: `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
@@ -43,7 +44,7 @@ exports.add = (req, res) => {
   addHelper(options, res);
 };
 
-exports.update = (req, res) => {
+const update = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
   const options = {
@@ -54,7 +55,7 @@ exports.update = (req, res) => {
   updateHelper(options, res);
 };
 
-exports.delete = async (req, res) => {
+const deleteCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `DELETE FROM CATEGORIES WHERE ID=${id}`,
@@ -62,4 +63,13 @@ exports.delete = async (req, res) => {
     errorMessage: "Categories delete error",
   };
   deleteHelper(options, res);
+};
+
+export default {
+  getAll,
+  getPrimary,
+  getSingle,
+  add,
+  update,
+  deleteCategory,
 };

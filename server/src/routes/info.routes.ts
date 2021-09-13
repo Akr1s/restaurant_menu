@@ -1,10 +1,11 @@
-const router = require("express-promise-router")();
+import promiseRouter from "express-promise-router";
+import controler from "../controlers/info.controler";
 
-const controler = require("../controlers/info.controler");
+const router = promiseRouter();
 
 router.get("/title", controler.getTitle);
 router.get("/rest", controler.getRestInfo);
 router.get("/", controler.getAll);
 router.put("/", controler.updateInfo);
 
-module.exports = router;
+export default router;

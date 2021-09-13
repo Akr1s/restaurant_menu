@@ -1,11 +1,12 @@
-const {
+import {
   getHelper,
   addHelper,
   updateHelper,
   deleteHelper,
-} = require("../helpers/index");
+} from "../helpers/index";
+import { Request, Response } from "express";
 
-exports.getAll = (req, res) => {
+const getAll = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM DISHES",
     errorMessage: "Dishes getAll error",
@@ -14,7 +15,7 @@ exports.getAll = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getAllVisible = (req, res) => {
+const getAllVisible = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
     errorMessage: "Dishes getAllVisible error",
@@ -23,7 +24,7 @@ exports.getAllVisible = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getSingle = (req, res) => {
+const getSingle = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT *  FROM DISHES WHERE ID=${id}`,
@@ -33,7 +34,7 @@ exports.getSingle = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getAllFromCategory = (req, res) => {
+const getAllFromCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id}) AND SHOW=TRUE`,
@@ -43,7 +44,7 @@ exports.getAllFromCategory = (req, res) => {
   getHelper(options, res);
 };
 
-exports.add = (req, res) => {
+const add = (req: Request, res: Response) => {
   const { name, description, img, show, category, weights } = req.body;
   const options = {
     query: `INSERT INTO DISHES(NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
@@ -55,7 +56,7 @@ exports.add = (req, res) => {
   addHelper(options, res);
 };
 
-exports.update = (req, res) => {
+const update = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, description, img, show, category, weights } = req.body;
   const options = {
@@ -68,7 +69,7 @@ exports.update = (req, res) => {
   updateHelper(options, res);
 };
 
-exports.delete = (req, res) => {
+const deleteDish = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `DELETE FROM DISHES WHERE ID=${id}`,
@@ -76,4 +77,14 @@ exports.delete = (req, res) => {
     errorMessage: "Dishes delete error",
   };
   deleteHelper(options, res);
+};
+
+export default {
+  getAll,
+  getAllVisible,
+  getSingle,
+  getAllFromCategory,
+  add,
+  update,
+  deleteDish,
 };

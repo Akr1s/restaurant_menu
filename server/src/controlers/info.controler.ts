@@ -1,6 +1,7 @@
-const { getHelper, updateHelper } = require("../helpers/index");
+import { getHelper, updateHelper } from "../helpers/index";
+import { Response, Request } from "express";
 
-exports.getAll = (req, res) => {
+const getAll = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM INFO LIMIT 1",
     errorMessage: "Info getAll error",
@@ -9,7 +10,7 @@ exports.getAll = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getTitle = (req, res) => {
+const getTitle = (req: Request, res: Response) => {
   const options = {
     query: "SELECT TITLE FROM INFO",
     errorMessage: "Info getTitle error",
@@ -18,7 +19,7 @@ exports.getTitle = (req, res) => {
   getHelper(options, res);
 };
 
-exports.getRestInfo = (req, res) => {
+const getRestInfo = (req: Request, res: Response) => {
   const options = {
     query: "SELECT ADDRESS, TEL, WIFI FROM INFO",
     errorMessage: "Info getRestInfo error",
@@ -27,7 +28,7 @@ exports.getRestInfo = (req, res) => {
   getHelper(options, res);
 };
 
-exports.updateInfo = (req, res) => {
+const updateInfo = (req: Request, res: Response) => {
   const { title, address, tel, wifi } = req.body;
   const options = {
     query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
@@ -35,4 +36,11 @@ exports.updateInfo = (req, res) => {
     errorMessage: "Info updateInfo error",
   };
   updateHelper(options, res);
+};
+
+export default {
+  getAll,
+  getTitle,
+  getRestInfo,
+  updateInfo,
 };
