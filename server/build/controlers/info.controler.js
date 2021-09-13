@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
 const infoMessages_1 = require("../constants/infoMessages");
+const statusCodes_1 = require("../constants/statusCodes");
 const getAllInfo = (req, res) => {
     const options = {
         query: "SELECT * FROM INFO LIMIT 1",
@@ -32,8 +33,10 @@ const updateInfo = (req, res) => {
         query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
         successMessage: infoMessages_1.INFO_MESSAGES.UPDATE_SUCCESS,
         errorMessage: infoMessages_1.INFO_MESSAGES.UPDATE_ERROR,
+        successStatusCode: statusCodes_1.STATUS_CODES.OK,
+        errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
-    (0, common_1.updateDataInDatabase)(options, res);
+    (0, common_1.handleDatabaseQuery)(options, res);
 };
 exports.default = {
     getAllInfo,

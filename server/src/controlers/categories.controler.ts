@@ -1,11 +1,8 @@
-import {
-  getDataFromDatabase,
-  updateDataInDatabase,
-  addDataToDatabase,
-  deleteDataFromDatabase,
-} from "../helpers/common";
+import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
 import { Request, Response } from "express";
 import { CATEGORIES_MESSAGES } from "../constants/categoriesMessages";
+import { STATUS_CODES } from "../constants/statusCodes";
+import { v4 as uuidv4 } from "uuid";
 
 const getAllCategories = (req: Request, res: Response) => {
   const options = {
@@ -38,11 +35,13 @@ const getSingleCategory = (req: Request, res: Response) => {
 const addCategory = (req: Request, res: Response) => {
   const { name, show, parent } = req.body;
   const options = {
-    query: `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
+    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT) VALUES ('${uuidv4()}','${name}',${show},${parent})`,
     successMessage: CATEGORIES_MESSAGES.ADD_SUCCESS,
     errorMessage: CATEGORIES_MESSAGES.ADD_ERROR,
+    successStatusCode: STATUS_CODES.CREATED,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  addDataToDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 const updateCategory = (req: Request, res: Response) => {
@@ -52,8 +51,10 @@ const updateCategory = (req: Request, res: Response) => {
     query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent} WHERE ID=${id}`,
     successMessage: CATEGORIES_MESSAGES.UPDATE_SUCCESS,
     errorMessage: CATEGORIES_MESSAGES.UPDATE_ERROR,
+    successStatusCode: STATUS_CODES.OK,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  updateDataInDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 const deleteCategory = (req: Request, res: Response) => {
@@ -62,8 +63,10 @@ const deleteCategory = (req: Request, res: Response) => {
     query: `DELETE FROM CATEGORIES WHERE ID=${id}`,
     successMessage: CATEGORIES_MESSAGES.DELETE_SUCCESS,
     errorMessage: CATEGORIES_MESSAGES.DELETE_ERROR,
+    successStatusCode: STATUS_CODES.OK,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  deleteDataFromDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 export default {

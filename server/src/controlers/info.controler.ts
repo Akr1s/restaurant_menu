@@ -1,6 +1,7 @@
-import { getDataFromDatabase, updateDataInDatabase } from "../helpers/common";
+import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
 import { Response, Request } from "express";
 import { INFO_MESSAGES } from "../constants/infoMessages";
+import { STATUS_CODES } from "../constants/statusCodes";
 
 const getAllInfo = (req: Request, res: Response) => {
   const options = {
@@ -35,8 +36,10 @@ const updateInfo = (req: Request, res: Response) => {
     query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
     successMessage: INFO_MESSAGES.UPDATE_SUCCESS,
     errorMessage: INFO_MESSAGES.UPDATE_ERROR,
+    successStatusCode: STATUS_CODES.OK,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  updateDataInDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 export default {

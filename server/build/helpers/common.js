@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteDataFromDatabase = exports.updateDataInDatabase = exports.addDataToDatabase = exports.getDataFromDatabase = void 0;
+exports.handleDatabaseQuery = exports.getDataFromDatabase = void 0;
 const database_1 = require("../config/database");
 const statusCodes_1 = require("../constants/statusCodes");
 const getDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,42 +26,16 @@ const getDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, 
     }
 });
 exports.getDataFromDatabase = getDataFromDatabase;
-const addDataToDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { query, successMessage, errorMessage } = options;
+const handleDatabaseQuery = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { query, successMessage, errorMessage, successStatusCode, errorStatusCode, } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(statusCodes_1.STATUS_CODES.CREATED).send({ message: successMessage });
+        res.status(successStatusCode).send({ message: successMessage });
     }
     catch (error) {
         res
-            .status(statusCodes_1.STATUS_CODES.ERROR)
+            .status(errorStatusCode)
             .send({ message: errorMessage, info: error.message });
     }
 });
-exports.addDataToDatabase = addDataToDatabase;
-const updateDataInDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { query, successMessage, errorMessage } = options;
-    try {
-        const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(statusCodes_1.STATUS_CODES.OK).send({ message: successMessage });
-    }
-    catch (error) {
-        res
-            .status(statusCodes_1.STATUS_CODES.ERROR)
-            .send({ message: errorMessage, info: error.message });
-    }
-});
-exports.updateDataInDatabase = updateDataInDatabase;
-const deleteDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { query, successMessage, errorMessage } = options;
-    try {
-        const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(statusCodes_1.STATUS_CODES.OK).send({ message: successMessage });
-    }
-    catch (error) {
-        res
-            .status(statusCodes_1.STATUS_CODES.ERROR)
-            .send({ message: errorMessage, info: error.message });
-    }
-});
-exports.deleteDataFromDatabase = deleteDataFromDatabase;
+exports.handleDatabaseQuery = handleDatabaseQuery;

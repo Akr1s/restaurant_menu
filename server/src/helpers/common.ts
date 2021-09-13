@@ -20,51 +20,25 @@ const getDataFromDatabase = async (
   }
 };
 
-const addDataToDatabase = async (options: OptionsInterface, res: Response) => {
-  const { query, successMessage, errorMessage } = options;
-  try {
-    const { rows } = await databaseQuery(query);
-    res.status(STATUS_CODES.CREATED).send({ message: successMessage });
-  } catch (error: any) {
-    res
-      .status(STATUS_CODES.ERROR)
-      .send({ message: errorMessage, info: error.message });
-  }
-};
-
-const updateDataInDatabase = async (
+const handleDatabaseQuery = async (
   options: OptionsInterface,
   res: Response
 ) => {
-  const { query, successMessage, errorMessage } = options;
+  const {
+    query,
+    successMessage,
+    errorMessage,
+    successStatusCode,
+    errorStatusCode,
+  } = options;
   try {
     const { rows } = await databaseQuery(query);
-    res.status(STATUS_CODES.OK).send({ message: successMessage });
+    res.status(successStatusCode).send({ message: successMessage });
   } catch (error: any) {
     res
-      .status(STATUS_CODES.ERROR)
+      .status(errorStatusCode)
       .send({ message: errorMessage, info: error.message });
   }
 };
 
-const deleteDataFromDatabase = async (
-  options: OptionsInterface,
-  res: Response
-) => {
-  const { query, successMessage, errorMessage } = options;
-  try {
-    const { rows } = await databaseQuery(query);
-    res.status(STATUS_CODES.OK).send({ message: successMessage });
-  } catch (error: any) {
-    res
-      .status(STATUS_CODES.ERROR)
-      .send({ message: errorMessage, info: error.message });
-  }
-};
-
-export {
-  getDataFromDatabase,
-  addDataToDatabase,
-  updateDataInDatabase,
-  deleteDataFromDatabase,
-};
+export { getDataFromDatabase, handleDatabaseQuery };

@@ -1,11 +1,8 @@
-import {
-  getDataFromDatabase,
-  addDataToDatabase,
-  updateDataInDatabase,
-  deleteDataFromDatabase,
-} from "../helpers/common";
+import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
 import { Request, Response } from "express";
 import { DISHES_MESSAGES } from "../constants/dishesMessages";
+import { STATUS_CODES } from "../constants/statusCodes";
+import { v4 as uuidv4 } from "uuid";
 
 const getAllDishes = (req: Request, res: Response) => {
   const options = {
@@ -48,13 +45,15 @@ const getAllDishesFromCategory = (req: Request, res: Response) => {
 const addDish = (req: Request, res: Response) => {
   const { name, description, img, show, category, weights } = req.body;
   const options = {
-    query: `INSERT INTO DISHES(NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
+    query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
       weights
     )}')`,
     successMessage: DISHES_MESSAGES.ADD_SUCCESS,
     errorMessage: DISHES_MESSAGES.ADD_ERROR,
+    successStatusCode: STATUS_CODES.CREATED,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  addDataToDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 const updateDish = (req: Request, res: Response) => {
@@ -66,8 +65,10 @@ const updateDish = (req: Request, res: Response) => {
     )}' WHERE ID=${id}`,
     successMessage: DISHES_MESSAGES.UPDATE_SUCCESS,
     errorMessage: DISHES_MESSAGES.UPDATE_ERROR,
+    successStatusCode: STATUS_CODES.OK,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  updateDataInDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 const deleteDish = (req: Request, res: Response) => {
@@ -76,8 +77,10 @@ const deleteDish = (req: Request, res: Response) => {
     query: `DELETE FROM DISHES WHERE ID=${id}`,
     successMessage: DISHES_MESSAGES.DELETE_SUCCESS,
     errorMessage: DISHES_MESSAGES.DELETE_ERROR,
+    successStatusCode: STATUS_CODES.OK,
+    errorStatusCode: STATUS_CODES.ERROR,
   };
-  deleteDataFromDatabase(options, res);
+  handleDatabaseQuery(options, res);
 };
 
 export default {

@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
 const dishesMessages_1 = require("../constants/dishesMessages");
+const statusCodes_1 = require("../constants/statusCodes");
+const uuid_1 = require("uuid");
 const getAllDishes = (req, res) => {
     const options = {
         query: "SELECT * FROM DISHES",
@@ -39,11 +41,13 @@ const getAllDishesFromCategory = (req, res) => {
 const addDish = (req, res) => {
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `INSERT INTO DISHES(NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}')`,
+        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}')`,
         successMessage: dishesMessages_1.DISHES_MESSAGES.ADD_SUCCESS,
         errorMessage: dishesMessages_1.DISHES_MESSAGES.ADD_ERROR,
+        successStatusCode: statusCodes_1.STATUS_CODES.CREATED,
+        errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
-    (0, common_1.addDataToDatabase)(options, res);
+    (0, common_1.handleDatabaseQuery)(options, res);
 };
 const updateDish = (req, res) => {
     const { id } = req.params;
@@ -52,8 +56,10 @@ const updateDish = (req, res) => {
         query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}' WHERE ID=${id}`,
         successMessage: dishesMessages_1.DISHES_MESSAGES.UPDATE_SUCCESS,
         errorMessage: dishesMessages_1.DISHES_MESSAGES.UPDATE_ERROR,
+        successStatusCode: statusCodes_1.STATUS_CODES.OK,
+        errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
-    (0, common_1.updateDataInDatabase)(options, res);
+    (0, common_1.handleDatabaseQuery)(options, res);
 };
 const deleteDish = (req, res) => {
     const { id } = req.params;
@@ -61,8 +67,10 @@ const deleteDish = (req, res) => {
         query: `DELETE FROM DISHES WHERE ID=${id}`,
         successMessage: dishesMessages_1.DISHES_MESSAGES.DELETE_SUCCESS,
         errorMessage: dishesMessages_1.DISHES_MESSAGES.DELETE_ERROR,
+        successStatusCode: statusCodes_1.STATUS_CODES.OK,
+        errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
-    (0, common_1.deleteDataFromDatabase)(options, res);
+    (0, common_1.handleDatabaseQuery)(options, res);
 };
 exports.default = {
     getAllDishes,
