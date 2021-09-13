@@ -1,8 +1,8 @@
 import {
-  getHelper,
-  addHelper,
-  updateHelper,
-  deleteHelper,
+  getDataFromDatabase,
+  addDataToDatabase,
+  updateDataInDatabase,
+  deleteDataFromDatabase,
 } from "../helpers/common";
 import { Request, Response } from "express";
 
@@ -12,7 +12,7 @@ const getAllDishes = (req: Request, res: Response) => {
     errorMessage: "Dishes getAll error",
     single: false,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getAllVisibleDishes = (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ const getAllVisibleDishes = (req: Request, res: Response) => {
     errorMessage: "Dishes getAllVisible error",
     single: false,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getSingleDish = (req: Request, res: Response) => {
@@ -31,7 +31,7 @@ const getSingleDish = (req: Request, res: Response) => {
     errorMessage: "Dishes getSingle error",
     single: true,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getAllDishesFromCategory = (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ const getAllDishesFromCategory = (req: Request, res: Response) => {
     errorMessage: "Dishes getAllFromCategory error",
     single: false,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const addDish = (req: Request, res: Response) => {
@@ -53,7 +53,7 @@ const addDish = (req: Request, res: Response) => {
     successMessage: `Dish ${name} created!`,
     errorMessage: "Dishes add error",
   };
-  addHelper(options, res);
+  addDataToDatabase(options, res);
 };
 
 const updateDish = (req: Request, res: Response) => {
@@ -66,7 +66,7 @@ const updateDish = (req: Request, res: Response) => {
     successMessage: `Dish ${name} updated!`,
     errorMessage: "Dishes update error",
   };
-  updateHelper(options, res);
+  updateDataInDatabase(options, res);
 };
 
 const deleteDish = (req: Request, res: Response) => {
@@ -76,7 +76,7 @@ const deleteDish = (req: Request, res: Response) => {
     successMessage: `Dish was deleted!`,
     errorMessage: "Dishes delete error",
   };
-  deleteHelper(options, res);
+  deleteDataFromDatabase(options, res);
 };
 
 export default {

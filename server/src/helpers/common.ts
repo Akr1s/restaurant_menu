@@ -3,7 +3,10 @@ import { Response } from "express";
 import GetOptionsInterface from "../interfaces/getOptions";
 import OptionsInterface from "../interfaces/options";
 
-const getHelper = async (options: GetOptionsInterface, res: Response) => {
+const getDataFromDatabase = async (
+  options: GetOptionsInterface,
+  res: Response
+) => {
   const { query, errorMessage, single } = options;
   try {
     const { rows } = await databaseQuery(query);
@@ -14,7 +17,7 @@ const getHelper = async (options: GetOptionsInterface, res: Response) => {
   }
 };
 
-const addHelper = async (options: OptionsInterface, res: Response) => {
+const addDataToDatabase = async (options: OptionsInterface, res: Response) => {
   const { query, successMessage, errorMessage } = options;
   try {
     const { rows } = await databaseQuery(query);
@@ -26,7 +29,10 @@ const addHelper = async (options: OptionsInterface, res: Response) => {
   }
 };
 
-const updateHelper = async (options: OptionsInterface, res: Response) => {
+const updateDataInDatabase = async (
+  options: OptionsInterface,
+  res: Response
+) => {
   const { query, successMessage, errorMessage } = options;
   try {
     const { rows } = await databaseQuery(query);
@@ -36,7 +42,10 @@ const updateHelper = async (options: OptionsInterface, res: Response) => {
   }
 };
 
-const deleteHelper = async (options: OptionsInterface, res: Response) => {
+const deleteDataFromDatabase = async (
+  options: OptionsInterface,
+  res: Response
+) => {
   const { query, successMessage, errorMessage } = options;
   try {
     const { rows } = await databaseQuery(query);
@@ -46,4 +55,9 @@ const deleteHelper = async (options: OptionsInterface, res: Response) => {
   }
 };
 
-export { getHelper, addHelper, updateHelper, deleteHelper };
+export {
+  getDataFromDatabase,
+  addDataToDatabase,
+  updateDataInDatabase,
+  deleteDataFromDatabase,
+};

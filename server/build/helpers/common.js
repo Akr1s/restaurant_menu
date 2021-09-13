@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteHelper = exports.updateHelper = exports.addHelper = exports.getHelper = void 0;
+exports.deleteDataFromDatabase = exports.updateDataInDatabase = exports.addDataToDatabase = exports.getDataFromDatabase = void 0;
 const database_1 = require("../config/database");
-const getHelper = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query, errorMessage, single } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
@@ -22,8 +22,8 @@ const getHelper = (options, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).send({ message: errorMessage, info: error.message });
     }
 });
-exports.getHelper = getHelper;
-const addHelper = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getDataFromDatabase = getDataFromDatabase;
+const addDataToDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query, successMessage, errorMessage } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
@@ -35,8 +35,8 @@ const addHelper = (options, res) => __awaiter(void 0, void 0, void 0, function* 
             .send({ message: errorMessage, info: error.message, stack: error.stack });
     }
 });
-exports.addHelper = addHelper;
-const updateHelper = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addDataToDatabase = addDataToDatabase;
+const updateDataInDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query, successMessage, errorMessage } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
@@ -46,8 +46,8 @@ const updateHelper = (options, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).send({ message: errorMessage, info: error.message });
     }
 });
-exports.updateHelper = updateHelper;
-const deleteHelper = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateDataInDatabase = updateDataInDatabase;
+const deleteDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query, successMessage, errorMessage } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
@@ -57,4 +57,4 @@ const deleteHelper = (options, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).send({ message: errorMessage, info: error.message });
     }
 });
-exports.deleteHelper = deleteHelper;
+exports.deleteDataFromDatabase = deleteDataFromDatabase;

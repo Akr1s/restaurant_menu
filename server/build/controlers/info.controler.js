@@ -7,7 +7,7 @@ const getAllInfo = (req, res) => {
         errorMessage: "Info getAll error",
         single: true,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getTitle = (req, res) => {
     const options = {
@@ -15,7 +15,7 @@ const getTitle = (req, res) => {
         errorMessage: "Info getTitle error",
         single: true,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getRestInfo = (req, res) => {
     const options = {
@@ -23,7 +23,7 @@ const getRestInfo = (req, res) => {
         errorMessage: "Info getRestInfo error",
         single: true,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const updateInfo = (req, res) => {
     const { title, address, tel, wifi } = req.body;
@@ -32,7 +32,7 @@ const updateInfo = (req, res) => {
         successMessage: "Information was succesfully updated!",
         errorMessage: "Info updateInfo error",
     };
-    (0, common_1.updateHelper)(options, res);
+    (0, common_1.updateDataInDatabase)(options, res);
 };
 exports.default = {
     getAllInfo,

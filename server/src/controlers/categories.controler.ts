@@ -1,8 +1,8 @@
 import {
-  getHelper,
-  updateHelper,
-  addHelper,
-  deleteHelper,
+  getDataFromDatabase,
+  updateDataInDatabase,
+  addDataToDatabase,
+  deleteDataFromDatabase,
 } from "../helpers/common";
 import { Request, Response } from "express";
 
@@ -12,7 +12,7 @@ const getAllCategories = (req: Request, res: Response) => {
     errorMessage: "Categories getAll error",
     single: false,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getPrimaryCategories = (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ const getPrimaryCategories = (req: Request, res: Response) => {
     errorMessage: "Categories getPrimary error",
     single: false,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getSingleCategory = (req: Request, res: Response) => {
@@ -31,7 +31,7 @@ const getSingleCategory = (req: Request, res: Response) => {
     errorMessage: "Categories getSingle error",
     single: true,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const addCategory = (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ const addCategory = (req: Request, res: Response) => {
     successMessage: `Category ${name} created!`,
     errorMessage: "Categories add error",
   };
-  addHelper(options, res);
+  addDataToDatabase(options, res);
 };
 
 const updateCategory = (req: Request, res: Response) => {
@@ -52,7 +52,7 @@ const updateCategory = (req: Request, res: Response) => {
     successMessage: `Category ${name} updated!`,
     errorMessage: "Categories update error",
   };
-  updateHelper(options, res);
+  updateDataInDatabase(options, res);
 };
 
 const deleteCategory = (req: Request, res: Response) => {
@@ -62,7 +62,7 @@ const deleteCategory = (req: Request, res: Response) => {
     successMessage: `Category was deleted!`,
     errorMessage: "Categories delete error",
   };
-  deleteHelper(options, res);
+  deleteDataFromDatabase(options, res);
 };
 
 export default {

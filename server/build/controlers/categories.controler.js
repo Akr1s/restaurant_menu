@@ -7,7 +7,7 @@ const getAllCategories = (req, res) => {
         errorMessage: "Categories getAll error",
         single: false,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getPrimaryCategories = (req, res) => {
     const options = {
@@ -15,7 +15,7 @@ const getPrimaryCategories = (req, res) => {
         errorMessage: "Categories getPrimary error",
         single: false,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getSingleCategory = (req, res) => {
     const { id } = req.params;
@@ -24,7 +24,7 @@ const getSingleCategory = (req, res) => {
         errorMessage: "Categories getSingle error",
         single: true,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const addCategory = (req, res) => {
     const { name, show, parent } = req.body;
@@ -33,7 +33,7 @@ const addCategory = (req, res) => {
         successMessage: `Category ${name} created!`,
         errorMessage: "Categories add error",
     };
-    (0, common_1.addHelper)(options, res);
+    (0, common_1.addDataToDatabase)(options, res);
 };
 const updateCategory = (req, res) => {
     const { id } = req.params;
@@ -43,7 +43,7 @@ const updateCategory = (req, res) => {
         successMessage: `Category ${name} updated!`,
         errorMessage: "Categories update error",
     };
-    (0, common_1.updateHelper)(options, res);
+    (0, common_1.updateDataInDatabase)(options, res);
 };
 const deleteCategory = (req, res) => {
     const { id } = req.params;
@@ -52,7 +52,7 @@ const deleteCategory = (req, res) => {
         successMessage: `Category was deleted!`,
         errorMessage: "Categories delete error",
     };
-    (0, common_1.deleteHelper)(options, res);
+    (0, common_1.deleteDataFromDatabase)(options, res);
 };
 exports.default = {
     getAllCategories,

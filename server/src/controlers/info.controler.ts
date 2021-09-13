@@ -1,4 +1,4 @@
-import { getHelper, updateHelper } from "../helpers/common";
+import { getDataFromDatabase, updateDataInDatabase } from "../helpers/common";
 import { Response, Request } from "express";
 
 const getAllInfo = (req: Request, res: Response) => {
@@ -7,7 +7,7 @@ const getAllInfo = (req: Request, res: Response) => {
     errorMessage: "Info getAll error",
     single: true,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getTitle = (req: Request, res: Response) => {
@@ -16,7 +16,7 @@ const getTitle = (req: Request, res: Response) => {
     errorMessage: "Info getTitle error",
     single: true,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const getRestInfo = (req: Request, res: Response) => {
@@ -25,7 +25,7 @@ const getRestInfo = (req: Request, res: Response) => {
     errorMessage: "Info getRestInfo error",
     single: true,
   };
-  getHelper(options, res);
+  getDataFromDatabase(options, res);
 };
 
 const updateInfo = (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ const updateInfo = (req: Request, res: Response) => {
     successMessage: "Information was succesfully updated!",
     errorMessage: "Info updateInfo error",
   };
-  updateHelper(options, res);
+  updateDataInDatabase(options, res);
 };
 
 export default {

@@ -7,7 +7,7 @@ const getAllDishes = (req, res) => {
         errorMessage: "Dishes getAll error",
         single: false,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getAllVisibleDishes = (req, res) => {
     const options = {
@@ -15,7 +15,7 @@ const getAllVisibleDishes = (req, res) => {
         errorMessage: "Dishes getAllVisible error",
         single: false,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getSingleDish = (req, res) => {
     const { id } = req.params;
@@ -24,7 +24,7 @@ const getSingleDish = (req, res) => {
         errorMessage: "Dishes getSingle error",
         single: true,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const getAllDishesFromCategory = (req, res) => {
     const { id } = req.params;
@@ -33,7 +33,7 @@ const getAllDishesFromCategory = (req, res) => {
         errorMessage: "Dishes getAllFromCategory error",
         single: false,
     };
-    (0, common_1.getHelper)(options, res);
+    (0, common_1.getDataFromDatabase)(options, res);
 };
 const addDish = (req, res) => {
     const { name, description, img, show, category, weights } = req.body;
@@ -42,7 +42,7 @@ const addDish = (req, res) => {
         successMessage: `Dish ${name} created!`,
         errorMessage: "Dishes add error",
     };
-    (0, common_1.addHelper)(options, res);
+    (0, common_1.addDataToDatabase)(options, res);
 };
 const updateDish = (req, res) => {
     const { id } = req.params;
@@ -52,7 +52,7 @@ const updateDish = (req, res) => {
         successMessage: `Dish ${name} updated!`,
         errorMessage: "Dishes update error",
     };
-    (0, common_1.updateHelper)(options, res);
+    (0, common_1.updateDataInDatabase)(options, res);
 };
 const deleteDish = (req, res) => {
     const { id } = req.params;
@@ -61,7 +61,7 @@ const deleteDish = (req, res) => {
         successMessage: `Dish was deleted!`,
         errorMessage: "Dishes delete error",
     };
-    (0, common_1.deleteHelper)(options, res);
+    (0, common_1.deleteDataFromDatabase)(options, res);
 };
 exports.default = {
     getAllDishes,
