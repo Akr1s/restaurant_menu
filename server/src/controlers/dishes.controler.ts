@@ -6,7 +6,7 @@ import {
 } from "../helpers/common";
 import { Request, Response } from "express";
 
-const getAll = (req: Request, res: Response) => {
+const getAllDishes = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM DISHES",
     errorMessage: "Dishes getAll error",
@@ -15,7 +15,7 @@ const getAll = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const getAllVisible = (req: Request, res: Response) => {
+const getAllVisibleDishes = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
     errorMessage: "Dishes getAllVisible error",
@@ -24,7 +24,7 @@ const getAllVisible = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const getSingle = (req: Request, res: Response) => {
+const getSingleDish = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT *  FROM DISHES WHERE ID=${id}`,
@@ -34,7 +34,7 @@ const getSingle = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const getAllFromCategory = (req: Request, res: Response) => {
+const getAllDishesFromCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id}) AND SHOW=TRUE`,
@@ -44,7 +44,7 @@ const getAllFromCategory = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const add = (req: Request, res: Response) => {
+const addDish = (req: Request, res: Response) => {
   const { name, description, img, show, category, weights } = req.body;
   const options = {
     query: `INSERT INTO DISHES(NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
@@ -56,7 +56,7 @@ const add = (req: Request, res: Response) => {
   addHelper(options, res);
 };
 
-const update = (req: Request, res: Response) => {
+const updateDish = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, description, img, show, category, weights } = req.body;
   const options = {
@@ -80,11 +80,11 @@ const deleteDish = (req: Request, res: Response) => {
 };
 
 export default {
-  getAll,
-  getAllVisible,
-  getSingle,
-  getAllFromCategory,
-  add,
-  update,
+  getAllDishes,
+  getAllVisibleDishes,
+  getSingleDish,
+  getAllDishesFromCategory,
+  addDish,
+  updateDish,
   deleteDish,
 };

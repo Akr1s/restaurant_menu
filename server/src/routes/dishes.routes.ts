@@ -3,12 +3,12 @@ import controler from "../controlers/dishes.controler";
 
 const router = promiseRouter();
 
-router.post("/add", controler.add);
-router.get("/select/visible", controler.getAllVisible);
-router.get("/select/:id", controler.getAllFromCategory);
-router.get("/:id", controler.getSingle);
-router.put("/:id", controler.update);
+router.post("/add", controler.addDish);
+router.get("/select/visible", controler.getAllVisibleDishes);
+router.get("/select/:id", controler.getAllDishesFromCategory);
+router.get("/:id", controler.getSingleDish);
+router.put("/:id", controler.updateDish);
 router.delete("/:id", controler.deleteDish);
-router.get("/", controler.getAll);
+router.get("/", controler.getAllDishes);
 
 export default router;

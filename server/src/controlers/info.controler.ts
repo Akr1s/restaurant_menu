@@ -1,7 +1,7 @@
 import { getHelper, updateHelper } from "../helpers/common";
 import { Response, Request } from "express";
 
-const getAll = (req: Request, res: Response) => {
+const getAllInfo = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM INFO LIMIT 1",
     errorMessage: "Info getAll error",
@@ -39,7 +39,7 @@ const updateInfo = (req: Request, res: Response) => {
 };
 
 export default {
-  getAll,
+  getAllInfo,
   getTitle,
   getRestInfo,
   updateInfo,

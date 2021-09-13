@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
-const getAll = (req, res) => {
+const getAllDishes = (req, res) => {
     const options = {
         query: "SELECT * FROM DISHES",
         errorMessage: "Dishes getAll error",
@@ -9,7 +9,7 @@ const getAll = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const getAllVisible = (req, res) => {
+const getAllVisibleDishes = (req, res) => {
     const options = {
         query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
         errorMessage: "Dishes getAllVisible error",
@@ -17,7 +17,7 @@ const getAllVisible = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const getSingle = (req, res) => {
+const getSingleDish = (req, res) => {
     const { id } = req.params;
     const options = {
         query: `SELECT *  FROM DISHES WHERE ID=${id}`,
@@ -26,7 +26,7 @@ const getSingle = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const getAllFromCategory = (req, res) => {
+const getAllDishesFromCategory = (req, res) => {
     const { id } = req.params;
     const options = {
         query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id}) AND SHOW=TRUE`,
@@ -35,7 +35,7 @@ const getAllFromCategory = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const add = (req, res) => {
+const addDish = (req, res) => {
     const { name, description, img, show, category, weights } = req.body;
     const options = {
         query: `INSERT INTO DISHES(NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}')`,
@@ -44,7 +44,7 @@ const add = (req, res) => {
     };
     (0, common_1.addHelper)(options, res);
 };
-const update = (req, res) => {
+const updateDish = (req, res) => {
     const { id } = req.params;
     const { name, description, img, show, category, weights } = req.body;
     const options = {
@@ -64,11 +64,11 @@ const deleteDish = (req, res) => {
     (0, common_1.deleteHelper)(options, res);
 };
 exports.default = {
-    getAll,
-    getAllVisible,
-    getSingle,
-    getAllFromCategory,
-    add,
-    update,
+    getAllDishes,
+    getAllVisibleDishes,
+    getSingleDish,
+    getAllDishesFromCategory,
+    addDish,
+    updateDish,
     deleteDish,
 };

@@ -6,7 +6,7 @@ import {
 } from "../helpers/common";
 import { Request, Response } from "express";
 
-const getAll = (req: Request, res: Response) => {
+const getAllCategories = (req: Request, res: Response) => {
   const options = {
     query: "SELECT NAME FROM CATEGORIES",
     errorMessage: "Categories getAll error",
@@ -15,7 +15,7 @@ const getAll = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const getPrimary = (req: Request, res: Response) => {
+const getPrimaryCategories = (req: Request, res: Response) => {
   const options = {
     query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
     errorMessage: "Categories getPrimary error",
@@ -24,7 +24,7 @@ const getPrimary = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const getSingle = (req: Request, res: Response) => {
+const getSingleCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
@@ -34,7 +34,7 @@ const getSingle = (req: Request, res: Response) => {
   getHelper(options, res);
 };
 
-const add = (req: Request, res: Response) => {
+const addCategory = (req: Request, res: Response) => {
   const { name, show, parent } = req.body;
   const options = {
     query: `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
@@ -44,7 +44,7 @@ const add = (req: Request, res: Response) => {
   addHelper(options, res);
 };
 
-const update = (req: Request, res: Response) => {
+const updateCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
   const options = {
@@ -66,10 +66,10 @@ const deleteCategory = (req: Request, res: Response) => {
 };
 
 export default {
-  getAll,
-  getPrimary,
-  getSingle,
-  add,
-  update,
+  getAllCategories,
+  getPrimaryCategories,
+  getSingleCategory,
+  addCategory,
+  updateCategory,
   deleteCategory,
 };

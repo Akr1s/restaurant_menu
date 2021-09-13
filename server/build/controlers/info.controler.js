@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
-const getAll = (req, res) => {
+const getAllInfo = (req, res) => {
     const options = {
         query: "SELECT * FROM INFO LIMIT 1",
         errorMessage: "Info getAll error",
@@ -35,7 +35,7 @@ const updateInfo = (req, res) => {
     (0, common_1.updateHelper)(options, res);
 };
 exports.default = {
-    getAll,
+    getAllInfo,
     getTitle,
     getRestInfo,
     updateInfo,

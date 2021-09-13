@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
-const getAll = (req, res) => {
+const getAllCategories = (req, res) => {
     const options = {
         query: "SELECT NAME FROM CATEGORIES",
         errorMessage: "Categories getAll error",
@@ -9,7 +9,7 @@ const getAll = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const getPrimary = (req, res) => {
+const getPrimaryCategories = (req, res) => {
     const options = {
         query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
         errorMessage: "Categories getPrimary error",
@@ -17,7 +17,7 @@ const getPrimary = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const getSingle = (req, res) => {
+const getSingleCategory = (req, res) => {
     const { id } = req.params;
     const options = {
         query: `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
@@ -26,7 +26,7 @@ const getSingle = (req, res) => {
     };
     (0, common_1.getHelper)(options, res);
 };
-const add = (req, res) => {
+const addCategory = (req, res) => {
     const { name, show, parent } = req.body;
     const options = {
         query: `INSERT INTO CATEGORIES(NAME, SHOW, PARENT) VALUES ('${name}',${show},${parent})`,
@@ -35,7 +35,7 @@ const add = (req, res) => {
     };
     (0, common_1.addHelper)(options, res);
 };
-const update = (req, res) => {
+const updateCategory = (req, res) => {
     const { id } = req.params;
     const { name, show, parent } = req.body;
     const options = {
@@ -55,10 +55,10 @@ const deleteCategory = (req, res) => {
     (0, common_1.deleteHelper)(options, res);
 };
 exports.default = {
-    getAll,
-    getPrimary,
-    getSingle,
-    add,
-    update,
+    getAllCategories,
+    getPrimaryCategories,
+    getSingleCategory,
+    addCategory,
+    updateCategory,
     deleteCategory,
 };

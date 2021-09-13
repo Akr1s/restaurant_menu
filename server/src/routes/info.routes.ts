@@ -5,7 +5,7 @@ const router = promiseRouter();
 
 router.get("/title", controler.getTitle);
 router.get("/rest", controler.getRestInfo);
-router.get("/", controler.getAll);
+router.get("/", controler.getAllInfo);
 router.put("/", controler.updateInfo);
 
 export default router;
