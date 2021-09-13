@@ -4,10 +4,20 @@ import { DISHES_MESSAGES } from "../constants/dishesMessages";
 import { STATUS_CODES } from "../constants/statusCodes";
 import { v4 as uuidv4 } from "uuid";
 
+const {
+  GET_ERROR,
+  ADD_ERROR,
+  ADD_SUCCESS,
+  UPDATE_SUCCESS,
+  UPDATE_ERROR,
+  DELETE_SUCCESS,
+  DELETE_ERROR,
+} = DISHES_MESSAGES;
+
 const getAllDishes = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM DISHES",
-    errorMessage: DISHES_MESSAGES.GET_ERROR,
+    errorMessage: GET_ERROR,
     single: false,
   };
   getDataFromDatabase(options, res);
@@ -16,7 +26,7 @@ const getAllDishes = (req: Request, res: Response) => {
 const getAllVisibleDishes = (req: Request, res: Response) => {
   const options = {
     query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
-    errorMessage: DISHES_MESSAGES.GET_ERROR,
+    errorMessage: GET_ERROR,
     single: false,
   };
   getDataFromDatabase(options, res);
@@ -26,7 +36,7 @@ const getSingleDish = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT *  FROM DISHES WHERE ID=${id}`,
-    errorMessage: DISHES_MESSAGES.GET_ERROR,
+    errorMessage: GET_ERROR,
     single: true,
   };
   getDataFromDatabase(options, res);
@@ -36,7 +46,7 @@ const getAllDishesFromCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id}) AND SHOW=TRUE`,
-    errorMessage: DISHES_MESSAGES.GET_ERROR,
+    errorMessage: GET_ERROR,
     single: false,
   };
   getDataFromDatabase(options, res);
@@ -48,8 +58,8 @@ const addDish = (req: Request, res: Response) => {
     query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
       weights
     )}')`,
-    successMessage: DISHES_MESSAGES.ADD_SUCCESS,
-    errorMessage: DISHES_MESSAGES.ADD_ERROR,
+    successMessage: ADD_SUCCESS,
+    errorMessage: ADD_ERROR,
     successStatusCode: STATUS_CODES.CREATED,
     errorStatusCode: STATUS_CODES.ERROR,
   };
@@ -63,8 +73,8 @@ const updateDish = (req: Request, res: Response) => {
     query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(
       weights
     )}' WHERE ID=${id}`,
-    successMessage: DISHES_MESSAGES.UPDATE_SUCCESS,
-    errorMessage: DISHES_MESSAGES.UPDATE_ERROR,
+    successMessage: UPDATE_SUCCESS,
+    errorMessage: UPDATE_ERROR,
     successStatusCode: STATUS_CODES.OK,
     errorStatusCode: STATUS_CODES.ERROR,
   };
@@ -75,8 +85,8 @@ const deleteDish = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
     query: `DELETE FROM DISHES WHERE ID=${id}`,
-    successMessage: DISHES_MESSAGES.DELETE_SUCCESS,
-    errorMessage: DISHES_MESSAGES.DELETE_ERROR,
+    successMessage: DELETE_SUCCESS,
+    errorMessage: DELETE_ERROR,
     successStatusCode: STATUS_CODES.OK,
     errorStatusCode: STATUS_CODES.ERROR,
   };

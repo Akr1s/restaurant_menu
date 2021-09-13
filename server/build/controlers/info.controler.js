@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
 const infoMessages_1 = require("../constants/infoMessages");
 const statusCodes_1 = require("../constants/statusCodes");
+const { UPDATE_ERROR, UPDATE_SUCCESS, GET_ERROR, GET_REST_INFO_ERROR, GET_TITLE_ERROR, } = infoMessages_1.INFO_MESSAGES;
 const getAllInfo = (req, res) => {
     const options = {
         query: "SELECT * FROM INFO LIMIT 1",
-        errorMessage: infoMessages_1.INFO_MESSAGES.GET_ERROR,
+        errorMessage: GET_ERROR,
         single: true,
     };
     (0, common_1.getDataFromDatabase)(options, res);
@@ -14,7 +15,7 @@ const getAllInfo = (req, res) => {
 const getTitle = (req, res) => {
     const options = {
         query: "SELECT TITLE FROM INFO",
-        errorMessage: infoMessages_1.INFO_MESSAGES.GET_TITLE_ERROR,
+        errorMessage: GET_TITLE_ERROR,
         single: true,
     };
     (0, common_1.getDataFromDatabase)(options, res);
@@ -22,7 +23,7 @@ const getTitle = (req, res) => {
 const getRestInfo = (req, res) => {
     const options = {
         query: "SELECT ADDRESS, TEL, WIFI FROM INFO",
-        errorMessage: infoMessages_1.INFO_MESSAGES.GET_REST_INFO_ERROR,
+        errorMessage: GET_REST_INFO_ERROR,
         single: true,
     };
     (0, common_1.getDataFromDatabase)(options, res);
@@ -31,8 +32,8 @@ const updateInfo = (req, res) => {
     const { title, address, tel, wifi } = req.body;
     const options = {
         query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
-        successMessage: infoMessages_1.INFO_MESSAGES.UPDATE_SUCCESS,
-        errorMessage: infoMessages_1.INFO_MESSAGES.UPDATE_ERROR,
+        successMessage: UPDATE_SUCCESS,
+        errorMessage: UPDATE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,
         errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
