@@ -4,6 +4,7 @@ import { STATUS_CODES } from "../constants/statusCodes";
 import { v4 as uuidv4 } from "uuid";
 import { validateDish } from "../validators/dishesValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
+import convertDate from "../utils/convertDate";
 
 const {
   DISHES_GET_ERROR,
@@ -62,9 +63,9 @@ const addDish = (req: Request, res: Response) => {
   }
   const { name, description, img, show, category, weights } = req.body;
   const options = {
-    query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
+    query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
       weights
-    )}')`,
+    )}', ${convertDate(new Date())},${convertDate(new Date())})`,
     successCode: ADD_SUCCESS,
     errorCode: ADD_ERROR,
     successStatusCode: STATUS_CODES.CREATED,
@@ -85,7 +86,7 @@ const updateDish = (req: Request, res: Response) => {
   const options = {
     query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(
       weights
-    )}' WHERE ID=${id}`,
+    )}', UPDATED_DATE=${convertDate(new Date())} WHERE ID=${id}`,
     successCode: UPDATE_SUCCESS,
     errorCode: UPDATE_ERROR,
     successStatusCode: STATUS_CODES.OK,

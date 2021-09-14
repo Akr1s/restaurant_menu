@@ -1,10 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
 const statusCodes_1 = require("../constants/statusCodes");
 const uuid_1 = require("uuid");
 const dishesValidator_1 = require("../validators/dishesValidator");
 const responseCodes_1 = require("../constants/responseCodes");
+const convertDate_1 = __importDefault(require("../utils/convertDate"));
 const { DISHES_GET_ERROR, ADD_ERROR, ADD_SUCCESS, UPDATE_SUCCESS, UPDATE_ERROR, DELETE_ERROR, DELETE_SUCCESS, } = responseCodes_1.RESPONSE_CODES;
 const getAllDishes = (req, res) => {
     const options = {
@@ -49,7 +53,7 @@ const addDish = (req, res) => {
     }
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}')`,
+        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}', ${(0, convertDate_1.default)(new Date())},${(0, convertDate_1.default)(new Date())})`,
         successCode: ADD_SUCCESS,
         errorCode: ADD_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.CREATED,
@@ -67,7 +71,7 @@ const updateDish = (req, res) => {
     const { id } = req.params;
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}' WHERE ID=${id}`,
+        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE=${(0, convertDate_1.default)(new Date())} WHERE ID=${id}`,
         successCode: UPDATE_SUCCESS,
         errorCode: UPDATE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,
