@@ -14,7 +14,7 @@ const getDataFromDatabase = async (
     const data = single ? rows[0] : rows;
     res.status(STATUS_CODES.OK).send(data);
   } catch (error: any) {
-    res.status(STATUS_CODES.ERROR).send(errorCode);
+    res.status(STATUS_CODES.ERROR).send(String(errorCode));
   }
 };
 
@@ -25,10 +25,10 @@ const handleDatabaseQuery = async (
   const { query, successCode, errorCode, successStatusCode, errorStatusCode } =
     options;
   try {
-    await databaseQuery(query);
-    res.status(successStatusCode).send(successCode);
+    const { rows } = await databaseQuery(query);
+    res.status(successStatusCode).send(String(successCode));
   } catch (error: any) {
-    res.status(errorStatusCode).send(errorCode);
+    res.status(errorStatusCode).send(String(errorCode));
   }
 };
 

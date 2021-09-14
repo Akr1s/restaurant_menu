@@ -20,18 +20,18 @@ const getDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, 
         res.status(statusCodes_1.STATUS_CODES.OK).send(data);
     }
     catch (error) {
-        res.status(statusCodes_1.STATUS_CODES.ERROR).send(errorCode);
+        res.status(statusCodes_1.STATUS_CODES.ERROR).send(String(errorCode));
     }
 });
 exports.getDataFromDatabase = getDataFromDatabase;
 const handleDatabaseQuery = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query, successCode, errorCode, successStatusCode, errorStatusCode } = options;
     try {
-        yield (0, database_1.databaseQuery)(query);
-        res.status(successStatusCode).send(successCode);
+        const { rows } = yield (0, database_1.databaseQuery)(query);
+        res.status(successStatusCode).send(String(successCode));
     }
     catch (error) {
-        res.status(errorStatusCode).send(errorCode);
+        res.status(errorStatusCode).send(String(errorCode));
     }
 });
 exports.handleDatabaseQuery = handleDatabaseQuery;

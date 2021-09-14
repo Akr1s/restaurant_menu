@@ -53,7 +53,7 @@ const addDish = (req, res) => {
     }
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}', ${(0, convertDate_1.default)(new Date())},${(0, convertDate_1.default)(new Date())})`,
+        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}', '${(0, convertDate_1.default)(new Date())}','${(0, convertDate_1.default)(new Date())}')`,
         successCode: ADD_SUCCESS,
         errorCode: ADD_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.CREATED,
@@ -71,7 +71,7 @@ const updateDish = (req, res) => {
     const { id } = req.params;
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE=${(0, convertDate_1.default)(new Date())} WHERE ID=${id}`,
+        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE='${(0, convertDate_1.default)(new Date())}' WHERE ID=${id}`,
         successCode: UPDATE_SUCCESS,
         errorCode: UPDATE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,

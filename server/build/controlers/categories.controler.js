@@ -44,8 +44,8 @@ const addCategory = (req, res) => {
     }
     const { name, show, parent } = req.body;
     const options = {
-        query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}',${show},${parent}, ${(0, convertDate_1.default)(new Date())},
-    ${(0, convertDate_1.default)(new Date())})`,
+        query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}',${show},${parent}, '${(0, convertDate_1.default)(new Date())}',
+    '${(0, convertDate_1.default)(new Date())}')`,
         successCode: ADD_SUCCESS,
         errorCode: ADD_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.CREATED,
@@ -61,7 +61,7 @@ const updateCategory = (req, res) => {
     const { id } = req.params;
     const { name, show, parent } = req.body;
     const options = {
-        query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent}, UPDATED_DATE=${(0, convertDate_1.default)(new Date())} WHERE ID=${id}`,
+        query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent}, UPDATED_DATE='${(0, convertDate_1.default)(new Date())}' WHERE ID=${id}`,
         successCode: UPDATE_SUCCESS,
         errorCode: UPDATE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,
