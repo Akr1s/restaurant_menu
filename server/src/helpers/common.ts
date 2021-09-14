@@ -8,15 +8,13 @@ const getDataFromDatabase = async (
   options: GetOptionsInterface,
   res: Response
 ) => {
-  const { query, errorMessage, single } = options;
+  const { query, errorCode, single } = options;
   try {
     const { rows } = await databaseQuery(query);
     const data = single ? rows[0] : rows;
     res.status(STATUS_CODES.OK).send(data);
   } catch (error: any) {
-    res
-      .status(STATUS_CODES.ERROR)
-      .send({ message: errorMessage, info: error.message });
+    res.status(STATUS_CODES.ERROR).send(errorCode);
   }
 };
 
@@ -24,20 +22,13 @@ const handleDatabaseQuery = async (
   options: OptionsInterface,
   res: Response
 ) => {
-  const {
-    query,
-    successMessage,
-    errorMessage,
-    successStatusCode,
-    errorStatusCode,
-  } = options;
+  const { query, successCode, errorCode, successStatusCode, errorStatusCode } =
+    options;
   try {
-    const { rows } = await databaseQuery(query);
-    res.status(successStatusCode).send({ message: successMessage });
+    await databaseQuery(query);
+    res.status(successStatusCode).send(successCode);
   } catch (error: any) {
-    res
-      .status(errorStatusCode)
-      .send({ message: errorMessage, info: error.message });
+    res.status(errorStatusCode).send(errorCode);
   }
 };
 

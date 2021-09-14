@@ -13,29 +13,25 @@ exports.handleDatabaseQuery = exports.getDataFromDatabase = void 0;
 const database_1 = require("../config/database");
 const statusCodes_1 = require("../constants/statusCodes");
 const getDataFromDatabase = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { query, errorMessage, single } = options;
+    const { query, errorCode, single } = options;
     try {
         const { rows } = yield (0, database_1.databaseQuery)(query);
         const data = single ? rows[0] : rows;
         res.status(statusCodes_1.STATUS_CODES.OK).send(data);
     }
     catch (error) {
-        res
-            .status(statusCodes_1.STATUS_CODES.ERROR)
-            .send({ message: errorMessage, info: error.message });
+        res.status(statusCodes_1.STATUS_CODES.ERROR).send(errorCode);
     }
 });
 exports.getDataFromDatabase = getDataFromDatabase;
 const handleDatabaseQuery = (options, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { query, successMessage, errorMessage, successStatusCode, errorStatusCode, } = options;
+    const { query, successCode, errorCode, successStatusCode, errorStatusCode } = options;
     try {
-        const { rows } = yield (0, database_1.databaseQuery)(query);
-        res.status(successStatusCode).send({ message: successMessage });
+        yield (0, database_1.databaseQuery)(query);
+        res.status(successStatusCode).send(successCode);
     }
     catch (error) {
-        res
-            .status(errorStatusCode)
-            .send({ message: errorMessage, info: error.message });
+        res.status(errorStatusCode).send(errorCode);
     }
 });
 exports.handleDatabaseQuery = handleDatabaseQuery;

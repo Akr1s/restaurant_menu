@@ -1,7 +1,7 @@
 export default interface OptionsInterface {
   query: string;
-  successMessage: string;
-  errorMessage: string;
+  successCode: number;
+  errorCode: number;
   successStatusCode: number;
   errorStatusCode: number;
 }

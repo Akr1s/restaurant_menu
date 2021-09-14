@@ -1,5 +1,5 @@
 export default interface GetOptionsInterface {
   query: string;
-  errorMessage: string;
+  errorCode: number;
   single: boolean;
 }
