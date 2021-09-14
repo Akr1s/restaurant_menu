@@ -18,7 +18,7 @@ export const stringIsEmpty = (param: string): boolean => {
   return param.trim().length === 0;
 };
 
-export const stringLengthEsceeds = (
+export const stringLengthExeeds = (
   param: string,
   maxLength: number
 ): boolean => {

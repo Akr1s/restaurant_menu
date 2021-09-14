@@ -2,6 +2,7 @@ import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
 import { Response, Request } from "express";
 import { INFO_MESSAGES } from "../constants/infoMessages";
 import { STATUS_CODES } from "../constants/statusCodes";
+import { validateInfo } from "../validators/infoValidator";
 
 const {
   UPDATE_ERROR,
@@ -39,6 +40,12 @@ const getRestInfo = (req: Request, res: Response) => {
 };
 
 const updateInfo = (req: Request, res: Response) => {
+  const validationResult: number = validateInfo(req.body);
+  if (validationResult) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${validationResult}`);
+  }
   const { title, address, tel, wifi } = req.body;
   const options = {
     query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.objectHasAdditionalProperties = exports.isUndefined = exports.stringLengthEsceeds = exports.stringIsEmpty = exports.wrongType = exports.objectIsEmpty = exports.propertiesAreMissing = void 0;
+exports.objectHasAdditionalProperties = exports.isUndefined = exports.stringLengthExeeds = exports.stringIsEmpty = exports.wrongType = exports.objectIsEmpty = exports.propertiesAreMissing = void 0;
 const propertyIsMissing = (property) => {
     return property == undefined;
 };
@@ -20,10 +20,10 @@ const stringIsEmpty = (param) => {
     return param.trim().length === 0;
 };
 exports.stringIsEmpty = stringIsEmpty;
-const stringLengthEsceeds = (param, maxLength) => {
+const stringLengthExeeds = (param, maxLength) => {
     return param.length > maxLength;
 };
-exports.stringLengthEsceeds = stringLengthEsceeds;
+exports.stringLengthExeeds = stringLengthExeeds;
 const isUndefined = (param) => {
     return param === undefined;
 };

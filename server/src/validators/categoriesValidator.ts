@@ -5,7 +5,7 @@ import {
   objectIsEmpty,
   propertiesAreMissing,
   stringIsEmpty,
-  stringLengthEsceeds,
+  stringLengthExeeds,
   wrongType,
 } from "../helpers/validatorHelpers";
 import { CategoryInterface } from "../interfaces/category";
@@ -20,7 +20,7 @@ export const validateCategory = (body: CategoryInterface): number => {
   if (
     wrongType(name, "string") ||
     stringIsEmpty(name) ||
-    stringLengthEsceeds(name, 30)
+    stringLengthExeeds(name, 30)
   )
     return VALIDATION_CODES.CATEGORIES_NAME_ERROR;
   if (wrongType(show, "boolean")) VALIDATION_CODES.CATEGORIES_SHOW_ERROR;

@@ -13,7 +13,7 @@ const validateCategory = (body) => {
         return validationCodes_1.VALIDATION_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;
     if ((0, validatorHelpers_1.wrongType)(name, "string") ||
         (0, validatorHelpers_1.stringIsEmpty)(name) ||
-        (0, validatorHelpers_1.stringLengthEsceeds)(name, 30))
+        (0, validatorHelpers_1.stringLengthExeeds)(name, 30))
         return validationCodes_1.VALIDATION_CODES.CATEGORIES_NAME_ERROR;
     if ((0, validatorHelpers_1.wrongType)(show, "boolean"))
         validationCodes_1.VALIDATION_CODES.CATEGORIES_SHOW_ERROR;
