@@ -4,6 +4,7 @@ const common_1 = require("../helpers/common");
 const dishesMessages_1 = require("../constants/dishesMessages");
 const statusCodes_1 = require("../constants/statusCodes");
 const uuid_1 = require("uuid");
+const dishesValidator_1 = require("../validators/dishesValidator");
 const { GET_ERROR, ADD_ERROR, ADD_SUCCESS, UPDATE_SUCCESS, UPDATE_ERROR, DELETE_SUCCESS, DELETE_ERROR, } = dishesMessages_1.DISHES_MESSAGES;
 const getAllDishes = (req, res) => {
     const options = {
@@ -40,6 +41,12 @@ const getAllDishesFromCategory = (req, res) => {
     (0, common_1.getDataFromDatabase)(options, res);
 };
 const addDish = (req, res) => {
+    const validationResult = (0, dishesValidator_1.validateDish)(req.body);
+    if (validationResult) {
+        return res
+            .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
+            .send(`${validationResult}`);
+    }
     const { name, description, img, show, category, weights } = req.body;
     const options = {
         query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}')`,
@@ -51,6 +58,12 @@ const addDish = (req, res) => {
     (0, common_1.handleDatabaseQuery)(options, res);
 };
 const updateDish = (req, res) => {
+    const validationResult = (0, dishesValidator_1.validateDish)(req.body);
+    if (validationResult) {
+        return res
+            .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
+            .send(`${validationResult}`);
+    }
     const { id } = req.params;
     const { name, description, img, show, category, weights } = req.body;
     const options = {

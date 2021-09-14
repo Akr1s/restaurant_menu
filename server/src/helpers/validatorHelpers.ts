@@ -1,5 +1,9 @@
-export const propertyIsMissing = (property: unknown): boolean => {
+const propertyIsMissing = (property: unknown): boolean => {
   return property == undefined;
+};
+
+export const propertiesAreMissing = (...properties: unknown[]): boolean => {
+  return properties.some((prop) => propertyIsMissing(prop));
 };
 
 export const objectIsEmpty = (obj: object): boolean => {

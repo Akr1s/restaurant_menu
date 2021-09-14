@@ -7,7 +7,7 @@ const validateCategory = (body) => {
     const { name, show, parent } = body;
     if ((0, validatorHelpers_1.objectIsEmpty)(body))
         return validationCodes_1.VALIDATION_CODES.BODY_IS_EMPTY;
-    if ((0, validatorHelpers_1.propertyIsMissing)(name) || (0, validatorHelpers_1.propertyIsMissing)(show) || (0, validatorHelpers_1.isUndefined)(parent))
+    if ((0, validatorHelpers_1.propertiesAreMissing)(name, show) || (0, validatorHelpers_1.isUndefined)(parent))
         return validationCodes_1.VALIDATION_CODES.PROPERTY_IS_MISSING;
     if ((0, validatorHelpers_1.objectHasAdditionalProperties)(body, 3))
         return validationCodes_1.VALIDATION_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;

@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { DISHES_MESSAGES } from "../constants/dishesMessages";
 import { STATUS_CODES } from "../constants/statusCodes";
 import { v4 as uuidv4 } from "uuid";
+import { validateDish } from "../validators/dishesValidator";
 
 const {
   GET_ERROR,
@@ -53,6 +54,12 @@ const getAllDishesFromCategory = (req: Request, res: Response) => {
 };
 
 const addDish = (req: Request, res: Response) => {
+  const validationResult: number = validateDish(req.body);
+  if (validationResult) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${validationResult}`);
+  }
   const { name, description, img, show, category, weights } = req.body;
   const options = {
     query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
@@ -67,6 +74,12 @@ const addDish = (req: Request, res: Response) => {
 };
 
 const updateDish = (req: Request, res: Response) => {
+  const validationResult: number = validateDish(req.body);
+  if (validationResult) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${validationResult}`);
+  }
   const { id } = req.params;
   const { name, description, img, show, category, weights } = req.body;
   const options = {
