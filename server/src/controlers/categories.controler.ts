@@ -37,7 +37,7 @@ const getPrimaryCategories = (req: Request, res: Response) => {
 const getSingleCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
-    query: `SELECT *  FROM CATEGORIES WHERE ID=${id}`,
+    query: `SELECT * FROM CATEGORIES WHERE ID='${id}'`,
     errorCode: CATEGORIES_GET_ERROR,
     single: true,
   };
@@ -75,7 +75,7 @@ const updateCategory = (req: Request, res: Response) => {
   const options = {
     query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent}, UPDATED_DATE='${convertDate(
       new Date()
-    )}' WHERE ID=${id}`,
+    )}' WHERE ID='${id}'`,
     successCode: UPDATE_SUCCESS,
     errorCode: UPDATE_ERROR,
     successStatusCode: STATUS_CODES.OK,
@@ -87,7 +87,7 @@ const updateCategory = (req: Request, res: Response) => {
 const deleteCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
-    query: `DELETE FROM CATEGORIES WHERE ID=${id}`,
+    query: `DELETE FROM CATEGORIES WHERE ID='${id}'`,
     successCode: DELETE_SUCCESS,
     errorCode: DELETE_ERROR,
     successStatusCode: STATUS_CODES.OK,

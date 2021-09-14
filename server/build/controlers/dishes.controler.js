@@ -29,7 +29,7 @@ const getAllVisibleDishes = (req, res) => {
 const getSingleDish = (req, res) => {
     const { id } = req.params;
     const options = {
-        query: `SELECT *  FROM DISHES WHERE ID=${id}`,
+        query: `SELECT *  FROM DISHES WHERE ID='${id}'`,
         errorCode: DISHES_GET_ERROR,
         single: true,
     };
@@ -38,7 +38,7 @@ const getSingleDish = (req, res) => {
 const getAllDishesFromCategory = (req, res) => {
     const { id } = req.params;
     const options = {
-        query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT=${id}) AND SHOW=TRUE`,
+        query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT='${id}') AND SHOW=TRUE`,
         errorCode: DISHES_GET_ERROR,
         single: false,
     };
@@ -71,7 +71,7 @@ const updateDish = (req, res) => {
     const { id } = req.params;
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE='${(0, convertDate_1.default)(new Date())}' WHERE ID=${id}`,
+        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE='${(0, convertDate_1.default)(new Date())}' WHERE ID='${id}'`,
         successCode: UPDATE_SUCCESS,
         errorCode: UPDATE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,
@@ -82,7 +82,7 @@ const updateDish = (req, res) => {
 const deleteDish = (req, res) => {
     const { id } = req.params;
     const options = {
-        query: `DELETE FROM DISHES WHERE ID=${id}`,
+        query: `DELETE FROM DISHES WHERE ID='${id}'`,
         successCode: DELETE_SUCCESS,
         errorCode: DELETE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,
