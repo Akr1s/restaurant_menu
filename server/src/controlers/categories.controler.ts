@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { CATEGORIES_MESSAGES } from "../constants/categoriesMessages";
 import { STATUS_CODES } from "../constants/statusCodes";
 import { v4 as uuidv4 } from "uuid";
+import { validateCategory } from "../validators/categoriesValidator";
 
 const {
   GET_ERROR,
@@ -43,6 +44,12 @@ const getSingleCategory = (req: Request, res: Response) => {
 };
 
 const addCategory = (req: Request, res: Response) => {
+  const validationResult: number = validateCategory(req.body);
+  if (validationResult) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${validationResult}`);
+  }
   const { name, show, parent } = req.body;
   const options = {
     query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT) VALUES ('${uuidv4()}','${name}',${show},${parent})`,
@@ -55,6 +62,10 @@ const addCategory = (req: Request, res: Response) => {
 };
 
 const updateCategory = (req: Request, res: Response) => {
+  const validationResult: number = validateCategory(req.body);
+  if (validationResult) {
+    return res.status(STATUS_CODES.UPDATE_ERROR).send(`${validationResult}`);
+  }
   const { id } = req.params;
   const { name, show, parent } = req.body;
   const options = {

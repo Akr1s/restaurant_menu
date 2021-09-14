@@ -13,12 +13,6 @@ export class CategoriesComponent implements OnInit {
     { name: 'All' },
     { name: 'First courses' },
     { name: 'Beverages' },
-    { name: 'All' },
-    { name: 'First courses' },
-    { name: 'Beverages' },
-    { name: 'All' },
-    { name: 'First courses' },
-    { name: 'Beverages' },
   ];
 
   @Output() categoryChangeEvent = new EventEmitter<string>();

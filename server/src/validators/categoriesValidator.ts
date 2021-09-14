@@ -1,0 +1,28 @@
+import { VALIDATION_CODES } from "../constants/validationCodes";
+import {
+  isUndefined,
+  objectHasAdditionalProperties,
+  objectIsEmpty,
+  propertyIsMissing,
+  stringIsEmpty,
+  stringLengthEsceeds,
+  wrongType,
+} from "../helpers/validatorHelpers";
+import { CategoryInterface } from "../interfaces/category";
+
+export const validateCategory = (body: CategoryInterface): number => {
+  const { name, show, parent } = body;
+  if (objectIsEmpty(body)) return VALIDATION_CODES.BODY_IS_EMPTY;
+  if (propertyIsMissing(name) || propertyIsMissing(show) || isUndefined(parent))
+    return VALIDATION_CODES.PROPERTY_IS_MISSING;
+  if (objectHasAdditionalProperties(body, 3))
+    return VALIDATION_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;
+  if (
+    wrongType(name, "string") ||
+    stringIsEmpty(name) ||
+    stringLengthEsceeds(name, 30)
+  )
+    return VALIDATION_CODES.CATEGORIES_NAME_ERROR;
+  if (wrongType(show, "boolean")) VALIDATION_CODES.CATEGORIES_SHOW_ERROR;
+  return VALIDATION_CODES.VALIDATION_SUCCESFUL;
+};

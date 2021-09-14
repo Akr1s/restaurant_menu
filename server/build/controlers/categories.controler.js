@@ -4,6 +4,7 @@ const common_1 = require("../helpers/common");
 const categoriesMessages_1 = require("../constants/categoriesMessages");
 const statusCodes_1 = require("../constants/statusCodes");
 const uuid_1 = require("uuid");
+const categoriesValidator_1 = require("../validators/categoriesValidator");
 const { GET_ERROR, ADD_SUCCESS, ADD_ERROR, UPDATE_ERROR, UPDATE_SUCCESS, DELETE_ERROR, DELETE_SUCCESS, } = categoriesMessages_1.CATEGORIES_MESSAGES;
 const getAllCategories = (req, res) => {
     const options = {
@@ -31,6 +32,12 @@ const getSingleCategory = (req, res) => {
     (0, common_1.getDataFromDatabase)(options, res);
 };
 const addCategory = (req, res) => {
+    const validationResult = (0, categoriesValidator_1.validateCategory)(req.body);
+    if (validationResult) {
+        return res
+            .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
+            .send(`${validationResult}`);
+    }
     const { name, show, parent } = req.body;
     const options = {
         query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT) VALUES ('${(0, uuid_1.v4)()}','${name}',${show},${parent})`,
@@ -42,6 +49,10 @@ const addCategory = (req, res) => {
     (0, common_1.handleDatabaseQuery)(options, res);
 };
 const updateCategory = (req, res) => {
+    const validationResult = (0, categoriesValidator_1.validateCategory)(req.body);
+    if (validationResult) {
+        return res.status(statusCodes_1.STATUS_CODES.UPDATE_ERROR).send(`${validationResult}`);
+    }
     const { id } = req.params;
     const { name, show, parent } = req.body;
     const options = {
