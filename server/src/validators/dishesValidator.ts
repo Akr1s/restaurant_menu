@@ -1,10 +1,8 @@
-import { VALIDATION_CODES } from "../constants/validationCodes";
+import { RESPONSE_CODES } from "../constants/responseCodes";
 import {
-  isUndefined,
-  objectHasAdditionalProperties,
+  objectConfigurationTest,
   objectIsEmpty,
-  propertiesAreMissing,
-  stringIsEmpty,
+  stringIsIncorrect,
   stringLengthExeeds,
   wrongType,
 } from "../helpers/validatorHelpers";
@@ -12,26 +10,22 @@ import { DishInterface } from "../interfaces/dish";
 
 export const validateDish = (body: DishInterface): number => {
   const { name, desc, img, show, category, weights } = body;
-  if (objectIsEmpty(body)) return VALIDATION_CODES.BODY_IS_EMPTY;
-  if (propertiesAreMissing(name, desc, img, show, category, weights))
-    return VALIDATION_CODES.PROPERTY_IS_MISSING;
-  if (objectHasAdditionalProperties(body, 6))
-    return VALIDATION_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;
-  if (
-    wrongType(name, "string") ||
-    stringIsEmpty(name) ||
-    stringLengthExeeds(name, 30)
-  )
-    return VALIDATION_CODES.DISHES_NAME_ERROR;
+  const objectConfigurationTestResult = objectConfigurationTest<DishInterface>(
+    body,
+    6,
+    name,
+    desc,
+    img,
+    show,
+    category,
+    weights
+  );
+  if (objectConfigurationTestResult) return objectConfigurationTestResult;
+  if (stringIsIncorrect(name, 30)) return RESPONSE_CODES.DISHES_NAME_ERROR;
   if (wrongType(desc, "string") || stringLengthExeeds(desc, 255))
-    return VALIDATION_CODES.DISHES_DESCRIPTION_ERROR;
-  if (
-    wrongType(img, "string") ||
-    stringIsEmpty(img) ||
-    stringLengthExeeds(img, 255)
-  )
-    return VALIDATION_CODES.DISHES_IMG_ERROR;
-  if (wrongType(show, "boolean")) VALIDATION_CODES.DISHES_SHOW_ERROR;
-  if (objectIsEmpty(weights)) return VALIDATION_CODES.DISHES_WEIGHTS_ERROR;
-  return VALIDATION_CODES.VALIDATION_SUCCESFUL;
+    return RESPONSE_CODES.DISHES_DESCRIPTION_ERROR;
+  if (stringIsIncorrect(img, 255)) return RESPONSE_CODES.DISHES_IMG_ERROR;
+  if (wrongType(show, "boolean")) RESPONSE_CODES.DISHES_SHOW_ERROR;
+  if (objectIsEmpty(weights)) return RESPONSE_CODES.DISHES_WEIGHTS_ERROR;
+  return RESPONSE_CODES.VALIDATION_SUCCESFUL;
 };
