@@ -54,13 +54,16 @@ const getAllDishesFromCategory = (req, res) => {
     };
     (0, common_1.getDataFromDatabase)(options, res);
 };
-const addDish = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const performDishValidation = (req, res, next) => {
     const validationResult = (0, dishesValidator_1.validateDish)(req.body);
     if (validationResult) {
         return res
             .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
             .send(`${validationResult}`);
     }
+    next();
+};
+const checkDuplicateDish = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, description, img, show, category, weights } = req.body;
     const duplicateCheckResult = yield (0, duplicateCheck_1.default)(name, "SELECT NAME FROM DISHES");
     if (duplicateCheckResult !== responseCodes_1.RESPONSE_CODES.ADD_SUCCESS) {
@@ -68,26 +71,24 @@ const addDish = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
             .send(`${duplicateCheckResult}`);
     }
+    next();
+});
+const createDishDBCall = (req, res) => {
+    const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(weights)}', '${(0, convertDate_1.default)(new Date())}','${(0, convertDate_1.default)(new Date())}')`,
+        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, '${category}', '${JSON.stringify(weights)}', '${(0, convertDate_1.default)(new Date())}','${(0, convertDate_1.default)(new Date())}')`,
         successCode: ADD_SUCCESS,
         errorCode: ADD_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.CREATED,
         errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
     (0, common_1.handleDatabaseQuery)(options, res);
-});
-const updateDish = (req, res) => {
-    const validationResult = (0, dishesValidator_1.validateDish)(req.body);
-    if (validationResult) {
-        return res
-            .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
-            .send(`${validationResult}`);
-    }
+};
+const updateDishDBCall = (req, res) => {
     const { id } = req.params;
     const { name, description, img, show, category, weights } = req.body;
     const options = {
-        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY=${category}, WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE='${(0, convertDate_1.default)(new Date())}' WHERE ID='${id}'`,
+        query: `UPDATE DISHES SET NAME='${name}' ,DESCRIPTION='${description}', IMG='${img}', SHOW=${show}, CATEGORY='${category}', WEIGHTS='${JSON.stringify(weights)}', UPDATED_DATE='${(0, convertDate_1.default)(new Date())}' WHERE ID='${id}'`,
         successCode: UPDATE_SUCCESS,
         errorCode: UPDATE_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.OK,
@@ -111,7 +112,9 @@ exports.default = {
     getAllVisibleDishes,
     getSingleDish,
     getAllDishesFromCategory,
-    addDish,
-    updateDish,
+    performDishValidation,
+    checkDuplicateDish,
+    createDishDBCall,
+    updateDishDBCall,
     deleteDish,
 };

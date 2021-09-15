@@ -1,6 +1,6 @@
 export interface DishInterface {
   name: string;
-  desc: string;
+  description: string;
   img: string;
   show: boolean;
   category: string;

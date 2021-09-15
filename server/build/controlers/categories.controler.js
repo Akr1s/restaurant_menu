@@ -45,13 +45,16 @@ const getSingleCategory = (req, res) => {
     };
     (0, common_1.getDataFromDatabase)(options, res);
 };
-const addCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const performCategoryValidation = (req, res, next) => {
     const validationResult = (0, categoriesValidator_1.validateCategory)(req.body);
     if (validationResult) {
         return res
             .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
             .send(`${validationResult}`);
     }
+    next();
+};
+const checkDuplicateCategory = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, show, parent } = req.body;
     const duplicateCheckResult = yield (0, duplicateCheck_1.default)(name, "SELECT NAME FROM CATEGORIES");
     if (duplicateCheckResult !== responseCodes_1.RESPONSE_CODES.ADD_SUCCESS) {
@@ -59,6 +62,10 @@ const addCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
             .send(`${duplicateCheckResult}`);
     }
+    next();
+});
+const createCategoryDBCall = (req, res, next) => {
+    const { name, show, parent } = req.body;
     const options = {
         query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}',${show},${parent}, '${(0, convertDate_1.default)(new Date())}',
     '${(0, convertDate_1.default)(new Date())}')`,
@@ -68,12 +75,8 @@ const addCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         errorStatusCode: statusCodes_1.STATUS_CODES.ERROR,
     };
     (0, common_1.handleDatabaseQuery)(options, res);
-});
-const updateCategory = (req, res) => {
-    const validationResult = (0, categoriesValidator_1.validateCategory)(req.body);
-    if (validationResult) {
-        return res.status(statusCodes_1.STATUS_CODES.UPDATE_ERROR).send(`${validationResult}`);
-    }
+};
+const updateCategoryDBCall = (req, res) => {
     const { id } = req.params;
     const { name, show, parent } = req.body;
     const options = {
@@ -100,7 +103,9 @@ exports.default = {
     getAllCategories,
     getPrimaryCategories,
     getSingleCategory,
-    addCategory,
-    updateCategory,
+    updateCategoryDBCall,
     deleteCategory,
+    performCategoryValidation,
+    createCategoryDBCall,
+    checkDuplicateCategory,
 };

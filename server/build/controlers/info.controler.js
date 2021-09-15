@@ -29,13 +29,16 @@ const getRestInfo = (req, res) => {
     };
     (0, common_1.getDataFromDatabase)(options, res);
 };
-const updateInfo = (req, res) => {
+const performInfoValidation = (req, res, next) => {
     const validationResult = (0, infoValidator_1.validateInfo)(req.body);
     if (validationResult) {
         return res
             .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
             .send(`${validationResult}`);
     }
+    next();
+};
+const updateInfoDBCall = (req, res) => {
     const { title, address, tel, wifi } = req.body;
     const options = {
         query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
@@ -50,5 +53,6 @@ exports.default = {
     getAllInfo,
     getTitle,
     getRestInfo,
-    updateInfo,
+    updateInfoDBCall,
+    performInfoValidation,
 };

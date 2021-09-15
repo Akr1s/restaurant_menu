@@ -1,5 +1,5 @@
 import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
-import { Response, Request } from "express";
+import { Response, Request, NextFunction } from "express";
 import { STATUS_CODES } from "../constants/statusCodes";
 import { validateInfo } from "../validators/infoValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
@@ -33,13 +33,21 @@ const getRestInfo = (req: Request, res: Response) => {
   getDataFromDatabase(options, res);
 };
 
-const updateInfo = (req: Request, res: Response) => {
+const performInfoValidation = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const validationResult: number = validateInfo(req.body);
   if (validationResult) {
     return res
       .status(STATUS_CODES.VALIDATION_ERROR)
       .send(`${validationResult}`);
   }
+  next();
+};
+
+const updateInfoDBCall = (req: Request, res: Response) => {
   const { title, address, tel, wifi } = req.body;
   const options = {
     query: `UPDATE INFO SET TITLE='${title}', ADDRESS='${address}', TEL='${tel}', WIFI='${wifi}'`,
@@ -55,5 +63,6 @@ export default {
   getAllInfo,
   getTitle,
   getRestInfo,
-  updateInfo,
+  updateInfoDBCall,
+  performInfoValidation,
 };

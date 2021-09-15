@@ -9,12 +9,12 @@ import {
 import { DishInterface } from "../interfaces/dish";
 
 export const validateDish = (body: DishInterface): number => {
-  const { name, desc, img, show, category, weights } = body;
+  const { name, description, img, show, category, weights } = body;
   const objectConfigurationTestResult = objectConfigurationTest<DishInterface>(
     body,
     6,
     name,
-    desc,
+    description,
     img,
     show,
     category,
@@ -22,7 +22,7 @@ export const validateDish = (body: DishInterface): number => {
   );
   if (objectConfigurationTestResult) return objectConfigurationTestResult;
   if (stringIsIncorrect(name, 30)) return RESPONSE_CODES.DISHES_NAME_ERROR;
-  if (wrongType(desc, "string") || stringLengthExeeds(desc, 255))
+  if (wrongType(description, "string") || stringLengthExeeds(description, 255))
     return RESPONSE_CODES.DISHES_DESCRIPTION_ERROR;
   if (stringIsIncorrect(img, 255)) return RESPONSE_CODES.DISHES_IMG_ERROR;
   if (wrongType(show, "boolean")) RESPONSE_CODES.DISHES_SHOW_ERROR;

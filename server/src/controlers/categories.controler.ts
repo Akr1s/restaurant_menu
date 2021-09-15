@@ -1,5 +1,5 @@
 import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { STATUS_CODES } from "../constants/statusCodes";
 import { v4 as uuidv4 } from "uuid";
 import { validateCategory } from "../validators/categoriesValidator";
@@ -45,13 +45,25 @@ const getSingleCategory = (req: Request, res: Response) => {
   getDataFromDatabase(options, res);
 };
 
-const addCategory = async (req: Request, res: Response) => {
+const performCategoryValidation = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const validationResult: number = validateCategory(req.body);
   if (validationResult) {
     return res
       .status(STATUS_CODES.VALIDATION_ERROR)
       .send(`${validationResult}`);
   }
+  next();
+};
+
+const checkDuplicateCategory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { name, show, parent } = req.body;
   const duplicateCheckResult = await duplicateCheck(
     name,
@@ -62,6 +74,15 @@ const addCategory = async (req: Request, res: Response) => {
       .status(STATUS_CODES.VALIDATION_ERROR)
       .send(`${duplicateCheckResult}`);
   }
+  next();
+};
+
+const createCategoryDBCall = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { name, show, parent } = req.body;
   const options = {
     query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},${parent}, '${convertDate(
       new Date()
@@ -75,11 +96,7 @@ const addCategory = async (req: Request, res: Response) => {
   handleDatabaseQuery(options, res);
 };
 
-const updateCategory = (req: Request, res: Response) => {
-  const validationResult: number = validateCategory(req.body);
-  if (validationResult) {
-    return res.status(STATUS_CODES.UPDATE_ERROR).send(`${validationResult}`);
-  }
+const updateCategoryDBCall = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
   const options = {
@@ -110,7 +127,9 @@ export default {
   getAllCategories,
   getPrimaryCategories,
   getSingleCategory,
-  addCategory,
-  updateCategory,
+  updateCategoryDBCall,
   deleteCategory,
+  performCategoryValidation,
+  createCategoryDBCall,
+  checkDuplicateCategory,
 };
