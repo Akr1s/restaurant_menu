@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { validateDish } from "../validators/dishesValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
 import convertDate from "../utils/convertDate";
+import duplicateCheck from "../validators/duplicateCheck";
 
 const {
   DISHES_GET_ERROR,
@@ -54,7 +55,7 @@ const getAllDishesFromCategory = (req: Request, res: Response) => {
   getDataFromDatabase(options, res);
 };
 
-const addDish = (req: Request, res: Response) => {
+const addDish = async (req: Request, res: Response) => {
   const validationResult: number = validateDish(req.body);
   if (validationResult) {
     return res
@@ -62,6 +63,15 @@ const addDish = (req: Request, res: Response) => {
       .send(`${validationResult}`);
   }
   const { name, description, img, show, category, weights } = req.body;
+  const duplicateCheckResult = await duplicateCheck(
+    name,
+    "SELECT NAME FROM DISHES"
+  );
+  if (duplicateCheckResult !== RESPONSE_CODES.ADD_SUCCESS) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${duplicateCheckResult}`);
+  }
   const options = {
     query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, ${category}, '${JSON.stringify(
       weights

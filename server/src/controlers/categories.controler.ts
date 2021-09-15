@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { validateCategory } from "../validators/categoriesValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
 import convertDate from "../utils/convertDate";
+import duplicateCheck from "../validators/duplicateCheck";
 
 const {
   CATEGORIES_GET_ERROR,
@@ -44,7 +45,7 @@ const getSingleCategory = (req: Request, res: Response) => {
   getDataFromDatabase(options, res);
 };
 
-const addCategory = (req: Request, res: Response) => {
+const addCategory = async (req: Request, res: Response) => {
   const validationResult: number = validateCategory(req.body);
   if (validationResult) {
     return res
@@ -52,6 +53,15 @@ const addCategory = (req: Request, res: Response) => {
       .send(`${validationResult}`);
   }
   const { name, show, parent } = req.body;
+  const duplicateCheckResult = await duplicateCheck(
+    name,
+    "SELECT NAME FROM CATEGORIES"
+  );
+  if (duplicateCheckResult !== RESPONSE_CODES.ADD_SUCCESS) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${duplicateCheckResult}`);
+  }
   const options = {
     query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},${parent}, '${convertDate(
       new Date()
