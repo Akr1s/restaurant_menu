@@ -5,16 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const info_routes_1 = __importDefault(require("./routes/info.routes"));
-const categories_routes_1 = __importDefault(require("./routes/categories.routes"));
-const dishes_routes_1 = __importDefault(require("./routes/dishes.routes"));
+const routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const environmentPort = Number(process.env.PORT);
 const port = environmentPort || 8080;
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use("/info/", info_routes_1.default);
-app.use("/categories/", categories_routes_1.default);
-app.use("/dishes/", dishes_routes_1.default);
+app.use("/api/", routes_1.default);
 app.listen(port);
