@@ -20,7 +20,12 @@ router.post(
   checkDuplicateCategory,
   createCategoryDBCall
 );
-router.put("/:id", performCategoryValidation, updateCategoryDBCall);
+router.put(
+  "/:id",
+  performCategoryValidation,
+  checkDuplicateCategory,
+  updateCategoryDBCall
+);
 router.delete("/:id", deleteCategory);
 router.get("/:id", getSingleCategory);
 router.get("/", getAllCategories);

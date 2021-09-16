@@ -1,5 +1,15 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { Category } from 'src/models/category.model';
+
+class CategoryClass {
+  constructor(
+    public id: number,
+    public name: string,
+    public show: boolean,
+    public category: any
+  ) {}
+}
 
 @Component({
   selector: 'app-categories',
@@ -8,6 +18,8 @@ import { Category } from 'src/models/category.model';
 })
 export class CategoriesComponent implements OnInit {
   @Input() selectedCategoryName: string;
+
+  categories: CategoryClass[];
 
   primaryCategoriesList: Category[] = [
     { name: 'All' },
@@ -32,7 +44,9 @@ export class CategoriesComponent implements OnInit {
     this.emitCategoryName(name);
   }
 
-  constructor() {}
+  constructor(private categoriesService: CategoriesService) {
+    categoriesService.getCategories();
+  }
 
   ngOnInit(): void {}
 }

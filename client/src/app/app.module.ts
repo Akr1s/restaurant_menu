@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,8 +16,20 @@ import { DishesListComponent } from './components/menu-components/dishes-list/di
 import { DishItemComponent } from './components/menu-components/dish-item/dish-item.component';
 
 @NgModule({
-  declarations: [AppComponent, Admin, Menu, Header, Error404, FooterComponent, CategoriesComponent, DishesComponent, SingleCategoryComponent, DishesListComponent, DishItemComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    Admin,
+    Menu,
+    Header,
+    Error404,
+    FooterComponent,
+    CategoriesComponent,
+    DishesComponent,
+    SingleCategoryComponent,
+    DishesListComponent,
+    DishItemComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
