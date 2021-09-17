@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimaryCategory } from 'src/models/primaryCategory.model';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 
 @Component({
   selector: 'app-single-category',
@@ -7,11 +8,13 @@ import { PrimaryCategory } from 'src/models/primaryCategory.model';
   styleUrls: ['./single-category.component.scss'],
 })
 export class SingleCategoryComponent implements OnInit {
-  primaryCategoryList: PrimaryCategory[] = [
-    { id: '', name: 'First courses' },
-    { id: '', name: 'Beverages' },
-  ];
-  constructor() {}
+  primaryCategoriesList: PrimaryCategory[];
 
-  ngOnInit(): void {}
+  constructor(private categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.categoriesService
+      .getCategories()
+      .subscribe((data: any) => (this.primaryCategoriesList = data));
+  }
 }

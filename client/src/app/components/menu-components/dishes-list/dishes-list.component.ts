@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Dish } from 'src/models/dish.model';
+import { Dish } from 'src/app/models/dish.model';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 
 @Component({
   selector: 'app-dishes-list',
@@ -17,7 +18,7 @@ export class DishesListComponent implements OnInit {
       img: 'https://1.bp.blogspot.com/-JHaJvvv_fYg/YD0LydJz9kI/AAAAAAAAFs8/EARf7IDXhpIoOPOCAyxIEiMFtSyv445CwCLcBGAsYHQ/s700/PNGKH_00001082.png',
       show: true,
       category: 9,
-      weights: { smoll: '100$', normal: '200$' },
+      weights: { small: '100$', normal: '200$' },
     },
     {
       id: 2,
@@ -27,7 +28,7 @@ export class DishesListComponent implements OnInit {
       img: 'https://1.bp.blogspot.com/-JHaJvvv_fYg/YD0LydJz9kI/AAAAAAAAFs8/EARf7IDXhpIoOPOCAyxIEiMFtSyv445CwCLcBGAsYHQ/s700/PNGKH_00001082.png',
       show: true,
       category: 9,
-      weights: { smoll: '100$', normal: '200$' },
+      weights: { small: '100$', normal: '200$' },
     },
     {
       id: 3,
@@ -36,7 +37,7 @@ export class DishesListComponent implements OnInit {
       img: 'https://1.bp.blogspot.com/-JHaJvvv_fYg/YD0LydJz9kI/AAAAAAAAFs8/EARf7IDXhpIoOPOCAyxIEiMFtSyv445CwCLcBGAsYHQ/s700/PNGKH_00001082.png',
       show: true,
       category: 11,
-      weights: { smoll: '100$', normal: '200$' },
+      weights: { small: '100$', normal: '200$' },
     },
     {
       id: 4,
@@ -45,7 +46,7 @@ export class DishesListComponent implements OnInit {
       img: 'https://1.bp.blogspot.com/-JHaJvvv_fYg/YD0LydJz9kI/AAAAAAAAFs8/EARf7IDXhpIoOPOCAyxIEiMFtSyv445CwCLcBGAsYHQ/s700/PNGKH_00001082.png',
       show: true,
       category: 10,
-      weights: { smoll: '100$', normal: '200$' },
+      weights: { small: '100$', normal: '200$' },
     },
   ];
 

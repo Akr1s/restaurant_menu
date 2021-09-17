@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 
 @Component({
   selector: 'app-dishes',
