@@ -6,6 +6,8 @@
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
+    border-bottom: 2px solid #eb862c;
+    padding-bottom: 1rem;
 
     li {
       font-size: 30px;
@@ -43,4 +45,7 @@
   .dropdown {
     width: 70%;
   }
+}
+.activeCategory {
+  color: red;
 }

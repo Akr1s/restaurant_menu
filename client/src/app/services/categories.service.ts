@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import routes from '../constants/categoryServiceRoutes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
   constructor(private http: HttpClient) {}
-  getCategories(): any {
-    return this.http.get<any>('http://localhost:3001/api/categories/primary');
+  getPrimaryCategories(): any {
+    return this.http.get<any>(routes.getPrimaryCategories);
   }
 }
