@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { Menu } from './pages/menu/menu.component';
 import { Admin } from './pages/admin/admin.component';
 import { Header } from './components/shared/header/header.component';
-import { Error404 } from './components/shared/error404/error404.component';
+import { NotFound } from './components/shared/not_found/not_found.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { CategoriesComponent } from './components/menu-components/categories/categories.component';
 import { DishesComponent } from './components/menu-components/dishes/dishes.component';
@@ -21,7 +21,7 @@ import { DishItemComponent } from './components/menu-components/dish-item/dish-i
     Admin,
     Menu,
     Header,
-    Error404,
+    NotFound,
     FooterComponent,
     CategoriesComponent,
     DishesComponent,

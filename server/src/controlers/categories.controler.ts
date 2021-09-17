@@ -19,7 +19,7 @@ const {
 
 const getAllCategories = (req: Request, res: Response) => {
   const options = {
-    query: "SELECT NAME FROM CATEGORIES",
+    query: "SELECT * FROM CATEGORIES",
     errorCode: CATEGORIES_GET_ERROR,
     single: false,
   };
@@ -28,7 +28,7 @@ const getAllCategories = (req: Request, res: Response) => {
 
 const getPrimaryCategories = (req: Request, res: Response) => {
   const options = {
-    query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
+    query: "SELECT ID,NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
     errorCode: CATEGORIES_GET_ERROR,
     single: false,
   };

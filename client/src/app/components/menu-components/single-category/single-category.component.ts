@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/models/category.model';
+import { PrimaryCategory } from 'src/models/primaryCategory.model';
 
 @Component({
   selector: 'app-single-category',
@@ -7,9 +7,9 @@ import { Category } from 'src/models/category.model';
   styleUrls: ['./single-category.component.scss'],
 })
 export class SingleCategoryComponent implements OnInit {
-  primaryCategoryList: Category[] = [
-    { name: 'First courses' },
-    { name: 'Beverages' },
+  primaryCategoryList: PrimaryCategory[] = [
+    { id: '', name: 'First courses' },
+    { id: '', name: 'Beverages' },
   ];
   constructor() {}
 

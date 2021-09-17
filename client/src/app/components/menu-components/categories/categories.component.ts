@@ -1,15 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { Category } from 'src/models/category.model';
-
-class CategoryClass {
-  constructor(
-    public id: number,
-    public name: string,
-    public show: boolean,
-    public category: any
-  ) {}
-}
+import { PrimaryCategory } from 'src/models/primaryCategory.model';
 
 @Component({
   selector: 'app-categories',
@@ -19,13 +10,7 @@ class CategoryClass {
 export class CategoriesComponent implements OnInit {
   @Input() selectedCategoryName: string;
 
-  categories: CategoryClass[];
-
-  primaryCategoriesList: Category[] = [
-    { name: 'All' },
-    { name: 'First courses' },
-    { name: 'Beverages' },
-  ];
+  primaryCategoriesList: PrimaryCategory[] = [{ id: '1', name: 'All' }];
 
   @Output() categoryChangeEvent = new EventEmitter<string>();
 
@@ -44,9 +29,17 @@ export class CategoriesComponent implements OnInit {
     this.emitCategoryName(name);
   }
 
-  constructor(private categoriesService: CategoriesService) {
-    categoriesService.getCategories();
-  }
+  constructor(private categoriesService: CategoriesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoriesService
+      .getCategories()
+      .subscribe(
+        (data: any) =>
+          (this.primaryCategoriesList = [
+            ...this.primaryCategoriesList,
+            ...data,
+          ])
+      );
+  }
 }

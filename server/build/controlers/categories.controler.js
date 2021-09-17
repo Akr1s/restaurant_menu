@@ -22,7 +22,7 @@ const duplicateCheck_1 = __importDefault(require("../validators/duplicateCheck")
 const { CATEGORIES_GET_ERROR, ADD_ERROR, ADD_SUCCESS, UPDATE_SUCCESS, UPDATE_ERROR, DELETE_ERROR, DELETE_SUCCESS, } = responseCodes_1.RESPONSE_CODES;
 const getAllCategories = (req, res) => {
     const options = {
-        query: "SELECT NAME FROM CATEGORIES",
+        query: "SELECT * FROM CATEGORIES",
         errorCode: CATEGORIES_GET_ERROR,
         single: false,
     };
@@ -30,7 +30,7 @@ const getAllCategories = (req, res) => {
 };
 const getPrimaryCategories = (req, res) => {
     const options = {
-        query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
+        query: "SELECT ID,NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
         errorCode: CATEGORIES_GET_ERROR,
         single: false,
     };
