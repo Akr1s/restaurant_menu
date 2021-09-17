@@ -25,6 +25,15 @@
   .details {
     margin-bottom: 0.5rem;
   }
+  .details {
+    display: flex;
+    justify-content: space-between;
+  }
+  .weights {
+    li + li {
+      margin-top: 0.25rem;
+    }
+  }
 }
 :host {
   display: flex;
