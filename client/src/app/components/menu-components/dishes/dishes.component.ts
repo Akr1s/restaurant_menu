@@ -7,7 +7,7 @@ import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
   styleUrls: ['./dishes.component.scss'],
 })
 export class DishesComponent implements OnInit {
-  @Input() selectedCategoryName: string;
+  @Input() selectedCategory: PrimaryCategory;
 
   constructor() {}
 

@@ -7,6 +7,6 @@ import { Injectable } from '@angular/core';
 export class CategoriesService {
   constructor(private http: HttpClient) {}
   getCategories(): any {
-    return this.http.get<any>('http://localhost:3001/api/categories');
+    return this.http.get<any>('http://localhost:3001/api/categories/primary');
   }
 }

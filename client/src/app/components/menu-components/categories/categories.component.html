@@ -3,7 +3,7 @@
     <ul class="categories-horizontal">
       <li
         *ngFor="let category of primaryCategoriesList"
-        (click)="changeCategoryFromNav(category.name)"
+        (click)="changeCategoryFromNav(category)"
       >
         {{ category.name }}
       </li>
@@ -11,11 +11,11 @@
     <select
       class="dropdown"
       (change)="changeCategory($event)"
-      [value]="selectedCategoryName"
+      [value]="selectedCategory.id"
     >
       <option
         *ngFor="let category of primaryCategoriesList"
-        [value]="category.name"
+        [value]="category.id"
       >
         {{ category.name }}
       </option>

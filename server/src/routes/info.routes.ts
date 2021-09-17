@@ -1,5 +1,5 @@
 import promiseRouter from "express-promise-router";
-import controler from "../controlers/info.controler";
+import controller from "../controllers/info.controller";
 
 const router = promiseRouter();
 
@@ -9,7 +9,7 @@ const {
   getTitle,
   getRestInfo,
   updateInfoDBCall,
-} = controler;
+} = controller;
 
 router.get("/title", getTitle);
 router.get("/rest", getRestInfo);

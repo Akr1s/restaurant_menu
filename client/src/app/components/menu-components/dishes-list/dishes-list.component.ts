@@ -8,7 +8,7 @@ import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
   styleUrls: ['./dishes-list.component.scss'],
 })
 export class DishesListComponent implements OnInit {
-  @Input() category: string;
+  @Input() category: PrimaryCategory;
   dishesList: Dish[] = [
     {
       id: 1,

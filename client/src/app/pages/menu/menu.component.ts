@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import categoryAll from 'src/app/constants/categoryAll';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 
 @Component({
   selector: 'app-menu',
@@ -6,9 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class Menu {
-  selectedCategoryName: string = 'All';
+  selectedCategory: PrimaryCategory = categoryAll;
 
-  changeCategory(category: string) {
-    this.selectedCategoryName = category;
+  changeCategory(category: PrimaryCategory) {
+    this.selectedCategory = category;
   }
 }

@@ -1,5 +1,5 @@
 import promiseRouter from "express-promise-router";
-import controler from "../controlers/categories.controler";
+import controller from "../controllers/categories.controller";
 
 const {
   checkDuplicateCategory,
@@ -9,11 +9,11 @@ const {
   getSingleCategory,
   getAllCategories,
   updateCategoryDBCall,
-} = controler;
+} = controller;
 
 const router = promiseRouter();
 
-router.get("/primary", controler.getPrimaryCategories);
+router.get("/primary", controller.getPrimaryCategories);
 router.post(
   "/add",
   performCategoryValidation,

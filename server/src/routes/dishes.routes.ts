@@ -1,5 +1,5 @@
 import promiseRouter from "express-promise-router";
-import controler from "../controlers/dishes.controler";
+import controller from "../controllers/dishes.controller";
 
 const router = promiseRouter();
 
@@ -13,7 +13,7 @@ const {
   checkDuplicateDish,
   createDishDBCall,
   updateDishDBCall,
-} = controler;
+} = controller;
 
 router.post(
   "/add",
