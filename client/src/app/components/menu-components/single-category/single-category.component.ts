@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { Dish } from 'src/app/models/dish.model';
 
 @Component({
   selector: 'app-single-category',
@@ -15,6 +16,8 @@ export class SingleCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.categoriesService
       .getPrimaryCategories()
-      .subscribe((data: any) => (this.primaryCategoriesList = data));
+      .subscribe(
+        (data: PrimaryCategory[]) => (this.primaryCategoriesList = data)
+      );
   }
 }

@@ -84,7 +84,7 @@ const createCategoryDBCall = (
 ) => {
   const { name, show, parent } = req.body;
   const options = {
-    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},${parent}, '${convertDate(
+    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},'${parent}', '${convertDate(
       new Date()
     )}',
     '${convertDate(new Date())}')`,
@@ -100,7 +100,7 @@ const updateCategoryDBCall = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
   const options = {
-    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent}, UPDATED_DATE='${convertDate(
+    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT='${parent}', UPDATED_DATE='${convertDate(
       new Date()
     )}' WHERE ID='${id}'`,
     successCode: UPDATE_SUCCESS,
