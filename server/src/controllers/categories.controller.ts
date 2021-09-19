@@ -64,7 +64,7 @@ const checkDuplicateCategory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, show, parent } = req.body;
+  const { name } = req.body;
   const duplicateCheckResult = await duplicateCheck(
     name,
     "SELECT NAME FROM CATEGORIES"

@@ -74,7 +74,7 @@ const checkDuplicateDish = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, description, img, show, category, weights } = req.body;
+  const { name } = req.body;
   const duplicateCheckResult = await duplicateCheck(
     name,
     "SELECT NAME FROM DISHES"
