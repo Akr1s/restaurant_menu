@@ -1,5 +1,5 @@
 .nav-container {
-  background-color: #231f20;
+  background-color: var(--body-color);
   padding-bottom: 0;
 
   ul {
@@ -7,7 +7,7 @@
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    border-bottom: 2px solid #eb862c;
+    border-bottom: 2px solid var(--primary-color);
     padding-bottom: 1rem;
 
     li {
@@ -24,7 +24,7 @@
 .dropdown {
   padding: 10px;
   border: none;
-  border-right: 10px solid #fff;
+  border-right: 10px solid var(--text-color);
   outline: none;
   width: 50%;
   border-radius: 4px;
@@ -48,5 +48,5 @@
   }
 }
 .activeCategory {
-  color: #cd3a26;
+  color: var(--secondary-color);
 }

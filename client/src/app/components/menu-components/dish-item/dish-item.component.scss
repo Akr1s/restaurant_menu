@@ -29,6 +29,13 @@
     display: flex;
     justify-content: space-between;
   }
+  .category {
+    flex: 0.7;
+  }
+  .weights {
+    flex: 0.3;
+  }
+
   .weights {
     li + li {
       margin-top: 0.25rem;

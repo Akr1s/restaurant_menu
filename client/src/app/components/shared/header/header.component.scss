@@ -1,7 +1,7 @@
 .header-container {
   display: flex;
   justify-content: space-between;
-  background-color: #eb862c;
+  background-color: var(--primary-color);
   align-items: center;
 
   h1,
@@ -19,7 +19,7 @@
     cursor: pointer;
 
     icon {
-      color: white;
+      color: var(--text-color);
     }
   }
   p.hide {
