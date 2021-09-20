@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import routes from '../constants/categoryServiceRoutes';
+import { Category } from '../models/category.model';
 import { PrimaryCategory } from '../models/primaryCategory.model';
 
 @Injectable({
@@ -12,5 +13,9 @@ export class CategoriesService {
 
   getPrimaryCategories(): Observable<PrimaryCategory[]> {
     return this.http.get<PrimaryCategory[]>(routes.getPrimaryCategories);
+  }
+
+  getSingleCategory(id: string): Observable<Category> {
+    return this.http.get<Category>(routes.getCategoryById + `${id}`);
   }
 }

@@ -1,11 +1,13 @@
 import { Weights } from './weights.model';
 
 export interface Dish {
-  id: number;
+  id: string;
   name: string;
   description: string;
   img: string;
   show: boolean;
-  category: number;
+  category: string;
   weights: Weights;
+  created_date: string;
+  updated_date: string;
 }

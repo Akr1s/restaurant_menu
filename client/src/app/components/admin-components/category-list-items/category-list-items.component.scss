@@ -1,0 +1,13 @@
+.list-container {
+  height: 150px;
+  border: 1px solid black;
+  overflow-y: scroll;
+}
+.item-title {
+  height: 50px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.selected {
+  background-color: var(--selected-item-color);
+}

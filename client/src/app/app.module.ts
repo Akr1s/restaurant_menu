@@ -16,6 +16,9 @@ import { DishesListComponent } from './components/menu-components/dishes-list/di
 import { DishItemComponent } from './components/menu-components/dish-item/dish-item.component';
 import { InfoPopupComponent } from './components/menu-components/info-popup/info-popup.component';
 import { ButtonComponent } from './components/shared/button/button.component';
+import { CategoryItemsComponent } from './components/admin-components/category-list-items/category-list-items.component';
+import { CategoryDetailsComponent } from './components/admin-components/category-details/category-details.component';
+import { CategoryEditorComponent } from './components/admin-components/category-editor/category-list-editor.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { ButtonComponent } from './components/shared/button/button.component';
     DishItemComponent,
     InfoPopupComponent,
     ButtonComponent,
+    CategoryEditorComponent,
+    CategoryItemsComponent,
+    CategoryDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
