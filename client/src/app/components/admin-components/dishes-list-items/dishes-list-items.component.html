@@ -1,0 +1,13 @@
+<div class="list-items">
+  <h3>{{ listTitle }}</h3>
+  <div class="list-container">
+    <div
+      class="item-title flex-center"
+      *ngFor="let item of listItems"
+      (click)="selectItem(item)"
+      [class.selected]="selectedListItem === item"
+    >
+      {{ item.name }}
+    </div>
+  </div>
+</div>

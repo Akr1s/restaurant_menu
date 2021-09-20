@@ -19,6 +19,9 @@ import { ButtonComponent } from './components/shared/button/button.component';
 import { CategoryItemsComponent } from './components/admin-components/category-list-items/category-list-items.component';
 import { CategoryDetailsComponent } from './components/admin-components/category-details/category-details.component';
 import { CategoryEditorComponent } from './components/admin-components/category-editor/category-list-editor.component';
+import { DishesEditorComponent } from './components/admin-components/dishes-editor/dishes-editor.component';
+import { DishesListItemsComponent } from './components/admin-components/dishes-list-items/dishes-list-items.component';
+import { DishDetailsComponent } from './components/admin-components/dish-details/dish-details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { CategoryEditorComponent } from './components/admin-components/category-
     CategoryEditorComponent,
     CategoryItemsComponent,
     CategoryDetailsComponent,
+    DishesEditorComponent,
+    DishesListItemsComponent,
+    DishDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
