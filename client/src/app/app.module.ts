@@ -14,6 +14,8 @@ import { DishesComponent } from './components/menu-components/dishes/dishes.comp
 import { SingleCategoryComponent } from './components/menu-components/single-category/single-category.component';
 import { DishesListComponent } from './components/menu-components/dishes-list/dishes-list.component';
 import { DishItemComponent } from './components/menu-components/dish-item/dish-item.component';
+import { InfoPopupComponent } from './components/menu-components/info-popup/info-popup.component';
+import { ButtonComponent } from './components/shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { DishItemComponent } from './components/menu-components/dish-item/dish-i
     SingleCategoryComponent,
     DishesListComponent,
     DishItemComponent,
+    InfoPopupComponent,
+    ButtonComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
