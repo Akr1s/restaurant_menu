@@ -1,0 +1,13 @@
+.single-category + .single-category {
+  margin-top: 2rem;
+}
+.category-title {
+  padding-left: 10%;
+  margin-bottom: 1rem;
+}
+@media screen and (max-width: 900px) {
+  .category-title {
+    padding-left: 0;
+    text-align: center;
+  }
+}

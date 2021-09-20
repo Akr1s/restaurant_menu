@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_promise_router_1 = __importDefault(require("express-promise-router"));
-const info_controler_1 = __importDefault(require("../controlers/info.controler"));
+const info_controller_1 = __importDefault(require("../controllers/info.controller"));
 const router = (0, express_promise_router_1.default)();
-const { performInfoValidation, getAllInfo, getTitle, getRestInfo, updateInfoDBCall, } = info_controler_1.default;
+const { performInfoValidation, getAllInfo, getTitle, getRestInfo, updateInfoDBCall, } = info_controller_1.default;
 router.get("/title", getTitle);
 router.get("/rest", getRestInfo);
 router.get("/", getAllInfo);

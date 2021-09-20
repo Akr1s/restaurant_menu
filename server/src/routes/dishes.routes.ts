@@ -1,5 +1,5 @@
 import promiseRouter from "express-promise-router";
-import controler from "../controlers/dishes.controler";
+import controller from "../controllers/dishes.controller";
 
 const router = promiseRouter();
 
@@ -13,7 +13,7 @@ const {
   checkDuplicateDish,
   createDishDBCall,
   updateDishDBCall,
-} = controler;
+} = controller;
 
 router.post(
   "/add",
@@ -24,7 +24,7 @@ router.post(
 router.get("/select/visible", getAllVisibleDishes);
 router.get("/select/:id", getAllDishesFromCategory);
 router.get("/:id", getSingleDish);
-router.put("/:id", performDishValidation, updateDishDBCall);
+router.put("/:id", performDishValidation, checkDuplicateDish, updateDishDBCall);
 router.delete("/:id", deleteDish);
 router.get("/", getAllDishes);
 

@@ -19,7 +19,7 @@ const {
 
 const getAllCategories = (req: Request, res: Response) => {
   const options = {
-    query: "SELECT NAME FROM CATEGORIES",
+    query: "SELECT * FROM CATEGORIES",
     errorCode: CATEGORIES_GET_ERROR,
     single: false,
   };
@@ -28,7 +28,7 @@ const getAllCategories = (req: Request, res: Response) => {
 
 const getPrimaryCategories = (req: Request, res: Response) => {
   const options = {
-    query: "SELECT NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
+    query: "SELECT ID,NAME FROM CATEGORIES WHERE PARENT IS NULL AND SHOW=TRUE",
     errorCode: CATEGORIES_GET_ERROR,
     single: false,
   };
@@ -64,7 +64,7 @@ const checkDuplicateCategory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, show, parent } = req.body;
+  const { name } = req.body;
   const duplicateCheckResult = await duplicateCheck(
     name,
     "SELECT NAME FROM CATEGORIES"
@@ -84,7 +84,7 @@ const createCategoryDBCall = (
 ) => {
   const { name, show, parent } = req.body;
   const options = {
-    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},${parent}, '${convertDate(
+    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},'${parent}', '${convertDate(
       new Date()
     )}',
     '${convertDate(new Date())}')`,
@@ -100,7 +100,7 @@ const updateCategoryDBCall = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, show, parent } = req.body;
   const options = {
-    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${parent}, UPDATED_DATE='${convertDate(
+    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT='${parent}', UPDATED_DATE='${convertDate(
       new Date()
     )}' WHERE ID='${id}'`,
     successCode: UPDATE_SUCCESS,

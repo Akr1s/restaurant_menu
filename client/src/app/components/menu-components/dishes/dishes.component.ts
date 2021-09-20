@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 
 @Component({
   selector: 'app-dishes',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./dishes.component.scss'],
 })
 export class DishesComponent implements OnInit {
-  @Input() selectedCategoryName: string;
+  @Input() selectedCategory: PrimaryCategory;
 
   constructor() {}
 

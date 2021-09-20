@@ -1,22 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Aclonica&display=swap");
+@import url("./app/style/_reset.scss");
+@import url("./app/style/_variables.scss");
 
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Aclonica", sans-serif;
-  color: white;
+  font-family: var(--main-font, sans-serif);
+  color: var(--text-color);
 }
+
 .container {
-  max-width: 1200px;
+  max-width: var(--container-width);
   margin: 0 auto;
   padding: 1rem;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
+
 .flex-center {
   display: flex;
   justify-content: center;

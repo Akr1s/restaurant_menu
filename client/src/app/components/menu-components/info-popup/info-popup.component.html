@@ -1,0 +1,19 @@
+<section class="info-popup" [class.activePopup]="isModalOpened">
+  <div class="popup">
+    <h4>INFORMATION</h4>
+    <div class="label flex-center">
+      <p class="info-label">Address:</p>
+      <span class="info-text">{{ restInfo.address }}</span>
+    </div>
+    <div class="label flex-center">
+      <p class="info-label">Manager phone:</p>
+      <span class="info-text">{{ restInfo.tel }}</span>
+    </div>
+    <div class="label flex-center">
+      <p class="info-label">Wi-Fi password:</p>
+      <span class="info-text">{{ restInfo.wifi }}</span>
+    </div>
+    <app-button (click)="closeModal()" btnText="Close"></app-button>
+  </div>
+  <div class="back-layer" (click)="closeModal()"></div>
+</section>

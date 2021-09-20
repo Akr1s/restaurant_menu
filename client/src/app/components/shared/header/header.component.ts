@@ -7,10 +7,21 @@ import { Component, Input } from '@angular/core';
 })
 export class Header {
   @Input() info!: boolean;
+  isModalOpened: boolean = false;
 
   title: string = 'Restaurant';
 
+  ngOnInit() {}
+
   openInfo(): void {
-    alert('Info');
+    this.openModal();
   }
+
+  openModal() {
+    this.isModalOpened = true;
+  }
+
+  public closeModal = (): void => {
+    this.isModalOpened = false;
+  };
 }

@@ -1,9 +1,10 @@
 <section class="dishes">
-  <div class="container dishes-container" [ngSwitch]="selectedCategoryName">
-    <app-single-category *ngSwitchCase="'All'"></app-single-category>
-    <app-dishes-list
-      *ngSwitchDefault
-      [category]="selectedCategoryName"
-    ></app-dishes-list>
+  <div class="container dishes-container">
+    <app-single-category
+      *ngIf="selectedCategory.name === 'All'; else dishesList"
+    ></app-single-category>
+    <ng-template #dishesList>
+      <app-dishes-list [category]="selectedCategory"></app-dishes-list>
+    </ng-template>
   </div>
 </section>

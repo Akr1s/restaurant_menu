@@ -1,13 +1,17 @@
-<div class="dish-item">
-  <div class="poster"><img [src]="dish.img" [alt]="dish.name" /></div>
+<article class="dish-item">
+  <img [src]="dish.img" [alt]="dish.name" class="poster" />
   <div class="description">
-    <h3>{{ dish.name }}</h3>
-    <p class="description-text">{{ dish.description }}</p>
+    <h3 class="dish-name">{{ dish.name }}</h3>
+    <p class="description-text">
+      {{ dish.description || "No description is provided" }}
+    </p>
     <div class="details">
       <p class="category">getCategory: {{ dish.category }}</p>
       <ul class="weights">
-        <li *ngFor="let item of dish.weights | keyvalue">{{ item.key }}</li>
+        <li *ngFor="let item of dish.weights | keyvalue">
+          {{ item.key }} : {{ item.value }}
+        </li>
       </ul>
     </div>
   </div>
-</div>
+</article>

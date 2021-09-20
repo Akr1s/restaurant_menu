@@ -1,0 +1,73 @@
+.dish-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+
+  .poster {
+    order: 5;
+    width: 18.75rem;
+    height: 18.75rem;
+    object-fit: contain;
+  }
+  .description {
+    order: 10;
+  }
+  .description-text {
+    width: 18.75rem;
+    text-align: justify;
+  }
+  .dish-name {
+    font-size: 2rem;
+  }
+  .dish-name,
+  .description-text,
+  .details {
+    margin-bottom: 0.5rem;
+  }
+  .details {
+    display: flex;
+    justify-content: space-between;
+  }
+  .category {
+    flex: 0.7;
+  }
+  .weights {
+    flex: 0.3;
+  }
+
+  .weights {
+    li + li {
+      margin-top: 0.25rem;
+    }
+  }
+}
+:host {
+  display: flex;
+  justify-content: flex-end;
+}
+:host:nth-of-type(2n) {
+  justify-content: start;
+  .description {
+    order: 2;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  :host,
+  :host:nth-of-type(2n) {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 700px) {
+  .dish-item {
+    flex-direction: column;
+    width: 100%;
+  }
+  :host:nth-of-type(2n) {
+    justify-content: flex-start;
+    .description {
+      order: 10;
+    }
+  }
+}

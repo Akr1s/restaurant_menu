@@ -1,5 +1,5 @@
 import promiseRouter from "express-promise-router";
-import controler from "../controlers/categories.controler";
+import controller from "../controllers/categories.controller";
 
 const {
   checkDuplicateCategory,
@@ -9,18 +9,23 @@ const {
   getSingleCategory,
   getAllCategories,
   updateCategoryDBCall,
-} = controler;
+} = controller;
 
 const router = promiseRouter();
 
-router.get("/primary", controler.getPrimaryCategories);
+router.get("/primary", controller.getPrimaryCategories);
 router.post(
   "/add",
   performCategoryValidation,
   checkDuplicateCategory,
   createCategoryDBCall
 );
-router.put("/:id", performCategoryValidation, updateCategoryDBCall);
+router.put(
+  "/:id",
+  performCategoryValidation,
+  checkDuplicateCategory,
+  updateCategoryDBCall
+);
 router.delete("/:id", deleteCategory);
 router.get("/:id", getSingleCategory);
 router.get("/", getAllCategories);

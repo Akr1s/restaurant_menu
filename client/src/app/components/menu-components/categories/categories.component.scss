@@ -1,11 +1,14 @@
 .nav-container {
-  background-color: #231f20;
+  background-color: var(--body-color);
+  padding-bottom: 0;
 
   ul {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
 
     li {
       font-size: 30px;
@@ -21,7 +24,7 @@
 .dropdown {
   padding: 10px;
   border: none;
-  border-right: 10px solid #fff;
+  border-right: 10px solid var(--text-color);
   outline: none;
   width: 50%;
   border-radius: 4px;
@@ -43,4 +46,7 @@
   .dropdown {
     width: 70%;
   }
+}
+.activeCategory {
+  color: var(--active-category);
 }

@@ -1,3 +1,7 @@
-<div class="dishes-list">
+<div class="dishes-list" *ngIf="dishesList.length > 0; else noDishes">
   <app-dish-item [dish]="dish" *ngFor="let dish of dishesList"></app-dish-item>
+  <div *ngIf="loading" class="loading">Loading...</div>
 </div>
+<ng-template #noDishes>
+  <div class="no-dishes">There are no dishes here!</div>
+</ng-template>
