@@ -4,7 +4,6 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChange,
   SimpleChanges,
 } from '@angular/core';
 import { Dish } from 'src/app/models/dish.model';
