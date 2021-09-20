@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Title } from 'src/app/models/title.model';
+import { InfoService } from 'src/app/services/info.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,13 @@ export class Header {
 
   title: string = 'Restaurant';
 
-  ngOnInit() {}
+  constructor(private infoService: InfoService) {}
+
+  ngOnInit() {
+    this.infoService.getTitle().subscribe((data: Title) => {
+      this.title = data.title;
+    });
+  }
 
   openInfo(): void {
     this.openModal();
