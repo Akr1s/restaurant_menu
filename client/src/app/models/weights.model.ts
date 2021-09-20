@@ -1,3 +1,3 @@
-export class Weights {
+export interface Weights {
   [key: string]: string;
 }

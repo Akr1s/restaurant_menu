@@ -1,6 +1,6 @@
 import { Weights } from './weights.model';
 
-export class Dish {
+export interface Dish {
   id: number;
   name: string;
   description: string;
