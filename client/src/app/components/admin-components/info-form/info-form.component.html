@@ -1,13 +1,28 @@
 <form class="info-form" [formGroup]="infoForm" (ngSubmit)="onSubmit()">
-  <label for="first-name">Title: </label>
-  <input id="first-name" type="text" formControlName="title" required />
-  <label for="first-name">Address: </label>
-  <input id="first-name" type="text" formControlName="address" required />
-  <label for="first-name">Manager phone: </label>
-  <input id="first-name" type="text" formControlName="tel" required />
-  <label for="first-name">Wi-Fi password: </label>
-  <input id="first-name" type="text" formControlName="wifi" required />
-  <button type="submit" [disabled]="!infoForm.valid">Submit</button>
+  <div class="input-wrapper">
+    <label for="title">Title: </label>
+    <input id="title" type="text" formControlName="title" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="address">Address: </label>
+    <input id="address" type="text" formControlName="address" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="tel">Manager phone: </label>
+    <input id="tel" type="text" formControlName="tel" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="wifi">Wi-Fi password: </label>
+    <input id="wifi" type="text" formControlName="wifi" />
+  </div>
+  <div class="btn-container">
+    <button type="submit" class="btn btn-submit" [disabled]="!infoForm.valid">
+      Submit
+    </button>
+    <button type="button" class="btn btn-cancel" (click)="cancelEditing()">
+      Cancel
+    </button>
+  </div>
 </form>
 <div>{{ infoForm.status | json }}</div>
 <div>{{ infoForm.value | json }}</div>

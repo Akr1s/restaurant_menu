@@ -22,4 +22,12 @@ export class InfoService {
   getInfo(): Observable<Info> {
     return this.http.get<Info>(infoServiceRoutes.getInfo);
   }
+
+  async postInfo(info: Info): Promise<number> {
+    const responseCode = await this.http
+      .put<number>(infoServiceRoutes.updateInfo, info)
+      .toPromise();
+    this.getInfo();
+    return responseCode;
+  }
 }

@@ -1,4 +1,14 @@
 <section class="info-editor">
+  <h3 class="editor-title">Information</h3>
   <info-view [info]="info"></info-view>
-  <info-form [info]="info"></info-form>
+  <info-form
+    [info]="info"
+    *ngIf="isEditing; else editBtn"
+    [cancelEditing]="cancelEditing"
+  ></info-form>
+  <ng-template #editBtn>
+    <div class="btn-edit-container flex-center">
+      <button class="btn btn-ok" (click)="enableEditing()">Edit Info</button>
+    </div>
+  </ng-template>
 </section>

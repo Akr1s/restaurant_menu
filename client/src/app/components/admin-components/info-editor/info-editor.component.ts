@@ -16,6 +16,8 @@ export class InfoEditorComponent implements OnInit {
     wifi: '11111121',
   }; //replace later
 
+  isEditing: boolean = false;
+
   constructor(private infoService: InfoService) {}
 
   ngOnInit(): void {
@@ -23,4 +25,13 @@ export class InfoEditorComponent implements OnInit {
       this.info = data;
     });
   }
+
+  enableEditing() {
+    this.isEditing = true;
+  }
+
+  public cancelEditing = () => {
+    this.isEditing = false;
+    console.log(this.isEditing);
+  };
 }

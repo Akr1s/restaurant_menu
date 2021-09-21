@@ -1,7 +1,20 @@
 <div class="info-view">
-  <h3>Info</h3>
-  <p>Title: {{ info.title }}</p>
-  <p>Address: {{ info.address }}</p>
-  <p>Manager number: {{ info.tel }}</p>
-  <p>Wifi password: {{ info.wifi }}</p>
+  <div class="items-container">
+    <div class="label">
+      <p class="label__static">Title</p>
+      <p class="label__variable">{{ info.title }}</p>
+    </div>
+    <div class="label">
+      <p class="label__static">Address</p>
+      <p class="label__variable">{{ info.address }}</p>
+    </div>
+    <div class="label">
+      <p class="label__static">Manager number</p>
+      <p class="label__variable">{{ info.tel }}</p>
+    </div>
+    <div class="label">
+      <p class="label__static">Wifi password</p>
+      <p class="label__variable">{{ info.wifi }}</p>
+    </div>
+  </div>
 </div>
