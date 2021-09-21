@@ -1,0 +1,13 @@
+<form class="info-form" [formGroup]="infoForm" (ngSubmit)="onSubmit()">
+  <label for="first-name">Title: </label>
+  <input id="first-name" type="text" formControlName="title" required />
+  <label for="first-name">Address: </label>
+  <input id="first-name" type="text" formControlName="address" required />
+  <label for="first-name">Manager phone: </label>
+  <input id="first-name" type="text" formControlName="tel" required />
+  <label for="first-name">Wi-Fi password: </label>
+  <input id="first-name" type="text" formControlName="wifi" required />
+  <button type="submit" [disabled]="!infoForm.valid">Submit</button>
+</form>
+<div>{{ infoForm.status | json }}</div>
+<div>{{ infoForm.value | json }}</div>

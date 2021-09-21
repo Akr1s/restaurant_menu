@@ -22,6 +22,10 @@ import { CategoryEditorComponent } from './components/admin-components/category-
 import { DishesEditorComponent } from './components/admin-components/dishes-editor/dishes-editor.component';
 import { DishesListItemsComponent } from './components/admin-components/dishes-list-items/dishes-list-items.component';
 import { DishDetailsComponent } from './components/admin-components/dish-details/dish-details.component';
+import { InfoEditorComponent } from './components/admin-components/info-editor/info-editor.component';
+import { InfoViewComponent } from './components/admin-components/info-view/info-view.component';
+import { InfoFormComponent } from './components/admin-components/info-form/info-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,8 +48,16 @@ import { DishDetailsComponent } from './components/admin-components/dish-details
     DishesEditorComponent,
     DishesListItemsComponent,
     DishDetailsComponent,
+    InfoEditorComponent,
+    InfoViewComponent,
+    InfoFormComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

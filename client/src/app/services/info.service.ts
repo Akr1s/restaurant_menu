@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import infoServiceRoutes from '../constants/infoServiceRoutes';
+import { Info } from '../models/info.model';
 import { RestInfo } from '../models/restInfo.model';
 import { Title } from '../models/title.model';
 
@@ -16,5 +17,9 @@ export class InfoService {
   }
   getTitle(): Observable<Title> {
     return this.http.get<Title>(infoServiceRoutes.getTitle);
+  }
+
+  getInfo(): Observable<Info> {
+    return this.http.get<Info>(infoServiceRoutes.getInfo);
   }
 }
