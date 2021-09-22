@@ -13,6 +13,9 @@ export class CategoryEditorComponent implements OnInit {
 
   selectedListItem: Category;
 
+  isEditing: boolean = false;
+  isAdding: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -21,5 +24,19 @@ export class CategoryEditorComponent implements OnInit {
 
   public selectItem = (item: Category): void => {
     this.selectedListItem = item;
+  };
+
+  enableEditing() {
+    this.isEditing = true;
+  }
+  enableAdding() {
+    this.isAdding = true;
+  }
+
+  public cancelEditing = () => {
+    this.isEditing = false;
+  };
+  public cancelAdding = () => {
+    this.isAdding = false;
   };
 }

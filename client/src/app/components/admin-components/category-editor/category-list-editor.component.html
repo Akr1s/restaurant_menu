@@ -11,4 +11,21 @@
       [listItemTitle]="listItemTitle"
     ></category-item-details>
   </div>
+  <category-form
+    *ngIf="isAdding; else btns"
+    [cancelEditing]="cancelAdding"
+  ></category-form>
+  <category-form
+    [category]="selectedListItem"
+    *ngIf="isEditing; else btns"
+    [cancelEditing]="cancelEditing"
+  ></category-form>
+  <ng-template #btns>
+    <div class="btn-edit-container flex-center">
+      <button class="btn btn-ok" (click)="enableEditing()">
+        Edit Category
+      </button>
+      <button class="btn btn-ok" (click)="enableAdding()">Add Category</button>
+    </div>
+  </ng-template>
 </section>
