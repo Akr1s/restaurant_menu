@@ -1,0 +1,8 @@
+.category-wrapper {
+  flex-direction: column;
+}
+.category-detail {
+  p + p {
+    margin-top: 0.25rem;
+  }
+}

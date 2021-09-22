@@ -1,12 +1,14 @@
 <section class="category-editor">
-  <category-list-items
-    [listTitle]="listTitle"
-    [listItems]="listItems"
-    [selectItem]="selectItem"
-    [selectedListItem]="selectedListItem"
-  ></category-list-items>
-  <category-item-details
-    [selectedListItem]="selectedListItem"
-    [listItemTitle]="listItemTitle"
-  ></category-item-details>
+  <h3 class="editor-title">{{ listTitle }}</h3>
+  <div class="categories-content">
+    <category-list-items
+      [listItems]="listItems"
+      [selectItem]="selectItem"
+      [selectedListItem]="selectedListItem"
+    ></category-list-items>
+    <category-item-details
+      [selectedListItem]="selectedListItem"
+      [listItemTitle]="listItemTitle"
+    ></category-item-details>
+  </div>
 </section>

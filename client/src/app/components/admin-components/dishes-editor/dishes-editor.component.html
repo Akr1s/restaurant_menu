@@ -1,12 +1,14 @@
 <section class="dish-editor">
-  <dishes-list-items
-    [listTitle]="listTitle"
-    [listItems]="listItems"
-    [selectItem]="selectItem"
-    [selectedListItem]="selectedListItem"
-  ></dishes-list-items>
-  <dish-details
-    [selectedListItem]="selectedListItem"
-    [listItemTitle]="listItemTitle"
-  ></dish-details>
+  <h3 class="editor-title">{{ listTitle }}</h3>
+  <div class="dishes-content">
+    <dishes-list-items
+      [listItems]="listItems"
+      [selectItem]="selectItem"
+      [selectedListItem]="selectedListItem"
+    ></dishes-list-items>
+    <dish-details
+      [selectedListItem]="selectedListItem"
+      [listItemTitle]="listItemTitle"
+    ></dish-details>
+  </div>
 </section>

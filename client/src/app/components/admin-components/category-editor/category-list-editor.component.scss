@@ -1,4 +1,17 @@
-.category-editor {
+.categories-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
+
+  & > * {
+    flex-basis: 40%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .categories-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+  }
 }

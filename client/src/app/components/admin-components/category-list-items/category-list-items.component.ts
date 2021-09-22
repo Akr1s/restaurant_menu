@@ -7,12 +7,24 @@ import { Category } from 'src/app/models/category.model';
   styleUrls: ['./category-list-items.component.scss'],
 })
 export class CategoryItemsComponent implements OnInit {
-  @Input() listTitle: string;
   @Input() listItems: Array<Category>;
   @Input() selectItem: (item: Category) => void;
   @Input() selectedListItem: Category;
 
+  filteredList: Array<Category>;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filteredList = this.listItems;
+  }
+
+  filterList(event: Event) {
+    if (event.target) {
+      const target = event.target as HTMLInputElement;
+      this.filteredList = this.listItems.filter((item) =>
+        item.name.includes(target.value)
+      );
+    }
+  }
 }

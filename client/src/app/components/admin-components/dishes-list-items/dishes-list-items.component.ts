@@ -7,12 +7,24 @@ import { Dish } from 'src/app/models/dish.model';
   styleUrls: ['./dishes-list-items.component.scss'],
 })
 export class DishesListItemsComponent implements OnInit {
-  @Input() listTitle: string;
   @Input() listItems: Array<Dish>;
   @Input() selectItem: (item: Dish) => void;
   @Input() selectedListItem: Dish;
 
+  filteredList: Array<Dish>;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filteredList = this.listItems;
+  }
+
+  filterList(event: Event) {
+    if (event.target) {
+      const target = event.target as HTMLInputElement;
+      this.filteredList = this.listItems.filter((item) =>
+        item.name.includes(target.value)
+      );
+    }
+  }
 }

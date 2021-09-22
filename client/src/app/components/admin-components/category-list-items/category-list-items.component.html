@@ -1,9 +1,18 @@
 <div class="list-items">
-  <h3>{{ listTitle }}</h3>
+  <div class="input-wrapper flex-center">
+    <input
+      type="text"
+      (keyup)="filterList($event)"
+      id="filterList"
+      placeholder="Search categories by name"
+      class="search-input"
+    />
+  </div>
+
   <div class="list-container">
     <div
       class="item-title flex-center"
-      *ngFor="let item of listItems"
+      *ngFor="let item of filteredList"
       (click)="selectItem(item)"
       [class.selected]="selectedListItem === item"
     >

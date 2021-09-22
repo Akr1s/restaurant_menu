@@ -1,0 +1,8 @@
+.dish-wrapper {
+  flex-direction: column;
+}
+.dish-detail {
+  p + p {
+    margin-top: 0.25rem;
+  }
+}

@@ -18,7 +18,6 @@ export class Header {
   ngOnInit() {
     this.infoService.getTitle().subscribe((data: Title) => {
       this.title = data.title;
-      console.log(data);
     });
   }
 

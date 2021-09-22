@@ -1,4 +1,19 @@
-<h3>{{ listItemTitle }}</h3>
-<div class="category-detail">
-  <p class="category__name">Name: {{ selectedListItem.name }}</p>
+<div class="dish-wrapper flex-center">
+  <h3 class="sub-category">{{ listItemTitle }}</h3>
+  <div class="dish-detail">
+    <p class="dish-name">Name: {{ selectedListItem.name }}</p>
+    <p class="dish-desc">Description: {{ selectedListItem.description }}</p>
+    <p class="dish-name">Img link: {{ selectedListItem.img }}</p>
+    <p class="dish-name">Show: {{ selectedListItem.show }}</p>
+    <p class="dish-name">Category: {{ selectedListItem.category }}</p>
+    <div class="weights">
+      <p class="weights-title">Weights</p>
+      <p
+        class="weight-item"
+        *ngFor="let pair of selectedListItem.weights | keyvalue"
+      >
+        {{ pair.key }}: {{ pair.value }}
+      </p>
+    </div>
+  </div>
 </div>

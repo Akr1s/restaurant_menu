@@ -22,11 +22,12 @@ body {
   text-align: center;
   font-size: 24px;
   text-transform: uppercase;
+  margin: 1rem 0rem;
 }
 
 .items-container {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .label {
@@ -35,7 +36,6 @@ body {
   align-items: center;
   padding: 1rem;
   border: 1px solid var(--admin-form-border-color);
-  flex-basis: 25%;
 }
 .label__static {
   margin-bottom: 0.5rem;
@@ -66,4 +66,7 @@ body {
 }
 .btn-cancel {
   background-color: var(--btn-danger);
+}
+.sub-category {
+  margin: 0.5rem 0rem;
 }

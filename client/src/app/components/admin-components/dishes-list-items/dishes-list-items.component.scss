@@ -11,3 +11,15 @@
 .selected {
   background-color: var(--selected-item-color);
 }
+.input-wrapper {
+  margin: 1rem 0rem;
+}
+.search-input {
+  padding: 0.5rem 1rem;
+  width: 50%;
+}
+@media screen and (max-width: 760px) {
+  .list-items {
+    margin-bottom: 1rem;
+  }
+}
