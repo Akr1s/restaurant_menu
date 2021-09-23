@@ -8,20 +8,14 @@ import { InfoService } from 'src/app/services/info.service';
   styleUrls: ['./info-editor.component.scss'],
 })
 export class InfoEditorComponent implements OnInit {
-  info: Info = {
-    id: 4,
-    title: 'Home',
-    address: 'Far, far away',
-    tel: '+380971234567',
-    wifi: '11111121',
-  }; //replace later
+  info: Info;
 
   isEditing: boolean = false;
 
   constructor(private infoService: InfoService) {}
 
   ngOnInit(): void {
-    this.infoService.getInfo().subscribe((data: Info) => {
+    this.infoService.infoData.subscribe((data: Info) => {
       this.info = data;
     });
   }

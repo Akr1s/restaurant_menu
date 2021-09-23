@@ -16,7 +16,7 @@ export class Header {
   constructor(private infoService: InfoService) {}
 
   ngOnInit() {
-    this.infoService.getTitle().subscribe((data: Title) => {
+    this.infoService.infoData.subscribe((data: Title) => {
       this.title = data.title;
     });
   }

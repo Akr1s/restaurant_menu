@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { infoMock } from '../constants/dataMocks';
 import infoServiceRoutes from '../constants/infoServiceRoutes';
+import { RESPONSE_CODES } from '../constants/responseCodes';
 import { Info } from '../models/info.model';
 import { RestInfo } from '../models/restInfo.model';
 import { Title } from '../models/title.model';
@@ -10,23 +12,26 @@ import { Title } from '../models/title.model';
   providedIn: 'root',
 })
 export class InfoService {
-  constructor(private http: HttpClient) {}
+  infoData = new BehaviorSubject<Info>(infoMock);
 
-  getRestInfo(): Observable<RestInfo> {
-    return this.http.get<RestInfo>(infoServiceRoutes.getRestInfo);
-  }
-  getTitle(): Observable<Title> {
-    return this.http.get<Title>(infoServiceRoutes.getTitle);
+  constructor(private http: HttpClient) {
+    this.getInfoData();
   }
 
-  getInfo(): Observable<Info> {
-    return this.http.get<Info>(infoServiceRoutes.getInfo);
+  private getInfoData(): void {
+    this.http.get<Info>(infoServiceRoutes.getInfo).subscribe((data: Info) => {
+      this.infoData.next(data);
+      console.log(data);
+    });
   }
 
-  async postInfo(info: Info): Promise<number> {
+  async updateInfo(info: Info): Promise<number> {
     const responseCode = await this.http
       .put<number>(infoServiceRoutes.updateInfo, info)
       .toPromise();
+    if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
+      this.getInfoData();
+    }
     return responseCode;
   }
 }

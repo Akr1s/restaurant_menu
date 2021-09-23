@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Info } from 'src/app/models/info.model';
 import { RestInfo } from 'src/app/models/restInfo.model';
 import { InfoService } from 'src/app/services/info.service';
 
@@ -19,8 +20,9 @@ export class InfoPopupComponent {
   constructor(private infoService: InfoService) {}
 
   ngOnInit() {
-    this.infoService.getRestInfo().subscribe((data: RestInfo) => {
-      this.restInfo = data;
+    this.infoService.infoData.subscribe((data: Info) => {
+      const { address, tel, wifi } = data;
+      this.restInfo = { address, tel, wifi };
     });
   }
 }

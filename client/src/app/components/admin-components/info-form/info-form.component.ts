@@ -23,7 +23,7 @@ export class InfoFormComponent implements OnInit {
   });
 
   async onSubmit() {
-    const responseCode = await this.infoService.postInfo(this.infoForm.value);
+    const responseCode = await this.infoService.updateInfo(this.infoForm.value);
     if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
       alert('Info Updated');
       this.cancelEditing();
