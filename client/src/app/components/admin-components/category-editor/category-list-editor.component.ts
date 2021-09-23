@@ -20,7 +20,7 @@ export class CategoryEditorComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   loadCategories() {
-    this.categoriesService.getAllCategories().subscribe((data: Category[]) => {
+    this.categoriesService.allCategoriesData.subscribe((data: Category[]) => {
       this.listItems = data;
       this.selectedListItem = data[0];
     });

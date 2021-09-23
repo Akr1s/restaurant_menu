@@ -21,7 +21,6 @@ export class InfoService {
   private getInfoData(): void {
     this.http.get<Info>(infoServiceRoutes.getInfo).subscribe((data: Info) => {
       this.infoData.next(data);
-      console.log(data);
     });
   }
 

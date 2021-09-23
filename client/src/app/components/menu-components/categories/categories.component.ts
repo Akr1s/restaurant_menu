@@ -11,7 +11,7 @@ import categoryAll from 'src/app/constants/categoryAll';
 export class CategoriesComponent implements OnInit {
   @Input() selectedCategory: PrimaryCategory;
 
-  primaryCategoriesList: PrimaryCategory[] = [categoryAll];
+  primaryCategoriesList: PrimaryCategory[] = [];
 
   @Output() categoryChangeEvent = new EventEmitter<PrimaryCategory>();
 
@@ -37,14 +37,9 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.categoriesService
-      .getPrimaryCategories()
-      .subscribe(
-        (data: any) =>
-          (this.primaryCategoriesList = [
-            ...this.primaryCategoriesList,
-            ...data,
-          ])
-      );
+    this.categoriesService.allPrimaryCategoriesData.subscribe(
+      (data: any) =>
+        (this.primaryCategoriesList = [...this.primaryCategoriesList, ...data])
+    );
   }
 }
