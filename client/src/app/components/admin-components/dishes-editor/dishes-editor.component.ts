@@ -20,7 +20,7 @@ export class DishesEditorComponent implements OnInit {
   constructor(private dishesService: DishesService) {}
 
   loadDishes() {
-    this.dishesService.getAllDishes().subscribe((data: Dish[]) => {
+    this.dishesService.dishData.subscribe((data: Dish[]) => {
       this.listItems = data;
       this.selectedListItem = data[0];
     });
