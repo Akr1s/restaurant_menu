@@ -1,8 +1,12 @@
 import baseUrl from './baseUrl';
 
 const categoryServiceRoutes = {
-  getPrimaryCategories: `${baseUrl}categories/primary`,
-  getCategoryById: `${baseUrl}categories/`,
+  getAllCategories: baseUrl + 'categories',
+  getPrimaryCategories: baseUrl + 'categories/primary',
+  getCategoryById: baseUrl + 'categories/',
+  updateCategory: baseUrl + 'categories/',
+  addCategory: baseUrl + 'categories/add',
+  deleteCategory: baseUrl + 'categories/',
 };
 
 export default categoryServiceRoutes;

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Category } from 'src/app/models/category.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'category-form',
@@ -9,7 +12,59 @@ import { Category } from 'src/app/models/category.model';
 export class CategoryFormComponent implements OnInit {
   @Input() cancelEditing: () => void;
   @Input() category: Category;
-  constructor() {}
+  @Input() title: string;
+  @Input() isAdding: boolean;
+  @Input() isEditing: boolean;
 
-  ngOnInit(): void {}
+  constructor(
+    private fb: FormBuilder,
+    private categoriesService: CategoriesService
+  ) {}
+
+  categoryForm = this.fb.group({
+    name: ['', [Validators.maxLength(30), Validators.required]],
+    show: ['', Validators.required],
+    parent: ['', Validators.required],
+  });
+
+  async onSubmit() {
+    if (this.isEditing) {
+      const responseCode = await this.categoriesService.updateCategory(
+        this.categoryForm.value,
+        this.category.id
+      );
+      if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
+        alert('Category updated');
+        this.cancelEditing();
+      }
+    }
+    if (this.isAdding) {
+      const responseCode = await this.categoriesService.addCategory(
+        this.categoryForm.value
+      );
+      console.log(responseCode);
+      if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
+        alert('Category added');
+        this.cancelEditing();
+      }
+    }
+  }
+
+  pathFormData() {
+    this.categoryForm.patchValue({ ...this.category });
+  }
+
+  checkNullCategory(category: Category) {
+    const parent = category.parent;
+    if (!parent) {
+      this.category.parent = 'Null';
+    }
+  }
+
+  ngOnInit(): void {
+    if (this.category) {
+      this.checkNullCategory(this.category);
+      this.pathFormData();
+    }
+  }
 }

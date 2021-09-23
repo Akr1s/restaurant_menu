@@ -1,1 +1,27 @@
-<p>update-category-form works!</p>
+<form class="category-form" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <h4 class="form-title">{{ title }}</h4>
+  <div class="input-wrapper">
+    <label for="title">Name: </label>
+    <input id="title" type="text" formControlName="name" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="address">Show: </label>
+    <input id="address" type="text" formControlName="show" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="tel">Parent: </label>
+    <input id="tel" type="text" formControlName="parent" required />
+  </div>
+  <div class="btn-container">
+    <button
+      type="submit"
+      class="btn btn-submit"
+      [disabled]="!categoryForm.valid || !categoryForm.dirty"
+    >
+      Submit
+    </button>
+    <button type="button" class="btn btn-cancel" (click)="cancelEditing()">
+      Cancel
+    </button>
+  </div>
+</form>

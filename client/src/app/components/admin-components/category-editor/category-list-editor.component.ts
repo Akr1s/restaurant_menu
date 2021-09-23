@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'category-list-editor',
@@ -9,30 +10,37 @@ import { Category } from 'src/app/models/category.model';
 export class CategoryEditorComponent implements OnInit {
   @Input() listTitle: string;
   @Input() listItemTitle: string;
-  @Input() listItems: Array<Category> = [];
+  listItems: Array<Category> = [];
 
   selectedListItem: Category;
 
   isEditing: boolean = false;
   isAdding: boolean = false;
 
-  constructor() {}
+  constructor(private categoriesService: CategoriesService) {}
+
+  loadCategories() {
+    this.categoriesService.getAllCategories().subscribe((data: Category[]) => {
+      this.listItems = data;
+      this.selectedListItem = data[0];
+    });
+  }
 
   ngOnInit(): void {
-    this.selectedListItem = this.listItems[0];
+    this.loadCategories();
   }
 
   public selectItem = (item: Category): void => {
     this.selectedListItem = item;
   };
 
-  enableEditing() {
-    this.isEditing = true;
-  }
   enableAdding() {
     this.isAdding = true;
   }
 
+  public enableEditing = () => {
+    this.isEditing = true;
+  };
   public cancelEditing = () => {
     this.isEditing = false;
   };

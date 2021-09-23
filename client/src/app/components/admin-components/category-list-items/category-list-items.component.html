@@ -9,7 +9,7 @@
     />
   </div>
 
-  <div class="list-container">
+  <div class="list-container" *ngIf="filteredList">
     <div
       class="item-title flex-center"
       *ngFor="let item of filteredList"

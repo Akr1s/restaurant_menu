@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Category } from 'src/app/models/category.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 
@@ -16,17 +17,22 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class CategoryDetailsComponent implements OnInit, OnChanges {
   @Input() listItemTitle: string;
   @Input() selectedListItem: Category;
+  @Input() enableEditing: () => void;
+  @Input() isAdding: boolean;
 
   parentName: string = 'Null';
 
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.checkNullCategory(this.selectedListItem);
+    if (this.selectedListItem) {
+      this.checkNullCategory(this.selectedListItem);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.checkNullCategory(changes.selectedListItem.currentValue);
+    if (changes.selectedListItem && changes.selectedListItem.currentValue)
+      this.checkNullCategory(changes.selectedListItem.currentValue);
   }
 
   getCategoryNameById(id: string) {
@@ -41,6 +47,15 @@ export class CategoryDetailsComponent implements OnInit, OnChanges {
       this.getCategoryNameById(parent);
     } else {
       this.parentName = 'Null';
+    }
+  }
+
+  async deleteCategory() {
+    const responseCode = await this.categoriesService.deleteCategory(
+      this.selectedListItem.id
+    );
+    if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
+      alert('Category deleted');
     }
   }
 }

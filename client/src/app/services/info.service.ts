@@ -27,7 +27,6 @@ export class InfoService {
     const responseCode = await this.http
       .put<number>(infoServiceRoutes.updateInfo, info)
       .toPromise();
-    this.getInfo();
     return responseCode;
   }
 }

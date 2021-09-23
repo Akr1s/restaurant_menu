@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Info } from 'src/app/models/info.model';
 import { InfoService } from 'src/app/services/info.service';
 
@@ -23,7 +24,8 @@ export class InfoFormComponent implements OnInit {
 
   async onSubmit() {
     const responseCode = await this.infoService.postInfo(this.infoForm.value);
-    if (responseCode === 81) {
+    if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
+      alert('Info Updated');
       this.cancelEditing();
     }
   }

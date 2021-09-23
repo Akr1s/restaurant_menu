@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 
 @Component({
@@ -6,7 +12,7 @@ import { Category } from 'src/app/models/category.model';
   templateUrl: './category-list-items.component.html',
   styleUrls: ['./category-list-items.component.scss'],
 })
-export class CategoryItemsComponent implements OnInit {
+export class CategoryItemsComponent implements OnInit, OnChanges {
   @Input() listItems: Array<Category>;
   @Input() selectItem: (item: Category) => void;
   @Input() selectedListItem: Category;
@@ -17,6 +23,12 @@ export class CategoryItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredList = this.listItems;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.listItems && changes.listItems.currentValue) {
+      this.filteredList = changes.listItems.currentValue;
+    }
   }
 
   filterList(event: Event) {
