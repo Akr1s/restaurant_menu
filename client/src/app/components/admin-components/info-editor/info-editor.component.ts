@@ -32,6 +32,5 @@ export class InfoEditorComponent implements OnInit {
 
   public cancelEditing = () => {
     this.isEditing = false;
-    console.log(this.isEditing);
   };
 }

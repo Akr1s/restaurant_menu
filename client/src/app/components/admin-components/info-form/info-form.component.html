@@ -16,7 +16,11 @@
     <input id="wifi" type="text" formControlName="wifi" />
   </div>
   <div class="btn-container">
-    <button type="submit" class="btn btn-submit" [disabled]="!infoForm.valid">
+    <button
+      type="submit"
+      class="btn btn-submit"
+      [disabled]="!infoForm.valid || !infoForm.dirty"
+    >
       Submit
     </button>
     <button type="button" class="btn btn-cancel" (click)="cancelEditing()">

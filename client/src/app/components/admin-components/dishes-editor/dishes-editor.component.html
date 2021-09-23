@@ -9,6 +9,31 @@
     <dish-details
       [selectedListItem]="selectedListItem"
       [listItemTitle]="listItemTitle"
+      [enableEditing]="enableEditing"
+      [isAdding]="isAdding"
     ></dish-details>
   </div>
+  <dish-form
+    title="Edit dish"
+    [dish]="selectedListItem"
+    *ngIf="isEditing; else formAdding"
+    [cancelEditing]="cancelEditing"
+    [isAdding]="isAdding"
+    [isEditing]="isEditing"
+  ></dish-form>
+
+  <ng-template #formAdding>
+    <dish-form
+      title="Add new dish"
+      *ngIf="isAdding; else controls"
+      [cancelEditing]="cancelAdding"
+      [isAdding]="isAdding"
+      [isEditing]="isEditing"
+    ></dish-form>
+  </ng-template>
+  <ng-template #controls>
+    <div class="btn-add-container flex-center">
+      <button class="btn btn-ok" (click)="enableAdding()">Add Dish</button>
+    </div>
+  </ng-template>
 </section>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Dish } from 'src/app/models/dish.model';
 
 @Component({
@@ -17,6 +17,12 @@ export class DishesListItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredList = this.listItems;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.listItems && changes.listItems.currentValue) {
+      this.filteredList = changes.listItems.currentValue;
+    }
   }
 
   filterList(event: Event) {

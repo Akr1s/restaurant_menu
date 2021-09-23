@@ -1,0 +1,39 @@
+<form class="dish-form" [formGroup]="dishForm" (ngSubmit)="onSubmit()">
+  <h4 class="form-title">{{ title }}</h4>
+  <div class="input-wrapper">
+    <label for="title">Name: </label>
+    <input id="title" type="text" formControlName="name" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="address">Description: </label>
+    <input id="address" type="text" formControlName="description" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="tel">Image link: </label>
+    <input id="tel" type="text" formControlName="img" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="tel">Show: </label>
+    <input id="tel" type="text" formControlName="show" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="tel">Category: </label>
+    <input id="tel" type="text" formControlName="category" required />
+  </div>
+  <div class="input-wrapper">
+    <label for="tel">Weights: </label>
+    <input id="tel" type="text" formControlName="weights" required />
+  </div>
+  <div class="btn-container">
+    <button
+      type="submit"
+      class="btn btn-submit"
+      [disabled]="!dishForm.valid || !dishForm.dirty"
+    >
+      Submit
+    </button>
+    <button type="button" class="btn btn-cancel" (click)="cancelEditing()">
+      Cancel
+    </button>
+  </div>
+</form>

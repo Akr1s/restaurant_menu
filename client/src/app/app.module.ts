@@ -27,6 +27,7 @@ import { InfoViewComponent } from './components/admin-components/info-view/info-
 import { InfoFormComponent } from './components/admin-components/info-form/info-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryFormComponent } from './components/admin-components/category-form/category-form.component';
+import { DishFormComponent } from './components/admin-components/dish-form/dish-form.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CategoryFormComponent } from './components/admin-components/category-fo
     InfoViewComponent,
     InfoFormComponent,
     CategoryFormComponent,
+    DishFormComponent,
   ],
   imports: [
     BrowserModule,
