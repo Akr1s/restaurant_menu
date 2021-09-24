@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import categoryAll from '../constants/categoryAll';
 import categoryServiceRoutes from '../constants/categoryServiceRoutes';
 import routes from '../constants/categoryServiceRoutes';
-import { categoryMock } from '../constants/dataMocks';
+import { categoryMock, primaryCategory } from '../constants/dataMocks';
 import { RESPONSE_CODES } from '../constants/responseCodes';
 import { Category } from '../models/category.model';
 import { PrimaryCategory } from '../models/primaryCategory.model';
@@ -17,10 +17,14 @@ export class CategoriesService {
   allPrimaryCategoriesData = new BehaviorSubject<PrimaryCategory[]>([
     categoryAll,
   ]);
+  allNonPrimaryCategoriesData = new BehaviorSubject<PrimaryCategory[]>([
+    primaryCategory,
+  ]);
 
   constructor(private http: HttpClient) {
     this.getAllCategories();
     this.getPrimaryCategories();
+    this.getNonPrimaryCategories();
   }
 
   private getAllCategories(): void {
@@ -36,6 +40,13 @@ export class CategoriesService {
       .get<PrimaryCategory[]>(routes.getPrimaryCategories)
       .subscribe((data: PrimaryCategory[]) => {
         this.allPrimaryCategoriesData.next(data);
+      });
+  }
+  private getNonPrimaryCategories(): void {
+    this.http
+      .get<PrimaryCategory[]>(routes.getNonPrimaryCategories)
+      .subscribe((data: PrimaryCategory[]) => {
+        this.allNonPrimaryCategoriesData.next(data);
       });
   }
 

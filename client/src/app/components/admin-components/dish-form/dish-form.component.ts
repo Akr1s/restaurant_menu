@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Dish } from 'src/app/models/dish.model';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { DishesService } from 'src/app/services/dishes.service';
 
 @Component({
@@ -16,7 +18,13 @@ export class DishFormComponent implements OnInit {
   @Input() isAdding: boolean;
   @Input() isEditing: boolean;
 
-  constructor(private fb: FormBuilder, private dishesService: DishesService) {}
+  categoriesList: Array<PrimaryCategory> = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private dishesService: DishesService,
+    private categoriesService: CategoriesService
+  ) {}
 
   dishForm = this.fb.group({
     name: ['', [Validators.maxLength(30), Validators.required]],
@@ -24,7 +32,7 @@ export class DishFormComponent implements OnInit {
     img: ['', Validators.required],
     show: ['', Validators.required],
     category: ['', Validators.required],
-    weights: ['', Validators.required],
+    weights: this.fb.array([]),
   });
 
   async onSubmit() {
@@ -51,10 +59,16 @@ export class DishFormComponent implements OnInit {
   }
 
   pathFormData() {
-    this.dishForm.patchValue({ ...this.dish });
+    const { name, description, img, show, category } = this.dish;
+    this.dishForm.patchValue({ name, description, img, show, category });
   }
 
   ngOnInit(): void {
+    this.categoriesService.allNonPrimaryCategoriesData.subscribe(
+      (data: PrimaryCategory[]) => {
+        this.categoriesList = data;
+      }
+    );
     if (this.dish) {
       this.pathFormData();
     }

@@ -36,6 +36,16 @@ const getPrimaryCategories = (req: Request, res: Response) => {
   getDataFromDatabase(options, res);
 };
 
+const getNonPrimaryCategories = (req: Request, res: Response) => {
+  const options = {
+    query: "SELECT ID,NAME FROM CATEGORIES WHERE PARENT IS NOT NULL",
+    errorCode: CATEGORIES_GET_ERROR,
+    single: false,
+  };
+
+  getDataFromDatabase(options, res);
+};
+
 const getSingleCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
@@ -133,4 +143,5 @@ export default {
   performCategoryValidation,
   createCategoryDBCall,
   checkDuplicateCategory,
+  getNonPrimaryCategories,
 };

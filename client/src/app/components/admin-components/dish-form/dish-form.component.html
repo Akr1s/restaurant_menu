@@ -4,25 +4,35 @@
     <label for="title">Name: </label>
     <input id="title" type="text" formControlName="name" required />
   </div>
-  <div class="input-wrapper">
+  <div class="input-wrapper text-area-wrapper">
     <label for="address">Description: </label>
-    <input id="address" type="text" formControlName="description" required />
+    <textarea
+      id="address"
+      type="text"
+      formControlName="description"
+      required
+    ></textarea>
   </div>
   <div class="input-wrapper">
     <label for="tel">Image link: </label>
     <input id="tel" type="text" formControlName="img" required />
   </div>
   <div class="input-wrapper">
-    <label for="tel">Show: </label>
-    <input id="tel" type="text" formControlName="show" required />
+    <div class="checkbox-wrapper">
+      Show:
+      <label class="switch" for="show">
+        <input type="checkbox" id="show" formControlName="show" />
+        <span class="slider round"></span>
+      </label>
+    </div>
   </div>
   <div class="input-wrapper">
     <label for="tel">Category: </label>
-    <input id="tel" type="text" formControlName="category" required />
-  </div>
-  <div class="input-wrapper">
-    <label for="tel">Weights: </label>
-    <input id="tel" type="text" formControlName="weights" required />
+    <select formControlName="category" required>
+      <option [ngValue]="category.id" *ngFor="let category of categoriesList">
+        {{ category.name }}
+      </option>
+    </select>
   </div>
   <div class="btn-container">
     <button
@@ -36,4 +46,5 @@
       Cancel
     </button>
   </div>
+  <p>{{ dishForm.value | json }}</p>
 </form>

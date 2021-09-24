@@ -27,21 +27,31 @@ export class DishesService {
   }
 
   async updateDish(dish: Dish, id: string): Promise<number> {
-    const responseCode = await this.http
-      .put<number>(routes.updateDish + id, dish)
-      .toPromise();
-    if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
-      this.getAllDishes();
+    let responseCode = RESPONSE_CODES.UPDATE_ERROR;
+    try {
+      responseCode = await this.http
+        .put<number>(routes.updateDish + id, dish)
+        .toPromise();
+      if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
+        this.getAllDishes();
+      }
+    } catch (error) {
+      console.log(error);
     }
     return responseCode;
   }
 
   async addDish(dish: Dish): Promise<number> {
-    const responseCode = await this.http
-      .post<number>(routes.addDish, dish)
-      .toPromise();
-    if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
-      this.getAllDishes();
+    let responseCode = RESPONSE_CODES.ADD_ERROR;
+    try {
+      responseCode = await this.http
+        .post<number>(routes.addDish, dish)
+        .toPromise();
+      if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
+        this.getAllDishes();
+      }
+    } catch (error) {
+      console.log(error);
     }
     return responseCode;
   }

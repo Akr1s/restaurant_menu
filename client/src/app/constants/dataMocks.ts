@@ -18,6 +18,11 @@ export const categoryMock: Category = {
   created_date: 'now',
   updated_date: 'never',
 };
+
+export const primaryCategory: PrimaryCategory = {
+  name: 'Primary category',
+  id: '1',
+};
 export const dishMock: Dish = {
   id: '1',
   name: 'Dish',

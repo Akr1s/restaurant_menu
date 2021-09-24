@@ -1,7 +1,14 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Category } from 'src/app/models/category.model';
 import { Dish } from 'src/app/models/dish.model';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { DishesService } from 'src/app/services/dishes.service';
 
@@ -10,13 +17,14 @@ import { DishesService } from 'src/app/services/dishes.service';
   templateUrl: './dish-details.component.html',
   styleUrls: ['./dish-details.component.scss'],
 })
-export class DishDetailsComponent implements OnInit {
+export class DishDetailsComponent implements OnInit, OnChanges {
   @Input() listItemTitle: string;
   @Input() selectedListItem: Dish;
   @Input() enableEditing: () => void;
   @Input() isAdding: boolean;
 
-  categoryName: string = 'Null';
+  categoryList: PrimaryCategory[] = [];
+  itemCategory: string = 'Null';
 
   constructor(
     private dishService: DishesService,
@@ -24,29 +32,27 @@ export class DishDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.selectedListItem) {
-      this.checkNullCategory(this.selectedListItem);
-    }
+    this.categoriesService.allNonPrimaryCategoriesData.subscribe(
+      (data: PrimaryCategory[]) => {
+        this.categoryList = data;
+        this.itemCategory = this.getCategoryNameById(
+          this.selectedListItem.category
+        );
+      }
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.selectedListItem && changes.selectedListItem.currentValue)
-      this.checkNullCategory(changes.selectedListItem.currentValue);
-  }
-
-  getCategoryNameById(id: string) {
-    this.categoriesService.getSingleCategory(id).subscribe((data: Category) => {
-      this.categoryName = data.name;
-    });
-  }
-
-  checkNullCategory(dish: Dish) {
-    const category = dish.category;
-    if (category) {
-      this.getCategoryNameById(category);
-    } else {
-      this.categoryName = 'Null';
+    if (changes.selectedListItem) {
+      this.itemCategory = this.getCategoryNameById(
+        changes.selectedListItem.currentValue.category
+      );
     }
+  }
+
+  getCategoryNameById(id: string): string {
+    const category = this.categoryList.filter((item) => item.id === id)[0];
+    return category ? category.name : 'Null';
   }
 
   async deleteDish() {
