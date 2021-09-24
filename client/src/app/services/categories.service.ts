@@ -44,23 +44,33 @@ export class CategoriesService {
   }
 
   async updateCategory(category: Category, id: string): Promise<number> {
-    const responseCode = await this.http
-      .put<number>(categoryServiceRoutes.updateCategory + id, category)
-      .toPromise();
-    if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
-      this.getAllCategories();
-      this.getPrimaryCategories();
+    let responseCode = RESPONSE_CODES.UPDATE_ERROR;
+    try {
+      responseCode = await this.http
+        .put<number>(categoryServiceRoutes.updateCategory + id, category)
+        .toPromise();
+      if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
+        this.getAllCategories();
+        this.getPrimaryCategories();
+      }
+    } catch (error) {
+      console.log(error);
     }
     return responseCode;
   }
 
   async addCategory(category: Category): Promise<number> {
-    const responseCode = await this.http
-      .post<number>(categoryServiceRoutes.addCategory, category)
-      .toPromise();
-    if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
-      this.getAllCategories();
-      this.getPrimaryCategories();
+    let responseCode = RESPONSE_CODES.ADD_ERROR;
+    try {
+      responseCode = await this.http
+        .post<number>(categoryServiceRoutes.addCategory, category)
+        .toPromise();
+      if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
+        this.getAllCategories();
+        this.getPrimaryCategories();
+      }
+    } catch (error) {
+      console.log(error);
     }
     return responseCode;
   }

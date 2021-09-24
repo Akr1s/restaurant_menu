@@ -5,12 +5,22 @@
     <input id="title" type="text" formControlName="name" required />
   </div>
   <div class="input-wrapper">
-    <label for="address">Show: </label>
-    <input id="address" type="text" formControlName="show" required />
+    <div class="checkbox-wrapper">
+      Show:
+      <label class="switch" for="show">
+        <input type="checkbox" id="show" formControlName="show" />
+        <span class="slider round"></span>
+      </label>
+    </div>
   </div>
   <div class="input-wrapper">
     <label for="tel">Parent: </label>
-    <input id="tel" type="text" formControlName="parent" required />
+    <select formControlName="parent">
+      <option [ngValue]="null">Null</option>
+      <option [ngValue]="category.id" *ngFor="let category of categoriesList">
+        {{ category.name }}
+      </option>
+    </select>
   </div>
   <div class="btn-container">
     <button

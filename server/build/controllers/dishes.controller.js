@@ -64,7 +64,7 @@ const performDishValidation = (req, res, next) => {
     next();
 };
 const checkDuplicateDish = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, description, img, show, category, weights } = req.body;
+    const { name } = req.body;
     const duplicateCheckResult = yield (0, duplicateCheck_1.default)(name, "SELECT NAME FROM DISHES");
     if (duplicateCheckResult !== responseCodes_1.RESPONSE_CODES.ADD_SUCCESS) {
         return res

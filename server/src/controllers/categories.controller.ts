@@ -32,6 +32,7 @@ const getPrimaryCategories = (req: Request, res: Response) => {
     errorCode: CATEGORIES_GET_ERROR,
     single: false,
   };
+
   getDataFromDatabase(options, res);
 };
 
@@ -82,11 +83,11 @@ const createCategoryDBCall = (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, show, parent } = req.body;
+  let { name, show, parent } = req.body;
   const options = {
-    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},'${parent}', '${convertDate(
-      new Date()
-    )}',
+    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},${
+      typeof parent === "string" ? `'${parent}'` : parent
+    }, '${convertDate(new Date())}',
     '${convertDate(new Date())}')`,
     successCode: ADD_SUCCESS,
     errorCode: ADD_ERROR,
@@ -98,11 +99,11 @@ const createCategoryDBCall = (
 
 const updateCategoryDBCall = (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, show, parent } = req.body;
+  let { name, show, parent } = req.body;
   const options = {
-    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT='${parent}', UPDATED_DATE='${convertDate(
-      new Date()
-    )}' WHERE ID='${id}'`,
+    query: `UPDATE CATEGORIES SET NAME='${name}', SHOW=${show}, PARENT=${
+      typeof parent === "string" ? `'${parent}'` : parent
+    }, UPDATED_DATE='${convertDate(new Date())}' WHERE ID='${id}'`,
     successCode: UPDATE_SUCCESS,
     errorCode: UPDATE_ERROR,
     successStatusCode: STATUS_CODES.OK,

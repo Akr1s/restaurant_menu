@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Category } from 'src/app/models/category.model';
+import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -16,6 +17,9 @@ export class CategoryFormComponent implements OnInit {
   @Input() isAdding: boolean;
   @Input() isEditing: boolean;
 
+  categoriesList: Array<PrimaryCategory>;
+  selectValue: string | null = null;
+
   constructor(
     private fb: FormBuilder,
     private categoriesService: CategoriesService
@@ -23,9 +27,20 @@ export class CategoryFormComponent implements OnInit {
 
   categoryForm = this.fb.group({
     name: ['', [Validators.maxLength(30), Validators.required]],
-    show: ['', Validators.required],
-    parent: ['', Validators.required],
+    show: [false, Validators.required],
+    parent: [null],
   });
+
+  ngOnInit(): void {
+    this.categoriesService.allPrimaryCategoriesData.subscribe(
+      (data: PrimaryCategory[]) => {
+        this.categoriesList = data;
+      }
+    );
+    if (this.category) {
+      this.pathFormData();
+    }
+  }
 
   async onSubmit() {
     if (this.isEditing) {
@@ -52,19 +67,5 @@ export class CategoryFormComponent implements OnInit {
 
   pathFormData() {
     this.categoryForm.patchValue({ ...this.category });
-  }
-
-  checkNullCategory(category: Category) {
-    const parent = category.parent;
-    if (!parent) {
-      this.category.parent = 'Null';
-    }
-  }
-
-  ngOnInit(): void {
-    if (this.category) {
-      this.checkNullCategory(this.category);
-      this.pathFormData();
-    }
   }
 }

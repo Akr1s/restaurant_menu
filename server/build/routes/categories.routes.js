@@ -9,7 +9,7 @@ const { checkDuplicateCategory, createCategoryDBCall, performCategoryValidation,
 const router = (0, express_promise_router_1.default)();
 router.get("/primary", categories_controller_1.default.getPrimaryCategories);
 router.post("/add", performCategoryValidation, checkDuplicateCategory, createCategoryDBCall);
-router.put("/:id", performCategoryValidation, checkDuplicateCategory, updateCategoryDBCall);
+router.put("/:id", performCategoryValidation, updateCategoryDBCall);
 router.delete("/:id", deleteCategory);
 router.get("/:id", getSingleCategory);
 router.get("/", getAllCategories);
