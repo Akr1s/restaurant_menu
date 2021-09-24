@@ -34,6 +34,38 @@
       </option>
     </select>
   </div>
+  <div class="portion-container input-wrapper" formArrayName="weights">
+    <div class="portions__header">
+      <span>Portions</span>
+      <button type="button" (click)="addWeight()" class="btn btn-submit">
+        Add
+      </button>
+    </div>
+    <div
+      class="portion__item"
+      *ngFor="let portionForm of weights.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <input
+          type="text"
+          formControlName="portion"
+          placeholder="Name a portion"
+        />
+        <input
+          type="text"
+          formControlName="price"
+          placeholder="Price of the portion"
+        />
+        <button
+          type="button"
+          class="btn btn-small btn-cancel"
+          (click)="deletePortion(i)"
+        >
+          Delete
+        </button>
+      </ng-container>
+    </div>
+  </div>
   <div class="btn-container">
     <button
       type="submit"
@@ -46,5 +78,4 @@
       Cancel
     </button>
   </div>
-  <p>{{ dishForm.value | json }}</p>
 </form>

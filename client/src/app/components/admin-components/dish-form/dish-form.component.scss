@@ -89,9 +89,22 @@ input:checked + .slider:before {
 .text-area-wrapper {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   & textarea {
     flex-grow: 1;
     resize: none;
   }
+}
+
+.portions__header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & * {
+    margin-bottom: 0.5rem;
+  }
+}
+.portion__item {
 }
