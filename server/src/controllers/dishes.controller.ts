@@ -88,9 +88,9 @@ const checkDuplicateDish = async (
 };
 
 const createDishDBCall = (req: Request, res: Response) => {
-  const { name, description, img, show, category, weights } = req.body;
+  const { name, description, img, show, category, weights, id } = req.body;
   const options = {
-    query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}', '${description}', '${img}', ${show}, '${category}', '${JSON.stringify(
+    query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${id}','${name}', '${description}', '${img}', ${show}, '${category}', '${JSON.stringify(
       weights
     )}', '${convertDate(new Date())}','${convertDate(new Date())}')`,
     successCode: ADD_SUCCESS,

@@ -5,4 +5,5 @@ export interface DishInterface {
   show: boolean;
   category: string;
   weights: object;
+  id: string;
 }

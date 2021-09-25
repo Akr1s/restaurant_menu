@@ -4,8 +4,8 @@ exports.validateDish = void 0;
 const responseCodes_1 = require("../constants/responseCodes");
 const validatorHelpers_1 = require("../helpers/validatorHelpers");
 const validateDish = (body) => {
-    const { name, description, img, show, category, weights } = body;
-    const objectConfigurationTestResult = (0, validatorHelpers_1.objectConfigurationTest)(body, 6, name, description, img, show, category, weights);
+    const { name, description, img, show, category, weights, id } = body;
+    const objectConfigurationTestResult = (0, validatorHelpers_1.objectConfigurationTest)(body, 7, name, description, img, show, category, weights, id);
     if (objectConfigurationTestResult)
         return objectConfigurationTestResult;
     if ((0, validatorHelpers_1.stringIsIncorrect)(name, 30))

@@ -54,8 +54,7 @@ export class CategoriesService {
 
   async addCategory(category: Category): Promise<number> {
     let responseCode = RESPONSE_CODES.ADD_ERROR;
-    const id = uuidv4();
-    category.id = id;
+    category.id = uuidv4();
     try {
       responseCode = await this.http
         .post<number>(categoryServiceRoutes.addCategory, category)

@@ -87,7 +87,6 @@ export class DishFormComponent implements OnInit {
   async onSubmit() {
     const form = this.dishForm;
     form.value.weights = this.convertWeights();
-    console.log(form.value);
     if (this.isEditing) {
       const responseCode = await this.dishesService.updateDish(
         form.value,
@@ -100,7 +99,6 @@ export class DishFormComponent implements OnInit {
     }
     if (this.isAdding) {
       const responseCode = await this.dishesService.addDish(form.value);
-      console.log(responseCode);
       if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
         alert('Dish added');
         this.cancelEditing();

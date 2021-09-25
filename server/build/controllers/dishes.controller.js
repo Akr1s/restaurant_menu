@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
 const statusCodes_1 = require("../constants/statusCodes");
-const uuid_1 = require("uuid");
 const dishesValidator_1 = require("../validators/dishesValidator");
 const responseCodes_1 = require("../constants/responseCodes");
 const convertDate_1 = __importDefault(require("../utils/convertDate"));
@@ -74,9 +73,9 @@ const checkDuplicateDish = (req, res, next) => __awaiter(void 0, void 0, void 0,
     next();
 });
 const createDishDBCall = (req, res) => {
-    const { name, description, img, show, category, weights } = req.body;
+    const { name, description, img, show, category, weights, id } = req.body;
     const options = {
-        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}', '${description}', '${img}', ${show}, '${category}', '${JSON.stringify(weights)}', '${(0, convertDate_1.default)(new Date())}','${(0, convertDate_1.default)(new Date())}')`,
+        query: `INSERT INTO DISHES(ID, NAME, DESCRIPTION, IMG, SHOW, CATEGORY, WEIGHTS, CREATED_DATE, UPDATED_DATE) VALUES ('${id}','${name}', '${description}', '${img}', ${show}, '${category}', '${JSON.stringify(weights)}', '${(0, convertDate_1.default)(new Date())}','${(0, convertDate_1.default)(new Date())}')`,
         successCode: ADD_SUCCESS,
         errorCode: ADD_ERROR,
         successStatusCode: statusCodes_1.STATUS_CODES.CREATED,

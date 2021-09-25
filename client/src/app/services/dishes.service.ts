@@ -5,6 +5,7 @@ import { dishMock } from '../constants/dataMocks';
 import routes from '../constants/dishServiceRoutes';
 import { RESPONSE_CODES } from '../constants/responseCodes';
 import { Dish } from '../models/dish.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -28,12 +29,13 @@ export class DishesService {
 
   async updateDish(dish: Dish, id: string): Promise<number> {
     let responseCode = RESPONSE_CODES.UPDATE_ERROR;
+    dish.id = id;
     try {
       responseCode = await this.http
         .put<number>(routes.updateDish + id, dish)
         .toPromise();
       if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
-        this.getAllDishes();
+        this.dishData.next(this.localDishListUpdate(dish, id));
       }
     } catch (error) {
       console.log(error);
@@ -43,12 +45,13 @@ export class DishesService {
 
   async addDish(dish: Dish): Promise<number> {
     let responseCode = RESPONSE_CODES.ADD_ERROR;
+    dish.id = uuidv4();
     try {
       responseCode = await this.http
         .post<number>(routes.addDish, dish)
         .toPromise();
       if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
-        this.getAllDishes();
+        this.dishData.next(this.localDishListAdd(dish));
       }
     } catch (error) {
       console.log(error);
@@ -57,12 +60,40 @@ export class DishesService {
   }
 
   async deleteDish(id: string): Promise<number> {
-    const responseCode = await this.http
-      .delete<number>(routes.deleteDish + id)
-      .toPromise();
-    if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
-      this.getAllDishes();
+    let responseCode = RESPONSE_CODES.DELETE_ERROR;
+    try {
+      responseCode = await this.http
+        .delete<number>(routes.deleteDish + id)
+        .toPromise();
+      if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
+        this.dishData.next(this.localDishListDelete(id));
+      }
+    } catch (error) {
+      console.log(error);
     }
     return responseCode;
+  }
+
+  localDishListUpdate(dish: Dish, id: string) {
+    const list = [...this.dishData.value];
+    const result = list.map((listItem: Dish): Dish => {
+      if (listItem.id === id) {
+        listItem = { ...listItem, ...dish };
+      }
+      return listItem;
+    });
+    return result;
+  }
+
+  localDishListAdd(dish: Dish) {
+    const list = [...this.dishData.value];
+    list.push(dish);
+    return list;
+  }
+
+  localDishListDelete(id: string) {
+    const list = [...this.dishData.value];
+    const resultList = list.filter((dish: Dish) => dish.id !== id);
+    return resultList;
   }
 }
