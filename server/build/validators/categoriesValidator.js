@@ -4,8 +4,8 @@ exports.validateCategory = void 0;
 const responseCodes_1 = require("../constants/responseCodes");
 const validatorHelpers_1 = require("../helpers/validatorHelpers");
 const validateCategory = (body) => {
-    const { name, show, parent } = body;
-    const objectConfigurationTestResult = (0, validatorHelpers_1.objectConfigurationTest)(body, 3, name, show);
+    const { name, show, parent, id } = body;
+    const objectConfigurationTestResult = (0, validatorHelpers_1.objectConfigurationTest)(body, 4, name, show, id);
     if (objectConfigurationTestResult)
         return objectConfigurationTestResult;
     if ((0, validatorHelpers_1.isUndefined)(parent))

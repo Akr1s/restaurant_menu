@@ -93,9 +93,9 @@ const createCategoryDBCall = (
   res: Response,
   next: NextFunction
 ) => {
-  let { name, show, parent } = req.body;
+  let { name, show, parent, id } = req.body;
   const options = {
-    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${uuidv4()}','${name}',${show},${
+    query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${id}','${name}',${show},${
       typeof parent === "string" ? `'${parent}'` : parent
     }, '${convertDate(new Date())}',
     '${convertDate(new Date())}')`,

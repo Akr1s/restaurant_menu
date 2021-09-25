@@ -8,9 +8,9 @@ import {
 import { CategoryInterface } from "../interfaces/category";
 
 export const validateCategory = (body: CategoryInterface): number => {
-  const { name, show, parent } = body;
+  const { name, show, parent, id } = body;
   const objectConfigurationTestResult =
-    objectConfigurationTest<CategoryInterface>(body, 3, name, show);
+    objectConfigurationTest<CategoryInterface>(body, 4, name, show, id);
   if (objectConfigurationTestResult) return objectConfigurationTestResult;
   if (isUndefined(parent)) return RESPONSE_CODES.PROPERTY_IS_MISSING;
   if (stringIsIncorrect(name, 30)) return RESPONSE_CODES.CATEGORIES_NAME_ERROR;

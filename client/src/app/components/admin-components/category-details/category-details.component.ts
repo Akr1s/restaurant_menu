@@ -35,16 +35,14 @@ export class CategoryDetailsComponent implements OnInit, OnChanges {
       this.checkNullCategory(changes.selectedListItem.currentValue);
   }
 
-  getCategoryNameById(id: string) {
-    this.categoriesService.getSingleCategory(id).subscribe((data: Category) => {
-      this.parentName = data.name;
-    });
+  getCategoryNameById(id: string): string {
+    return this.categoriesService.getSingleCategory(id).name;
   }
 
   checkNullCategory(category: Category) {
     const parent = category.parent;
     if (parent) {
-      this.getCategoryNameById(parent);
+      this.parentName = this.getCategoryNameById(parent);
     } else {
       this.parentName = 'Null';
     }

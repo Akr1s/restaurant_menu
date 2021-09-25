@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("../helpers/common");
 const statusCodes_1 = require("../constants/statusCodes");
-const uuid_1 = require("uuid");
 const categoriesValidator_1 = require("../validators/categoriesValidator");
 const responseCodes_1 = require("../constants/responseCodes");
 const convertDate_1 = __importDefault(require("../utils/convertDate"));
@@ -73,9 +72,9 @@ const checkDuplicateCategory = (req, res, next) => __awaiter(void 0, void 0, voi
     next();
 });
 const createCategoryDBCall = (req, res, next) => {
-    let { name, show, parent } = req.body;
+    let { name, show, parent, id } = req.body;
     const options = {
-        query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${(0, uuid_1.v4)()}','${name}',${show},${typeof parent === "string" ? `'${parent}'` : parent}, '${(0, convertDate_1.default)(new Date())}',
+        query: `INSERT INTO CATEGORIES(ID,NAME, SHOW, PARENT, CREATED_DATE, UPDATED_DATE) VALUES ('${id}','${name}',${show},${typeof parent === "string" ? `'${parent}'` : parent}, '${(0, convertDate_1.default)(new Date())}',
     '${(0, convertDate_1.default)(new Date())}')`,
         successCode: ADD_SUCCESS,
         errorCode: ADD_ERROR,

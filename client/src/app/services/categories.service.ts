@@ -4,27 +4,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import categoryAll from '../constants/categoryAll';
 import categoryServiceRoutes from '../constants/categoryServiceRoutes';
 import routes from '../constants/categoryServiceRoutes';
-import { categoryMock, primaryCategory } from '../constants/dataMocks';
 import { RESPONSE_CODES } from '../constants/responseCodes';
 import { Category } from '../models/category.model';
 import { PrimaryCategory } from '../models/primaryCategory.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
-  allCategoriesData = new BehaviorSubject<Category[]>([categoryMock]);
-  allPrimaryCategoriesData = new BehaviorSubject<PrimaryCategory[]>([
-    categoryAll,
-  ]);
-  allNonPrimaryCategoriesData = new BehaviorSubject<PrimaryCategory[]>([
-    primaryCategory,
-  ]);
+  allCategoriesData = new BehaviorSubject<Array<Category>>([]);
+  allPrimaryCategoriesData = new BehaviorSubject<Array<PrimaryCategory>>([]);
+  allNonPrimaryCategoriesData = new BehaviorSubject<Array<PrimaryCategory>>([]);
 
   constructor(private http: HttpClient) {
     this.getAllCategories();
-    this.getPrimaryCategories();
-    this.getNonPrimaryCategories();
   }
 
   private getAllCategories(): void {
@@ -32,37 +26,25 @@ export class CategoriesService {
       .get<Category[]>(routes.getAllCategories)
       .subscribe((data: Category[]) => {
         this.allCategoriesData.next(data);
+        this.fillLists();
       });
   }
 
-  private getPrimaryCategories(): void {
-    this.http
-      .get<PrimaryCategory[]>(routes.getPrimaryCategories)
-      .subscribe((data: PrimaryCategory[]) => {
-        this.allPrimaryCategoriesData.next(data);
-      });
-  }
-  private getNonPrimaryCategories(): void {
-    this.http
-      .get<PrimaryCategory[]>(routes.getNonPrimaryCategories)
-      .subscribe((data: PrimaryCategory[]) => {
-        this.allNonPrimaryCategoriesData.next(data);
-      });
-  }
-
-  getSingleCategory(id: string): Observable<Category> {
-    return this.http.get<Category>(routes.getCategoryById + `${id}`);
+  getSingleCategory(id: string): any {
+    const categories = [...this.allCategoriesData.value];
+    return categories.filter((category: Category) => category.id === id)[0];
   }
 
   async updateCategory(category: Category, id: string): Promise<number> {
     let responseCode = RESPONSE_CODES.UPDATE_ERROR;
+    category.id = id;
     try {
       responseCode = await this.http
         .put<number>(categoryServiceRoutes.updateCategory + id, category)
         .toPromise();
       if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
-        this.getAllCategories();
-        this.getPrimaryCategories();
+        this.allCategoriesData.next(this.localCategoryListUpdate(category, id));
+        this.fillLists();
       }
     } catch (error) {
       console.log(error);
@@ -72,13 +54,15 @@ export class CategoriesService {
 
   async addCategory(category: Category): Promise<number> {
     let responseCode = RESPONSE_CODES.ADD_ERROR;
+    const id = uuidv4();
+    category.id = id;
     try {
       responseCode = await this.http
         .post<number>(categoryServiceRoutes.addCategory, category)
         .toPromise();
       if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
-        this.getAllCategories();
-        this.getPrimaryCategories();
+        this.allCategoriesData.next(this.localCategoryListAdd(category));
+        this.fillLists();
       }
     } catch (error) {
       console.log(error);
@@ -87,13 +71,65 @@ export class CategoriesService {
   }
 
   async deleteCategory(id: string): Promise<number> {
-    const responseCode = await this.http
-      .delete<number>(categoryServiceRoutes.deleteCategory + id)
-      .toPromise();
-    if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
-      this.getAllCategories();
-      this.getPrimaryCategories();
+    let responseCode = RESPONSE_CODES.DELETE_ERROR;
+    try {
+      responseCode = await this.http
+        .delete<number>(categoryServiceRoutes.deleteCategory + id)
+        .toPromise();
+      if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
+        this.allCategoriesData.next(this.localCategoryListDelete(id));
+        this.fillLists();
+      }
+    } catch (error) {
+      if (RESPONSE_CODES.DELETE_ERROR) {
+        alert(
+          'Cannot delete category with dishes. Delete all dishes from this category first!'
+        );
+      }
     }
     return responseCode;
+  }
+
+  filterCategory(isPrimary: boolean): PrimaryCategory[] {
+    const categories = [...this.allCategoriesData.value];
+    const resultList = categories.filter(
+      (category: Category) =>
+        typeof category.parent === (isPrimary ? 'object' : 'string')
+    );
+    return resultList.map((category: Category) => ({
+      id: category.id,
+      name: category.name,
+    }));
+  }
+
+  fillLists(): void {
+    this.allPrimaryCategoriesData.next([
+      categoryAll,
+      ...this.filterCategory(true),
+    ]);
+    this.allNonPrimaryCategoriesData.next(this.filterCategory(false));
+  }
+
+  localCategoryListUpdate(category: Category, id: string) {
+    const list = [...this.allCategoriesData.value];
+    const result = list.map((listItem: Category): Category => {
+      if (listItem.id === id) {
+        listItem = { ...listItem, ...category };
+      }
+      return listItem;
+    });
+    return result;
+  }
+
+  localCategoryListAdd(category: Category) {
+    const list = [...this.allCategoriesData.value];
+    list.push(category);
+    return list;
+  }
+
+  localCategoryListDelete(id: string) {
+    const list = [...this.allCategoriesData.value];
+    const resultList = list.filter((category: Category) => category.id !== id);
+    return resultList;
   }
 }

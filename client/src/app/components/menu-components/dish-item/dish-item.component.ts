@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Dish } from 'src/app/models/dish.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-dish-item',
@@ -8,8 +9,14 @@ import { Dish } from 'src/app/models/dish.model';
 })
 export class DishItemComponent implements OnInit {
   @Input() dish: Dish;
+  categoryName: string;
 
-  constructor() {}
+  constructor(private categoriesService: CategoriesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const category = this.categoriesService.getSingleCategory(
+      this.dish.category
+    );
+    this.categoryName = category.name;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import categoryAll from 'src/app/constants/categoryAll';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { Category } from 'src/app/models/category.model';
 import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
@@ -32,9 +33,12 @@ export class CategoryFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    //filter
     this.categoriesService.allPrimaryCategoriesData.subscribe(
       (data: PrimaryCategory[]) => {
-        this.categoriesList = data;
+        this.categoriesList = data.filter(
+          (category: PrimaryCategory) => category.name !== categoryAll.name
+        );
       }
     );
     if (this.category) {
@@ -57,7 +61,6 @@ export class CategoryFormComponent implements OnInit {
       const responseCode = await this.categoriesService.addCategory(
         this.categoryForm.value
       );
-      console.log(responseCode);
       if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
         alert('Category added');
         this.cancelEditing();

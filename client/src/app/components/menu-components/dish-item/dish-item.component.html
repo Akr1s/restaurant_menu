@@ -6,7 +6,7 @@
       {{ dish.description || "No description is provided" }}
     </p>
     <div class="details">
-      <p class="category">getCategory: {{ dish.category }}</p>
+      <p class="category">Category: {{ categoryName }}</p>
       <ul class="weights">
         <li *ngFor="let item of dish.weights | keyvalue">
           {{ item.key }} : {{ item.value }}
