@@ -21,6 +21,10 @@ export class CategoriesService {
     this.getAllCategories();
   }
 
+  getPrimaryCategories(): Observable<PrimaryCategory[]> {
+    return this.http.get<PrimaryCategory[]>(routes.getPrimaryCategories);
+  }
+
   private getAllCategories(): void {
     this.http
       .get<Category[]>(routes.getAllCategories)

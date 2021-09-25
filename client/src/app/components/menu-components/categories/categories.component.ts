@@ -37,9 +37,10 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.categoriesService.allPrimaryCategoriesData.subscribe(
-      (data: any) =>
-        (this.primaryCategoriesList = [...this.primaryCategoriesList, ...data])
-    );
+    this.categoriesService
+      .getPrimaryCategories()
+      .subscribe(
+        (data: any) => (this.primaryCategoriesList = [categoryAll, ...data])
+      );
   }
 }

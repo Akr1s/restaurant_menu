@@ -14,13 +14,10 @@ export class SingleCategoryComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.categoriesService.allPrimaryCategoriesData.subscribe(
-      (data: PrimaryCategory[]) => {
-        const filteredData = data.filter(
-          (category: PrimaryCategory) => category.name !== categoryAll.name
-        );
-        this.primaryCategoriesList = filteredData;
-      }
-    );
+    this.categoriesService
+      .getPrimaryCategories()
+      .subscribe((data: PrimaryCategory[]) => {
+        this.primaryCategoriesList = data;
+      });
   }
 }
