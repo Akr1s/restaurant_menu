@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { infoMock } from '../constants/dataMocks';
 import infoServiceRoutes from '../constants/infoServiceRoutes';
 import { RESPONSE_CODES } from '../constants/responseCodes';
 import { Info } from '../models/info.model';
-import { RestInfo } from '../models/restInfo.model';
-import { Title } from '../models/title.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +27,7 @@ export class InfoService {
       .put<number>(infoServiceRoutes.updateInfo, info)
       .toPromise();
     if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
-      this.getInfoData();
+      this.infoData.next(info);
     }
     return responseCode;
   }
