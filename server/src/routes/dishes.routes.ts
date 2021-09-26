@@ -13,10 +13,12 @@ const {
   checkDuplicateDish,
   createDishDBCall,
   updateDishDBCall,
+  uploadImage,
 } = controller;
 
 router.post(
   "/add",
+  uploadImage,
   performDishValidation,
   checkDuplicateDish,
   createDishDBCall
@@ -24,7 +26,7 @@ router.post(
 router.get("/select/visible", getAllVisibleDishes);
 router.get("/select/:id", getAllDishesFromCategory);
 router.get("/:id", getSingleDish);
-router.put("/:id", performDishValidation, updateDishDBCall);
+router.put("/:id", uploadImage, performDishValidation, updateDishDBCall);
 router.delete("/:id", deleteDish);
 router.get("/", getAllDishes);
 

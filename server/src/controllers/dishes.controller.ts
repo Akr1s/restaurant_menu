@@ -6,6 +6,7 @@ import { validateDish } from "../validators/dishesValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
 import convertDate from "../utils/convertDate";
 import duplicateCheck from "../validators/duplicateCheck";
+import cloudinary from "../config/cloudinary.config";
 
 const {
   DISHES_GET_ERROR,
@@ -128,6 +129,15 @@ const deleteDish = (req: Request, res: Response) => {
   handleDatabaseQuery(options, res);
 };
 
+const uploadImage = async (req: Request, res: Response, next: NextFunction) => {
+  const { img } = req.body;
+  if (!img.startsWith("http")) {
+    const response = await cloudinary.uploader.upload(img);
+    req.body.img = response.secure_url;
+  }
+  next();
+};
+
 export default {
   getAllDishes,
   getAllVisibleDishes,
@@ -138,4 +148,5 @@ export default {
   createDishDBCall,
   updateDishDBCall,
   deleteDish,
+  uploadImage,
 };

@@ -18,6 +18,7 @@ const dishesValidator_1 = require("../validators/dishesValidator");
 const responseCodes_1 = require("../constants/responseCodes");
 const convertDate_1 = __importDefault(require("../utils/convertDate"));
 const duplicateCheck_1 = __importDefault(require("../validators/duplicateCheck"));
+const cloudinary_config_1 = __importDefault(require("../config/cloudinary.config"));
 const { DISHES_GET_ERROR, ADD_ERROR, ADD_SUCCESS, UPDATE_SUCCESS, UPDATE_ERROR, DELETE_ERROR, DELETE_SUCCESS, } = responseCodes_1.RESPONSE_CODES;
 const getAllDishes = (req, res) => {
     const options = {
@@ -106,6 +107,14 @@ const deleteDish = (req, res) => {
     };
     (0, common_1.handleDatabaseQuery)(options, res);
 };
+const uploadImage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { img } = req.body;
+    if (!img.startsWith("http")) {
+        const response = yield cloudinary_config_1.default.uploader.upload(img);
+        req.body.img = response.secure_url;
+    }
+    next();
+});
 exports.default = {
     getAllDishes,
     getAllVisibleDishes,
@@ -116,4 +125,5 @@ exports.default = {
     createDishDBCall,
     updateDishDBCall,
     deleteDish,
+    uploadImage,
 };

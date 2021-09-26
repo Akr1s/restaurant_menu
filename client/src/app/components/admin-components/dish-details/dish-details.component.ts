@@ -25,6 +25,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
 
   categoryList: PrimaryCategory[] = [];
   itemCategory: string = 'Null';
+  dishImageString: string;
 
   constructor(
     private dishService: DishesService,
@@ -32,6 +33,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
+    this.dishImageString = this.checkImageLink(this.selectedListItem);
     this.categoriesService.allNonPrimaryCategoriesData.subscribe(
       (data: PrimaryCategory[]) => {
         this.categoryList = data;
@@ -44,6 +46,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.selectedListItem) {
+      this.dishImageString = this.checkImageLink(this.selectedListItem);
       this.itemCategory = this.getCategoryNameById(
         changes.selectedListItem.currentValue.category
       );
@@ -62,5 +65,11 @@ export class DishDetailsComponent implements OnInit, OnChanges {
     if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
       alert('Category deleted');
     }
+  }
+
+  checkImageLink(dish: Dish) {
+    let image = dish.img;
+    if (!image.startsWith('http')) image = 'Long base64 string';
+    return image;
   }
 }

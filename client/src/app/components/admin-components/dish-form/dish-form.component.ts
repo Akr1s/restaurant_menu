@@ -27,6 +27,7 @@ export class DishFormComponent implements OnInit {
 
   categoriesList: Array<PrimaryCategory> = [];
   weightsArray: Array<string[]> = [];
+  previewSource: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +59,7 @@ export class DishFormComponent implements OnInit {
       this.weightsArray = Object.entries(this.dish.weights);
       this.fillWeights(this.weightsArray.length);
       this.pathFormData();
+      this.previewSource = this.dishForm.controls.img.value;
     }
     this.convertWeights();
   }
@@ -87,6 +89,7 @@ export class DishFormComponent implements OnInit {
   async onSubmit() {
     const form = this.dishForm;
     form.value.weights = this.convertWeights();
+    form.value.img = this.previewSource;
     if (this.isEditing) {
       const responseCode = await this.dishesService.updateDish(
         form.value,
@@ -107,7 +110,7 @@ export class DishFormComponent implements OnInit {
   }
 
   pathFormData() {
-    const { name, description, img, show, category } = this.dish;
+    let { name, description, img, show, category } = this.dish;
     this.pathWeights();
     this.dishForm.patchValue({
       name,
@@ -140,5 +143,26 @@ export class DishFormComponent implements OnInit {
       result[key] = value;
     }
     return result;
+  }
+
+  handleImageInputChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      const file: File = (target.files as FileList)[0];
+      this.previewFile(file);
+    }
+  }
+
+  previewFile(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      this.previewSource = reader.result as string;
+    };
+  }
+
+  clearPreviewImage() {
+    this.previewSource = '';
+    this.dishForm.controls.img.setValue('');
   }
 }

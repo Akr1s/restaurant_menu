@@ -106,5 +106,19 @@ input:checked + .slider:before {
     margin-bottom: 0.5rem;
   }
 }
-.portion__item {
+
+.image-preview {
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+}
+.delete-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #727070;
+  cursor: pointer;
 }

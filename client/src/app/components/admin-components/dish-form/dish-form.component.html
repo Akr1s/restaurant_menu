@@ -13,9 +13,29 @@
       required
     ></textarea>
   </div>
-  <div class="input-wrapper">
-    <label for="tel">Image link: </label>
-    <input id="tel" type="text" formControlName="img" required />
+  <div class="input-wrapper" *ngIf="!previewSource">
+    <label for="image">Image: </label>
+    <input
+      id="image"
+      type="file"
+      formControlName="img"
+      required
+      (change)="handleImageInputChange($event)"
+    />
+  </div>
+  <div
+    class="image-preview flex-center"
+    *ngIf="previewSource"
+    title="Image preview"
+  >
+    <img [src]="previewSource" alt="Preview image" />
+    <button
+      type="button"
+      class="delete-image flex-center"
+      (click)="clearPreviewImage()"
+    >
+      X
+    </button>
   </div>
   <div class="input-wrapper">
     <div class="checkbox-wrapper">
@@ -27,8 +47,8 @@
     </div>
   </div>
   <div class="input-wrapper">
-    <label for="tel">Category: </label>
-    <select formControlName="category" required>
+    <label for="category">Category: </label>
+    <select formControlName="category" id="category" required>
       <option [ngValue]="category.id" *ngFor="let category of categoriesList">
         {{ category.name }}
       </option>
