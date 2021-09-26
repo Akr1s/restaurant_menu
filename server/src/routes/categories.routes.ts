@@ -11,6 +11,7 @@ const {
   updateCategoryDBCall,
   getPrimaryCategories,
   getNonPrimaryCategories,
+  checkDuplicateCategoryUpdate,
 } = controller;
 
 const router = promiseRouter();
@@ -23,8 +24,12 @@ router.post(
   checkDuplicateCategory,
   createCategoryDBCall
 );
-//categories update validation
-router.put("/:id", performCategoryValidation, updateCategoryDBCall);
+router.put(
+  "/:id",
+  checkDuplicateCategoryUpdate,
+  performCategoryValidation,
+  updateCategoryDBCall
+);
 router.delete("/:id", deleteCategory);
 router.get("/:id", getSingleCategory);
 router.get("/", getAllCategories);

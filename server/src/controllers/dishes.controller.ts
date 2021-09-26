@@ -88,6 +88,24 @@ const checkDuplicateDish = async (
   next();
 };
 
+const checkDuplicateDishUpdate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { name, id } = req.body;
+  const duplicateCheckResult = await duplicateCheck(
+    name,
+    `SELECT NAME FROM DISHES WHERE ID<>'${id}'`
+  );
+  if (duplicateCheckResult !== RESPONSE_CODES.ADD_SUCCESS) {
+    return res
+      .status(STATUS_CODES.VALIDATION_ERROR)
+      .send(`${duplicateCheckResult}`);
+  }
+  next();
+};
+
 const createDishDBCall = (req: Request, res: Response) => {
   const { name, description, img, show, category, weights, id } = req.body;
   const options = {
@@ -149,4 +167,5 @@ export default {
   updateDishDBCall,
   deleteDish,
   uploadImage,
+  checkDuplicateDishUpdate,
 };

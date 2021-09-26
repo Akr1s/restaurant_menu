@@ -14,6 +14,7 @@ const {
   createDishDBCall,
   updateDishDBCall,
   uploadImage,
+  checkDuplicateDishUpdate,
 } = controller;
 
 router.post(
@@ -26,7 +27,13 @@ router.post(
 router.get("/select/visible", getAllVisibleDishes);
 router.get("/select/:id", getAllDishesFromCategory);
 router.get("/:id", getSingleDish);
-router.put("/:id", uploadImage, performDishValidation, updateDishDBCall);
+router.put(
+  "/:id",
+  uploadImage,
+  performDishValidation,
+  checkDuplicateDishUpdate,
+  updateDishDBCall
+);
 router.delete("/:id", deleteDish);
 router.get("/", getAllDishes);
 

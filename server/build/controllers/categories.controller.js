@@ -71,6 +71,16 @@ const checkDuplicateCategory = (req, res, next) => __awaiter(void 0, void 0, voi
     }
     next();
 });
+const checkDuplicateCategoryUpdate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, id } = req.body;
+    const duplicateCheckResult = yield (0, duplicateCheck_1.default)(name, `SELECT NAME FROM CATEGORIES WHERE ID<>'${id}'`);
+    if (duplicateCheckResult !== responseCodes_1.RESPONSE_CODES.ADD_SUCCESS) {
+        return res
+            .status(statusCodes_1.STATUS_CODES.VALIDATION_ERROR)
+            .send(`${duplicateCheckResult}`);
+    }
+    next();
+});
 const createCategoryDBCall = (req, res, next) => {
     let { name, show, parent, id } = req.body;
     const options = {
@@ -116,4 +126,5 @@ exports.default = {
     createCategoryDBCall,
     checkDuplicateCategory,
     getNonPrimaryCategories,
+    checkDuplicateCategoryUpdate,
 };
