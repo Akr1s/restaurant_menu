@@ -1,14 +1,14 @@
-import { Dish } from '../models/dish.model';
-import { Info } from '../models/info.model';
+import { DishInterface } from '../interfaces/dish';
+import { InfoInterface } from '../interfaces/info';
 
-export const infoMock: Info = {
+export const infoMock: InfoInterface = {
   id: 1,
   title: 'Restaurant',
   address: 'Unknown',
   tel: 'Unknown',
   wifi: 'Free',
 };
-export const dishMock: Dish = {
+export const dishMock: DishInterface = {
   id: '1',
   name: 'Dish',
   description: 'Dummy text here',

@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import categoryAll from 'src/app/constants/categoryAll';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
-import { Category } from 'src/app/models/category.model';
-import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { CategoryInterface } from 'src/app/interfaces/category';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -13,12 +13,12 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoryFormComponent implements OnInit {
   @Input() cancelEditing: () => void;
-  @Input() category: Category;
+  @Input() category: CategoryInterface;
   @Input() title: string;
   @Input() isAdding: boolean;
   @Input() isEditing: boolean;
 
-  categoriesList: Array<PrimaryCategory>;
+  categoriesList: Array<PrimaryCategoryInterface>;
   selectValue: string | null = null;
 
   constructor(
@@ -35,9 +35,10 @@ export class CategoryFormComponent implements OnInit {
   ngOnInit(): void {
     //filter
     this.categoriesService.allPrimaryCategoriesData.subscribe(
-      (data: PrimaryCategory[]) => {
+      (data: PrimaryCategoryInterface[]) => {
         this.categoriesList = data.filter(
-          (category: PrimaryCategory) => category.name !== categoryAll.name
+          (category: PrimaryCategoryInterface) =>
+            category.name !== categoryAll.name
         );
       }
     );

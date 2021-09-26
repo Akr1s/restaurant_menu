@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import categoryAll from 'src/app/constants/categoryAll';
 
 @Component({
@@ -9,20 +9,20 @@ import categoryAll from 'src/app/constants/categoryAll';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-  @Input() selectedCategory: PrimaryCategory;
+  @Input() selectedCategory: PrimaryCategoryInterface;
 
-  primaryCategoriesList: PrimaryCategory[] = [];
+  primaryCategoriesList: PrimaryCategoryInterface[] = [];
 
-  @Output() categoryChangeEvent = new EventEmitter<PrimaryCategory>();
+  @Output() categoryChangeEvent = new EventEmitter<PrimaryCategoryInterface>();
 
-  emitCategory(category: PrimaryCategory) {
+  emitCategory(category: PrimaryCategoryInterface) {
     this.categoryChangeEvent.emit(category);
   }
 
   changeCategory(event: Event) {
     const target = event.target as HTMLSelectElement;
     if (target) {
-      const clickedCategory: PrimaryCategory =
+      const clickedCategory: PrimaryCategoryInterface =
         this.primaryCategoriesList.filter(
           (category) => category.id === target.value
         )[0];
@@ -30,7 +30,7 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  changeCategoryFromNav(category: PrimaryCategory) {
+  changeCategoryFromNav(category: PrimaryCategoryInterface) {
     this.emitCategory(category);
   }
 

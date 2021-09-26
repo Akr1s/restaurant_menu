@@ -1,13 +1,13 @@
-import { Weights } from './weights.model';
+import { WeightsInterface } from './weights';
 
-export interface Dish {
+export interface DishInterface {
   id: string;
   name: string;
   description: string;
   img: string;
   show: boolean;
   category: string;
-  weights: Weights;
+  weights: WeightsInterface;
   created_date: string;
   updated_date: string;
 }

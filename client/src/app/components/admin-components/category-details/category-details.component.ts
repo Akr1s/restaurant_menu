@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
-import { Category } from 'src/app/models/category.model';
+import { CategoryInterface } from 'src/app/interfaces/category';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoryDetailsComponent implements OnInit, OnChanges {
   @Input() listItemTitle: string;
-  @Input() selectedListItem: Category;
+  @Input() selectedListItem: CategoryInterface;
   @Input() enableEditing: () => void;
   @Input() isAdding: boolean;
 
@@ -39,7 +39,7 @@ export class CategoryDetailsComponent implements OnInit, OnChanges {
     return this.categoriesService.getSingleCategory(id).name;
   }
 
-  checkNullCategory(category: Category) {
+  checkNullCategory(category: CategoryInterface) {
     const parent = category.parent;
     if (parent) {
       this.parentName = this.getCategoryNameById(parent);

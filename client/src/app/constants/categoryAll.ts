@@ -1,6 +1,6 @@
-import { PrimaryCategory } from '../models/primaryCategory.model';
+import { PrimaryCategoryInterface } from '../interfaces/primaryCategory';
 
-const categoryAll: PrimaryCategory = {
+const categoryAll: PrimaryCategoryInterface = {
   id: '1',
   name: 'All',
 };

@@ -6,8 +6,8 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Dish } from 'src/app/models/dish.model';
-import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { DishInterface } from 'src/app/interfaces/dish';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import { DishesService } from 'src/app/services/dishes.service';
 
 @Component({
@@ -16,8 +16,8 @@ import { DishesService } from 'src/app/services/dishes.service';
   styleUrls: ['./dishes-list.component.scss'],
 })
 export class DishesListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() category: PrimaryCategory;
-  dishesList: Dish[] = [];
+  @Input() category: PrimaryCategoryInterface;
+  dishesList: DishInterface[] = [];
   loading: boolean;
   first: any;
 
@@ -27,7 +27,7 @@ export class DishesListComponent implements OnInit, OnChanges, OnDestroy {
     this.loading = true;
     this.first = this.dishesService
       .getDishesByCategoryId(id)
-      .subscribe((data: Dish[]) => {
+      .subscribe((data: DishInterface[]) => {
         this.dishesList = data;
         this.loading = false;
       });

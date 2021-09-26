@@ -6,9 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
-import { Category } from 'src/app/models/category.model';
-import { Dish } from 'src/app/models/dish.model';
-import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { DishInterface } from 'src/app/interfaces/dish';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { DishesService } from 'src/app/services/dishes.service';
 
@@ -19,11 +18,11 @@ import { DishesService } from 'src/app/services/dishes.service';
 })
 export class DishDetailsComponent implements OnInit, OnChanges {
   @Input() listItemTitle: string;
-  @Input() selectedListItem: Dish;
+  @Input() selectedListItem: DishInterface;
   @Input() enableEditing: () => void;
   @Input() isAdding: boolean;
 
-  categoryList: PrimaryCategory[] = [];
+  categoryList: PrimaryCategoryInterface[] = [];
   itemCategory: string = 'Null';
   dishImageString: string;
 
@@ -35,7 +34,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.dishImageString = this.checkImageLink(this.selectedListItem);
     this.categoriesService.allNonPrimaryCategoriesData.subscribe(
-      (data: PrimaryCategory[]) => {
+      (data: PrimaryCategoryInterface[]) => {
         this.categoryList = data;
         this.itemCategory = this.getCategoryNameById(
           this.selectedListItem.category
@@ -67,7 +66,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
     }
   }
 
-  checkImageLink(dish: Dish) {
+  checkImageLink(dish: DishInterface) {
     let image = dish.img;
     if (!image.startsWith('http')) image = 'Long base64 string';
     return image;

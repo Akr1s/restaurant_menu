@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Dish } from 'src/app/models/dish.model';
+import { DishInterface } from 'src/app/interfaces/dish';
 import { DishesService } from 'src/app/services/dishes.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { DishesService } from 'src/app/services/dishes.service';
 export class DishesEditorComponent implements OnInit {
   @Input() listTitle: string;
   @Input() listItemTitle: string;
-  listItems: Array<Dish> = [];
+  listItems: Array<DishInterface> = [];
 
-  selectedListItem: Dish;
+  selectedListItem: DishInterface;
 
   isEditing: boolean = false;
   isAdding: boolean = false;
@@ -20,7 +20,7 @@ export class DishesEditorComponent implements OnInit {
   constructor(private dishesService: DishesService) {}
 
   loadDishes() {
-    this.dishesService.dishData.subscribe((data: Dish[]) => {
+    this.dishesService.dishData.subscribe((data: DishInterface[]) => {
       this.listItems = data;
       this.selectedListItem = data[0];
     });
@@ -30,7 +30,7 @@ export class DishesEditorComponent implements OnInit {
     this.loadDishes();
   }
 
-  public selectItem = (item: Dish): void => {
+  public selectItem = (item: DishInterface): void => {
     this.selectedListItem = item;
   };
 

@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Category } from 'src/app/models/category.model';
+import { CategoryInterface } from 'src/app/interfaces/category';
 
 @Component({
   selector: 'category-list-items',
@@ -13,11 +13,11 @@ import { Category } from 'src/app/models/category.model';
   styleUrls: ['./category-list-items.component.scss'],
 })
 export class CategoryItemsComponent implements OnInit, OnChanges {
-  @Input() listItems: Array<Category>;
-  @Input() selectItem: (item: Category) => void;
-  @Input() selectedListItem: Category;
+  @Input() listItems: Array<CategoryInterface>;
+  @Input() selectItem: (item: CategoryInterface) => void;
+  @Input() selectedListItem: CategoryInterface;
 
-  filteredList: Array<Category>;
+  filteredList: Array<CategoryInterface>;
 
   constructor() {}
 

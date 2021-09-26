@@ -5,30 +5,36 @@ import categoryAll from '../constants/categoryAll';
 import categoryServiceRoutes from '../constants/categoryServiceRoutes';
 import routes from '../constants/categoryServiceRoutes';
 import { RESPONSE_CODES } from '../constants/responseCodes';
-import { Category } from '../models/category.model';
-import { PrimaryCategory } from '../models/primaryCategory.model';
+import { CategoryInterface } from '../interfaces/category';
+import { PrimaryCategoryInterface } from '../interfaces/primaryCategory';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
-  allCategoriesData = new BehaviorSubject<Array<Category>>([]);
-  allPrimaryCategoriesData = new BehaviorSubject<Array<PrimaryCategory>>([]);
-  allNonPrimaryCategoriesData = new BehaviorSubject<Array<PrimaryCategory>>([]);
+  allCategoriesData = new BehaviorSubject<Array<CategoryInterface>>([]);
+  allPrimaryCategoriesData = new BehaviorSubject<
+    Array<PrimaryCategoryInterface>
+  >([]);
+  allNonPrimaryCategoriesData = new BehaviorSubject<
+    Array<PrimaryCategoryInterface>
+  >([]);
 
   constructor(private http: HttpClient) {
     this.getAllCategories();
   }
 
-  getPrimaryCategories(): Observable<PrimaryCategory[]> {
-    return this.http.get<PrimaryCategory[]>(routes.getPrimaryCategories);
+  getPrimaryCategories(): Observable<PrimaryCategoryInterface[]> {
+    return this.http.get<PrimaryCategoryInterface[]>(
+      routes.getPrimaryCategories
+    );
   }
 
   private getAllCategories(): void {
     this.http
-      .get<Category[]>(routes.getAllCategories)
-      .subscribe((data: Category[]) => {
+      .get<CategoryInterface[]>(routes.getAllCategories)
+      .subscribe((data: CategoryInterface[]) => {
         this.allCategoriesData.next(data);
         this.fillLists();
       });
@@ -36,10 +42,15 @@ export class CategoriesService {
 
   getSingleCategory(id: string): any {
     const categories = [...this.allCategoriesData.value];
-    return categories.filter((category: Category) => category.id === id)[0];
+    return categories.filter(
+      (category: CategoryInterface) => category.id === id
+    )[0];
   }
 
-  async updateCategory(category: Category, id: string): Promise<number> {
+  async updateCategory(
+    category: CategoryInterface,
+    id: string
+  ): Promise<number> {
     let responseCode = RESPONSE_CODES.UPDATE_ERROR;
     category.id = id;
     try {
@@ -56,7 +67,7 @@ export class CategoriesService {
     return responseCode;
   }
 
-  async addCategory(category: Category): Promise<number> {
+  async addCategory(category: CategoryInterface): Promise<number> {
     let responseCode = RESPONSE_CODES.ADD_ERROR;
     category.id = uuidv4();
     try {
@@ -93,13 +104,13 @@ export class CategoriesService {
     return responseCode;
   }
 
-  filterCategory(isPrimary: boolean): PrimaryCategory[] {
+  filterCategory(isPrimary: boolean): PrimaryCategoryInterface[] {
     const categories = [...this.allCategoriesData.value];
     const resultList = categories.filter(
-      (category: Category) =>
+      (category: CategoryInterface) =>
         typeof category.parent === (isPrimary ? 'object' : 'string')
     );
-    return resultList.map((category: Category) => ({
+    return resultList.map((category: CategoryInterface) => ({
       id: category.id,
       name: category.name,
     }));
@@ -113,18 +124,20 @@ export class CategoriesService {
     this.allNonPrimaryCategoriesData.next(this.filterCategory(false));
   }
 
-  localCategoryListUpdate(category: Category, id: string) {
+  localCategoryListUpdate(category: CategoryInterface, id: string) {
     const list = [...this.allCategoriesData.value];
-    const result = list.map((listItem: Category): Category => {
-      if (listItem.id === id) {
-        listItem = { ...listItem, ...category };
+    const result = list.map(
+      (listItem: CategoryInterface): CategoryInterface => {
+        if (listItem.id === id) {
+          listItem = { ...listItem, ...category };
+        }
+        return listItem;
       }
-      return listItem;
-    });
+    );
     return result;
   }
 
-  localCategoryListAdd(category: Category) {
+  localCategoryListAdd(category: CategoryInterface) {
     const list = [...this.allCategoriesData.value];
     list.push(category);
     return list;
@@ -132,7 +145,9 @@ export class CategoriesService {
 
   localCategoryListDelete(id: string) {
     const list = [...this.allCategoriesData.value];
-    const resultList = list.filter((category: Category) => category.id !== id);
+    const resultList = list.filter(
+      (category: CategoryInterface) => category.id !== id
+    );
     return resultList;
   }
 }

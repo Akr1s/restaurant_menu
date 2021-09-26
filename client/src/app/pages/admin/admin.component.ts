@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Category } from 'src/app/models/category.model';
-import { Dish } from 'src/app/models/dish.model';
+import { CategoryInterface } from 'src/app/interfaces/category';
+import { DishInterface } from 'src/app/interfaces/dish';
 
 @Component({
   selector: 'app-admin',

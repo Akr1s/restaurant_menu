@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Dish } from 'src/app/models/dish.model';
+import { DishInterface } from 'src/app/interfaces/dish';
 
 @Component({
   selector: 'dishes-list-items',
@@ -7,11 +7,11 @@ import { Dish } from 'src/app/models/dish.model';
   styleUrls: ['./dishes-list-items.component.scss'],
 })
 export class DishesListItemsComponent implements OnInit {
-  @Input() listItems: Array<Dish>;
-  @Input() selectItem: (item: Dish) => void;
-  @Input() selectedListItem: Dish;
+  @Input() listItems: Array<DishInterface>;
+  @Input() selectItem: (item: DishInterface) => void;
+  @Input() selectedListItem: DishInterface;
 
-  filteredList: Array<Dish>;
+  filteredList: Array<DishInterface>;
 
   constructor() {}
 

@@ -4,30 +4,34 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { dishMock } from '../constants/dataMocks';
 import routes from '../constants/dishServiceRoutes';
 import { RESPONSE_CODES } from '../constants/responseCodes';
-import { Dish } from '../models/dish.model';
+import { DishInterface } from '../interfaces/dish';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DishesService {
-  dishData = new BehaviorSubject<Dish[]>([dishMock]);
+  dishData = new BehaviorSubject<DishInterface[]>([dishMock]);
 
   constructor(private http: HttpClient) {
     this.getAllDishes();
   }
 
   private getAllDishes(): void {
-    this.http.get<Dish[]>(routes.getAllDishes).subscribe((data: Dish[]) => {
-      this.dishData.next(data);
-    });
+    this.http
+      .get<DishInterface[]>(routes.getAllDishes)
+      .subscribe((data: DishInterface[]) => {
+        this.dishData.next(data);
+      });
   }
 
-  getDishesByCategoryId(id: string): Observable<Dish[]> {
-    return this.http.get<Dish[]>(`${routes.getDishesByCategoryId}${id}`);
+  getDishesByCategoryId(id: string): Observable<DishInterface[]> {
+    return this.http.get<DishInterface[]>(
+      `${routes.getDishesByCategoryId}${id}`
+    );
   }
 
-  async updateDish(dish: Dish, id: string): Promise<number> {
+  async updateDish(dish: DishInterface, id: string): Promise<number> {
     let responseCode = RESPONSE_CODES.UPDATE_ERROR;
     dish.id = id;
     try {
@@ -43,7 +47,7 @@ export class DishesService {
     return responseCode;
   }
 
-  async addDish(dish: Dish): Promise<number> {
+  async addDish(dish: DishInterface): Promise<number> {
     let responseCode = RESPONSE_CODES.ADD_ERROR;
     dish.id = uuidv4();
     try {
@@ -74,9 +78,9 @@ export class DishesService {
     return responseCode;
   }
 
-  localDishListUpdate(dish: Dish, id: string) {
+  localDishListUpdate(dish: DishInterface, id: string) {
     const list = [...this.dishData.value];
-    const result = list.map((listItem: Dish): Dish => {
+    const result = list.map((listItem: DishInterface): DishInterface => {
       if (listItem.id === id) {
         listItem = { ...listItem, ...dish };
       }
@@ -85,7 +89,7 @@ export class DishesService {
     return result;
   }
 
-  localDishListAdd(dish: Dish) {
+  localDishListAdd(dish: DishInterface) {
     const list = [...this.dishData.value];
     list.push(dish);
     return list;
@@ -93,7 +97,7 @@ export class DishesService {
 
   localDishListDelete(id: string) {
     const list = [...this.dishData.value];
-    const resultList = list.filter((dish: Dish) => dish.id !== id);
+    const resultList = list.filter((dish: DishInterface) => dish.id !== id);
     return resultList;
   }
 }

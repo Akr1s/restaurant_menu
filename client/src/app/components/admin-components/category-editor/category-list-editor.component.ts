@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Category } from 'src/app/models/category.model';
+import { CategoryInterface } from 'src/app/interfaces/category';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class CategoryEditorComponent implements OnInit {
   @Input() listTitle: string;
   @Input() listItemTitle: string;
-  listItems: Array<Category> = [];
+  listItems: Array<CategoryInterface> = [];
 
-  selectedListItem: Category;
+  selectedListItem: CategoryInterface;
 
   isEditing: boolean = false;
   isAdding: boolean = false;
@@ -20,17 +20,19 @@ export class CategoryEditorComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   loadCategories() {
-    this.categoriesService.allCategoriesData.subscribe((data: Category[]) => {
-      this.listItems = data;
-      this.selectedListItem = data[0];
-    });
+    this.categoriesService.allCategoriesData.subscribe(
+      (data: CategoryInterface[]) => {
+        this.listItems = data;
+        this.selectedListItem = data[0];
+      }
+    );
   }
 
   ngOnInit(): void {
     this.loadCategories();
   }
 
-  public selectItem = (item: Category): void => {
+  public selectItem = (item: CategoryInterface): void => {
     this.selectedListItem = item;
   };
 

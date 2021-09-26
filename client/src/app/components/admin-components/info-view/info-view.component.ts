@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Info } from 'src/app/models/info.model';
+import { InfoInterface } from 'src/app/interfaces/info';
 
 @Component({
   selector: 'info-view',
@@ -7,7 +7,7 @@ import { Info } from 'src/app/models/info.model';
   styleUrls: ['./info-view.component.scss'],
 })
 export class InfoViewComponent implements OnInit {
-  @Input() info: Info;
+  @Input() info: InfoInterface;
 
   constructor() {}
 

@@ -1,4 +1,4 @@
-export interface Info {
+export interface InfoInterface {
   id: number;
   title: string;
   address: string;

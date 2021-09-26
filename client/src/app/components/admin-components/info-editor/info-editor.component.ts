@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Info } from 'src/app/models/info.model';
+import { InfoInterface } from 'src/app/interfaces/info';
 import { InfoService } from 'src/app/services/info.service';
 
 @Component({
@@ -8,14 +8,14 @@ import { InfoService } from 'src/app/services/info.service';
   styleUrls: ['./info-editor.component.scss'],
 })
 export class InfoEditorComponent implements OnInit {
-  info: Info;
+  info: InfoInterface;
 
   isEditing: boolean = false;
 
   constructor(private infoService: InfoService) {}
 
   ngOnInit(): void {
-    this.infoService.infoData.subscribe((data: Info) => {
+    this.infoService.infoData.subscribe((data: InfoInterface) => {
       this.info = data;
     });
   }

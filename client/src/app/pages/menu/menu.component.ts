@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import categoryAll from 'src/app/constants/categoryAll';
-import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +8,9 @@ import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
   styleUrls: ['./menu.component.scss'],
 })
 export class Menu {
-  selectedCategory: PrimaryCategory = categoryAll;
+  selectedCategory: PrimaryCategoryInterface = categoryAll;
 
-  changeCategory(category: PrimaryCategory) {
+  changeCategory(category: PrimaryCategoryInterface) {
     this.selectedCategory = category;
   }
 }

@@ -7,9 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
-import { Dish } from 'src/app/models/dish.model';
-import { PrimaryCategory } from 'src/app/models/primaryCategory.model';
-import { Weights } from 'src/app/models/weights.model';
+import { DishInterface } from 'src/app/interfaces/dish';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
+import { WeightsInterface } from 'src/app/interfaces/weights';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { DishesService } from 'src/app/services/dishes.service';
 
@@ -20,12 +20,12 @@ import { DishesService } from 'src/app/services/dishes.service';
 })
 export class DishFormComponent implements OnInit {
   @Input() cancelEditing: () => void;
-  @Input() dish: Dish;
+  @Input() dish: DishInterface;
   @Input() title: string;
   @Input() isAdding: boolean;
   @Input() isEditing: boolean;
 
-  categoriesList: Array<PrimaryCategory> = [];
+  categoriesList: Array<PrimaryCategoryInterface> = [];
   weightsArray: Array<string[]> = [];
   previewSource: string = '';
 
@@ -51,7 +51,7 @@ export class DishFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoriesService.allNonPrimaryCategoriesData.subscribe(
-      (data: PrimaryCategory[]) => {
+      (data: PrimaryCategoryInterface[]) => {
         this.categoriesList = data;
       }
     );
@@ -133,7 +133,7 @@ export class DishFormComponent implements OnInit {
     this.weights.setValue(weightsValue);
   };
 
-  convertWeights(): Weights {
+  convertWeights(): WeightsInterface {
     const values = this.weights.value;
     const count = values.length;
     const result: any = {};

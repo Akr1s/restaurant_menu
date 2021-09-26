@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Dish } from 'src/app/models/dish.model';
+import { DishInterface } from 'src/app/interfaces/dish';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./dish-item.component.scss'],
 })
 export class DishItemComponent implements OnInit {
-  @Input() dish: Dish;
+  @Input() dish: DishInterface;
   categoryName: string;
 
   constructor(private categoriesService: CategoriesService) {}

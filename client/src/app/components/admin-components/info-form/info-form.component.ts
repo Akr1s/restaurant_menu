@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
-import { Info } from 'src/app/models/info.model';
+import { InfoInterface } from 'src/app/interfaces/info';
 import { InfoService } from 'src/app/services/info.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { InfoService } from 'src/app/services/info.service';
   styleUrls: ['./info-form.component.scss'],
 })
 export class InfoFormComponent implements OnInit {
-  @Input() info: Info;
+  @Input() info: InfoInterface;
   @Input() cancelEditing: () => void;
 
   constructor(private fb: FormBuilder, private infoService: InfoService) {}
