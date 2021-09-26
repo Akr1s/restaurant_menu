@@ -13,22 +13,6 @@ const getAllInfo = (req, res) => {
     };
     (0, common_1.getDataFromDatabase)(options, res);
 };
-const getTitle = (req, res) => {
-    const options = {
-        query: "SELECT TITLE FROM INFO",
-        errorCode: INFO_GET_ERROR,
-        single: true,
-    };
-    (0, common_1.getDataFromDatabase)(options, res);
-};
-const getRestInfo = (req, res) => {
-    const options = {
-        query: "SELECT ADDRESS, TEL, WIFI FROM INFO",
-        errorCode: INFO_GET_ERROR,
-        single: true,
-    };
-    (0, common_1.getDataFromDatabase)(options, res);
-};
 const performInfoValidation = (req, res, next) => {
     const validationResult = (0, infoValidator_1.validateInfo)(req.body);
     if (validationResult) {
@@ -51,8 +35,6 @@ const updateInfoDBCall = (req, res) => {
 };
 exports.default = {
     getAllInfo,
-    getTitle,
-    getRestInfo,
     updateInfoDBCall,
     performInfoValidation,
 };

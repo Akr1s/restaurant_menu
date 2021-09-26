@@ -10,7 +10,7 @@ const validateDish = (body) => {
         return objectConfigurationTestResult;
     if ((0, validatorHelpers_1.stringIsIncorrect)(name, 30))
         return responseCodes_1.RESPONSE_CODES.DISHES_NAME_ERROR;
-    if ((0, validatorHelpers_1.wrongType)(description, "string") || (0, validatorHelpers_1.stringLengthExeeds)(description, 255))
+    if ((0, validatorHelpers_1.wrongType)(description, "string") || (0, validatorHelpers_1.stringLengthExceeds)(description, 255))
         return responseCodes_1.RESPONSE_CODES.DISHES_DESCRIPTION_ERROR;
     if ((0, validatorHelpers_1.stringIsIncorrect)(img, 255))
         return responseCodes_1.RESPONSE_CODES.DISHES_IMG_ERROR;
@@ -18,6 +18,6 @@ const validateDish = (body) => {
         responseCodes_1.RESPONSE_CODES.DISHES_SHOW_ERROR;
     if ((0, validatorHelpers_1.objectIsEmpty)(weights))
         return responseCodes_1.RESPONSE_CODES.DISHES_WEIGHTS_ERROR;
-    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESFUL;
+    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };
 exports.validateDish = validateDish;

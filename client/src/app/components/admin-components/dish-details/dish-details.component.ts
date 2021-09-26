@@ -63,7 +63,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
       this.selectedListItem.id
     );
     if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
-      alert('Category deleted');
+      alert('Dish deleted');
     }
   }
 

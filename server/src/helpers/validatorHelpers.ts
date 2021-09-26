@@ -20,7 +20,7 @@ export const stringIsEmpty = (param: string): boolean => {
   return param.trim().length === 0;
 };
 
-export const stringLengthExeeds = (
+export const stringLengthExceeds = (
   param: string,
   maxLength: number
 ): boolean => {
@@ -48,13 +48,13 @@ export const objectConfigurationTest = <T extends object>(
     return RESPONSE_CODES.PROPERTY_IS_MISSING;
   if (objectHasAdditionalProperties(body, amountOfProperties))
     return RESPONSE_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;
-  return RESPONSE_CODES.VALIDATION_SUCCESFUL;
+  return RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };
 
 export const stringIsIncorrect = (property: string, maxLength: number) => {
   return (
     wrongType(property, "string") ||
     stringIsEmpty(property) ||
-    stringLengthExeeds(property, maxLength)
+    stringLengthExceeds(property, maxLength)
   );
 };

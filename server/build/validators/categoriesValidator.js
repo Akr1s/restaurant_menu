@@ -14,6 +14,6 @@ const validateCategory = (body) => {
         return responseCodes_1.RESPONSE_CODES.CATEGORIES_NAME_ERROR;
     if ((0, validatorHelpers_1.wrongType)(show, "boolean"))
         responseCodes_1.RESPONSE_CODES.CATEGORIES_SHOW_ERROR;
-    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESFUL;
+    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };
 exports.validateCategory = validateCategory;

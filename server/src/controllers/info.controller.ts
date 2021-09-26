@@ -15,24 +15,6 @@ const getAllInfo = (req: Request, res: Response) => {
   getDataFromDatabase(options, res);
 };
 
-const getTitle = (req: Request, res: Response) => {
-  const options = {
-    query: "SELECT TITLE FROM INFO",
-    errorCode: INFO_GET_ERROR,
-    single: true,
-  };
-  getDataFromDatabase(options, res);
-};
-
-const getRestInfo = (req: Request, res: Response) => {
-  const options = {
-    query: "SELECT ADDRESS, TEL, WIFI FROM INFO",
-    errorCode: INFO_GET_ERROR,
-    single: true,
-  };
-  getDataFromDatabase(options, res);
-};
-
 const performInfoValidation = (
   req: Request,
   res: Response,
@@ -61,8 +43,6 @@ const updateInfoDBCall = (req: Request, res: Response) => {
 
 export default {
   getAllInfo,
-  getTitle,
-  getRestInfo,
   updateInfoDBCall,
   performInfoValidation,
 };

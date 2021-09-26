@@ -1,7 +1,6 @@
 import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
 import { NextFunction, Request, Response } from "express";
 import { STATUS_CODES } from "../constants/statusCodes";
-import { v4 as uuidv4 } from "uuid";
 import { validateDish } from "../validators/dishesValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
 import convertDate from "../utils/convertDate";
@@ -23,25 +22,6 @@ const getAllDishes = (req: Request, res: Response) => {
     query: "SELECT * FROM DISHES",
     errorCode: DISHES_GET_ERROR,
     single: false,
-  };
-  getDataFromDatabase(options, res);
-};
-
-const getAllVisibleDishes = (req: Request, res: Response) => {
-  const options = {
-    query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
-    errorCode: DISHES_GET_ERROR,
-    single: false,
-  };
-  getDataFromDatabase(options, res);
-};
-
-const getSingleDish = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const options = {
-    query: `SELECT *  FROM DISHES WHERE ID='${id}'`,
-    errorCode: DISHES_GET_ERROR,
-    single: true,
   };
   getDataFromDatabase(options, res);
 };
@@ -158,8 +138,6 @@ const uploadImage = async (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   getAllDishes,
-  getAllVisibleDishes,
-  getSingleDish,
   getAllDishesFromCategory,
   performDishValidation,
   checkDuplicateDish,

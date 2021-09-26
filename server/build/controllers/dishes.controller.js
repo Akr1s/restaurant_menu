@@ -28,23 +28,6 @@ const getAllDishes = (req, res) => {
     };
     (0, common_1.getDataFromDatabase)(options, res);
 };
-const getAllVisibleDishes = (req, res) => {
-    const options = {
-        query: "SELECT * FROM DISHES WHERE SHOW=TRUE",
-        errorCode: DISHES_GET_ERROR,
-        single: false,
-    };
-    (0, common_1.getDataFromDatabase)(options, res);
-};
-const getSingleDish = (req, res) => {
-    const { id } = req.params;
-    const options = {
-        query: `SELECT *  FROM DISHES WHERE ID='${id}'`,
-        errorCode: DISHES_GET_ERROR,
-        single: true,
-    };
-    (0, common_1.getDataFromDatabase)(options, res);
-};
 const getAllDishesFromCategory = (req, res) => {
     const { id } = req.params;
     const options = {
@@ -127,8 +110,6 @@ const uploadImage = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.default = {
     getAllDishes,
-    getAllVisibleDishes,
-    getSingleDish,
     getAllDishesFromCategory,
     performDishValidation,
     checkDuplicateDish,

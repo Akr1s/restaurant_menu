@@ -5,13 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_promise_router_1 = __importDefault(require("express-promise-router"));
 const categories_controller_1 = __importDefault(require("../controllers/categories.controller"));
-const { checkDuplicateCategory, createCategoryDBCall, performCategoryValidation, deleteCategory, getSingleCategory, getAllCategories, updateCategoryDBCall, getPrimaryCategories, getNonPrimaryCategories, checkDuplicateCategoryUpdate, } = categories_controller_1.default;
+const { checkDuplicateCategory, createCategoryDBCall, performCategoryValidation, deleteCategory, getAllCategories, updateCategoryDBCall, getPrimaryCategories, checkDuplicateCategoryUpdate, } = categories_controller_1.default;
 const router = (0, express_promise_router_1.default)();
 router.get("/primary", getPrimaryCategories);
-router.get("/nonprimary", getNonPrimaryCategories);
 router.post("/add", performCategoryValidation, checkDuplicateCategory, createCategoryDBCall);
 router.put("/:id", checkDuplicateCategoryUpdate, performCategoryValidation, updateCategoryDBCall);
 router.delete("/:id", deleteCategory);
-router.get("/:id", getSingleCategory);
 router.get("/", getAllCategories);
 exports.default = router;

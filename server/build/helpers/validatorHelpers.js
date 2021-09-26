@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stringIsIncorrect = exports.objectConfigurationTest = exports.objectHasAdditionalProperties = exports.isUndefined = exports.stringLengthExeeds = exports.stringIsEmpty = exports.wrongType = exports.objectIsEmpty = exports.propertiesAreMissing = void 0;
+exports.stringIsIncorrect = exports.objectConfigurationTest = exports.objectHasAdditionalProperties = exports.isUndefined = exports.stringLengthExceeds = exports.stringIsEmpty = exports.wrongType = exports.objectIsEmpty = exports.propertiesAreMissing = void 0;
 const responseCodes_1 = require("../constants/responseCodes");
 const propertyIsMissing = (property) => {
     return property == undefined;
@@ -21,10 +21,10 @@ const stringIsEmpty = (param) => {
     return param.trim().length === 0;
 };
 exports.stringIsEmpty = stringIsEmpty;
-const stringLengthExeeds = (param, maxLength) => {
+const stringLengthExceeds = (param, maxLength) => {
     return param.length > maxLength;
 };
-exports.stringLengthExeeds = stringLengthExeeds;
+exports.stringLengthExceeds = stringLengthExceeds;
 const isUndefined = (param) => {
     return param === undefined;
 };
@@ -40,12 +40,12 @@ const objectConfigurationTest = (body, amountOfProperties, ...propertiesList) =>
         return responseCodes_1.RESPONSE_CODES.PROPERTY_IS_MISSING;
     if ((0, exports.objectHasAdditionalProperties)(body, amountOfProperties))
         return responseCodes_1.RESPONSE_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;
-    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESFUL;
+    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };
 exports.objectConfigurationTest = objectConfigurationTest;
 const stringIsIncorrect = (property, maxLength) => {
     return ((0, exports.wrongType)(property, "string") ||
         (0, exports.stringIsEmpty)(property) ||
-        (0, exports.stringLengthExeeds)(property, maxLength));
+        (0, exports.stringLengthExceeds)(property, maxLength));
 };
 exports.stringIsIncorrect = stringIsIncorrect;

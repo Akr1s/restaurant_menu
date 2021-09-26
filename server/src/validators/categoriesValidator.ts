@@ -15,5 +15,5 @@ export const validateCategory = (body: CategoryInterface): number => {
   if (isUndefined(parent)) return RESPONSE_CODES.PROPERTY_IS_MISSING;
   if (stringIsIncorrect(name, 30)) return RESPONSE_CODES.CATEGORIES_NAME_ERROR;
   if (wrongType(show, "boolean")) RESPONSE_CODES.CATEGORIES_SHOW_ERROR;
-  return RESPONSE_CODES.VALIDATION_SUCCESFUL;
+  return RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };

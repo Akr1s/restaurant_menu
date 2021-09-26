@@ -6,18 +6,15 @@ const {
   createCategoryDBCall,
   performCategoryValidation,
   deleteCategory,
-  getSingleCategory,
   getAllCategories,
   updateCategoryDBCall,
   getPrimaryCategories,
-  getNonPrimaryCategories,
   checkDuplicateCategoryUpdate,
 } = controller;
 
 const router = promiseRouter();
 
 router.get("/primary", getPrimaryCategories);
-router.get("/nonprimary", getNonPrimaryCategories);
 router.post(
   "/add",
   performCategoryValidation,
@@ -31,7 +28,6 @@ router.put(
   updateCategoryDBCall
 );
 router.delete("/:id", deleteCategory);
-router.get("/:id", getSingleCategory);
 router.get("/", getAllCategories);
 
 export default router;

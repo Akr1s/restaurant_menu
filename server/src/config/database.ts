@@ -7,7 +7,7 @@ const pool: Pool = new Pool({
 });
 
 pool.on("connect", () => {
-  console.log("Connection succesful");
+  console.log("Connection successful");
 });
 
 export const databaseQuery = (text: string, params?: string[]) =>

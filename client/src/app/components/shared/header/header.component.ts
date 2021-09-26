@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Title } from 'src/app/models/title.model';
+import { Info } from 'src/app/models/info.model';
 import { InfoService } from 'src/app/services/info.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class Header {
   constructor(private infoService: InfoService) {}
 
   ngOnInit() {
-    this.infoService.infoData.subscribe((data: Title) => {
+    this.infoService.infoData.subscribe((data: Info) => {
       this.title = data.title;
     });
   }

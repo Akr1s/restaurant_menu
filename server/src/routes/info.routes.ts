@@ -3,16 +3,8 @@ import controller from "../controllers/info.controller";
 
 const router = promiseRouter();
 
-const {
-  performInfoValidation,
-  getAllInfo,
-  getTitle,
-  getRestInfo,
-  updateInfoDBCall,
-} = controller;
+const { performInfoValidation, getAllInfo, updateInfoDBCall } = controller;
 
-router.get("/title", getTitle);
-router.get("/rest", getRestInfo);
 router.get("/", getAllInfo);
 router.put("/", performInfoValidation, updateInfoDBCall);
 

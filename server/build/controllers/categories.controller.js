@@ -35,23 +35,6 @@ const getPrimaryCategories = (req, res) => {
     };
     (0, common_1.getDataFromDatabase)(options, res);
 };
-const getNonPrimaryCategories = (req, res) => {
-    const options = {
-        query: "SELECT ID,NAME FROM CATEGORIES WHERE PARENT IS NOT NULL",
-        errorCode: CATEGORIES_GET_ERROR,
-        single: false,
-    };
-    (0, common_1.getDataFromDatabase)(options, res);
-};
-const getSingleCategory = (req, res) => {
-    const { id } = req.params;
-    const options = {
-        query: `SELECT * FROM CATEGORIES WHERE ID='${id}'`,
-        errorCode: CATEGORIES_GET_ERROR,
-        single: true,
-    };
-    (0, common_1.getDataFromDatabase)(options, res);
-};
 const performCategoryValidation = (req, res, next) => {
     const validationResult = (0, categoriesValidator_1.validateCategory)(req.body);
     if (validationResult) {
@@ -119,12 +102,10 @@ const deleteCategory = (req, res) => {
 exports.default = {
     getAllCategories,
     getPrimaryCategories,
-    getSingleCategory,
     updateCategoryDBCall,
     deleteCategory,
     performCategoryValidation,
     createCategoryDBCall,
     checkDuplicateCategory,
-    getNonPrimaryCategories,
     checkDuplicateCategoryUpdate,
 };

@@ -11,7 +11,7 @@ const pool = new pg_1.Pool({
     connectionString: process.env.DATABASE_URL,
 });
 pool.on("connect", () => {
-    console.log("Connection succesful");
+    console.log("Connection successful");
 });
 const databaseQuery = (text, params) => pool.query(text, params);
 exports.databaseQuery = databaseQuery;

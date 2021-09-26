@@ -20,5 +20,5 @@ export const validateInfo = (body: InfoInterface): number => {
   if (stringIsIncorrect(address, 50)) return RESPONSE_CODES.INFO_ADDRESS_ERROR;
   if (stringIsIncorrect(tel, 15)) return RESPONSE_CODES.INFO_TEL_ERROR;
   if (stringIsIncorrect(wifi, 15)) return RESPONSE_CODES.INFO_WIFI_ERROR;
-  return RESPONSE_CODES.VALIDATION_SUCCESFUL;
+  return RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };

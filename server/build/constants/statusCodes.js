@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.STATUS_CODES = void 0;
-var STATUS_CODES;
-(function (STATUS_CODES) {
-    STATUS_CODES[STATUS_CODES["OK"] = 200] = "OK";
-    STATUS_CODES[STATUS_CODES["ERROR"] = 500] = "ERROR";
-    STATUS_CODES[STATUS_CODES["CREATED"] = 201] = "CREATED";
-    STATUS_CODES[STATUS_CODES["VALIDATION_ERROR"] = 422] = "VALIDATION_ERROR";
-    STATUS_CODES[STATUS_CODES["UPDATE_ERROR"] = 409] = "UPDATE_ERROR";
-})(STATUS_CODES = exports.STATUS_CODES || (exports.STATUS_CODES = {}));
+exports.STATUS_CODES = {
+    OK: 200,
+    ERROR: 500,
+    CREATED: 201,
+    VALIDATION_ERROR: 422,
+    UPDATE_ERROR: 409,
+};

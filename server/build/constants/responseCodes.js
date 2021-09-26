@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RESPONSE_CODES = void 0;
 exports.RESPONSE_CODES = {
-    VALIDATION_SUCCESFUL: 0,
+    VALIDATION_SUCCESSFUL: 0,
     BODY_IS_EMPTY: 1,
     PROPERTY_IS_MISSING: 2,
     BODY_HAS_ADDITIONAL_PROPERTIES: 3,

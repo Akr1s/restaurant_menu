@@ -1,7 +1,6 @@
 import { getDataFromDatabase, handleDatabaseQuery } from "../helpers/common";
 import { NextFunction, Request, Response } from "express";
 import { STATUS_CODES } from "../constants/statusCodes";
-import { v4 as uuidv4 } from "uuid";
 import { validateCategory } from "../validators/categoriesValidator";
 import { RESPONSE_CODES } from "../constants/responseCodes";
 import convertDate from "../utils/convertDate";
@@ -33,26 +32,6 @@ const getPrimaryCategories = (req: Request, res: Response) => {
     single: false,
   };
 
-  getDataFromDatabase(options, res);
-};
-
-const getNonPrimaryCategories = (req: Request, res: Response) => {
-  const options = {
-    query: "SELECT ID,NAME FROM CATEGORIES WHERE PARENT IS NOT NULL",
-    errorCode: CATEGORIES_GET_ERROR,
-    single: false,
-  };
-
-  getDataFromDatabase(options, res);
-};
-
-const getSingleCategory = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const options = {
-    query: `SELECT * FROM CATEGORIES WHERE ID='${id}'`,
-    errorCode: CATEGORIES_GET_ERROR,
-    single: true,
-  };
   getDataFromDatabase(options, res);
 };
 
@@ -155,12 +134,10 @@ const deleteCategory = (req: Request, res: Response) => {
 export default {
   getAllCategories,
   getPrimaryCategories,
-  getSingleCategory,
   updateCategoryDBCall,
   deleteCategory,
   performCategoryValidation,
   createCategoryDBCall,
   checkDuplicateCategory,
-  getNonPrimaryCategories,
   checkDuplicateCategoryUpdate,
 };

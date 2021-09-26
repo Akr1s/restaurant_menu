@@ -5,8 +5,6 @@ const router = promiseRouter();
 
 const {
   getAllDishes,
-  getAllVisibleDishes,
-  getSingleDish,
   deleteDish,
   getAllDishesFromCategory,
   performDishValidation,
@@ -24,9 +22,7 @@ router.post(
   checkDuplicateDish,
   createDishDBCall
 );
-router.get("/select/visible", getAllVisibleDishes);
 router.get("/select/:id", getAllDishesFromCategory);
-router.get("/:id", getSingleDish);
 router.put(
   "/:id",
   uploadImage,

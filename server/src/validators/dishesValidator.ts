@@ -3,7 +3,7 @@ import {
   objectConfigurationTest,
   objectIsEmpty,
   stringIsIncorrect,
-  stringLengthExeeds,
+  stringLengthExceeds,
   wrongType,
 } from "../helpers/validatorHelpers";
 import { DishInterface } from "../interfaces/dish";
@@ -23,10 +23,10 @@ export const validateDish = (body: DishInterface): number => {
   );
   if (objectConfigurationTestResult) return objectConfigurationTestResult;
   if (stringIsIncorrect(name, 30)) return RESPONSE_CODES.DISHES_NAME_ERROR;
-  if (wrongType(description, "string") || stringLengthExeeds(description, 255))
+  if (wrongType(description, "string") || stringLengthExceeds(description, 255))
     return RESPONSE_CODES.DISHES_DESCRIPTION_ERROR;
   if (stringIsIncorrect(img, 255)) return RESPONSE_CODES.DISHES_IMG_ERROR;
   if (wrongType(show, "boolean")) RESPONSE_CODES.DISHES_SHOW_ERROR;
   if (objectIsEmpty(weights)) return RESPONSE_CODES.DISHES_WEIGHTS_ERROR;
-  return RESPONSE_CODES.VALIDATION_SUCCESFUL;
+  return RESPONSE_CODES.VALIDATION_SUCCESSFUL;
 };
