@@ -1,1 +1,16 @@
-<button class="btn">{{ btnText }}</button>
+<button
+  class="btn"
+  [ngClass]="{
+    'btn-ok': ok,
+    'btn-submit': submit,
+    'btn-cancel': cancel,
+    'btn-small': small,
+    'btn-add': add,
+    'btn-close': close,
+    'btn-largeFont': largeFont
+  }"
+  [type]="submit ? 'submit' : 'button'"
+  [disabled]="isDisabled"
+>
+  {{ btnText }}
+</button>

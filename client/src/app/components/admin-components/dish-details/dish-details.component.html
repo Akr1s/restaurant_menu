@@ -17,15 +17,21 @@
     </div>
   </div>
   <div class="btn-edit-container flex-center">
-    <button
-      class="btn btn-ok btn-small"
-      [disabled]="isAdding"
+    <app-button
+      [ok]="true"
+      [small]="true"
+      [isDisabled]="isAdding"
       (click)="enableEditing()"
+      btnText="Edit Dish"
     >
-      Edit Dish
-    </button>
-    <button class="btn btn-cancel btn-small" (click)="deleteDish()">
-      Delete Dish
-    </button>
+    </app-button>
+    <app-button
+      [cancel]="true"
+      [small]="true"
+      [isDisabled]="isAdding"
+      (click)="deleteDish()"
+      btnText="Delete Dish"
+    >
+    </app-button>
   </div>
 </div>

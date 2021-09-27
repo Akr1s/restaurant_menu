@@ -33,7 +33,11 @@
   </ng-template>
   <ng-template #controls>
     <div class="btn-add-container flex-center">
-      <button class="btn btn-ok" (click)="enableAdding()">Add Category</button>
+      <app-button
+        [ok]="true"
+        (click)="enableAdding()"
+        btnText="Add Category"
+      ></app-button>
     </div>
   </ng-template>
 </section>

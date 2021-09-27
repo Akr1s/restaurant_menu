@@ -16,15 +16,17 @@
     <input id="wifi" type="text" formControlName="wifi" />
   </div>
   <div class="btn-container">
-    <button
+    <app-button
       type="submit"
-      class="btn btn-submit"
-      [disabled]="!infoForm.valid || !infoForm.dirty"
+      [submit]="true"
+      [isDisabled]="!infoForm.valid || !infoForm.dirty"
+      btnText="Submit"
     >
-      Submit
-    </button>
-    <button type="button" class="btn btn-cancel" (click)="cancelEditing()">
-      Cancel
-    </button>
+    </app-button>
+    <app-button
+      [cancel]="true"
+      (click)="cancelEditing()"
+      btnText="Cancel"
+    ></app-button>
   </div>
 </form>

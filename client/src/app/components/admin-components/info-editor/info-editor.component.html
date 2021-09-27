@@ -8,7 +8,11 @@
   ></info-form>
   <ng-template #editBtn>
     <div class="btn-edit-container flex-center">
-      <button class="btn btn-ok" (click)="enableEditing()">Edit Info</button>
+      <app-button
+        [ok]="true"
+        (click)="enableEditing()"
+        btnText="Edit Info"
+      ></app-button>
     </div>
   </ng-template>
 </section>

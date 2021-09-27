@@ -57,9 +57,7 @@
   <div class="portion-container input-wrapper" formArrayName="weights">
     <div class="portions__header">
       <span>Portions</span>
-      <button type="button" (click)="addWeight()" class="btn btn-submit">
-        Add
-      </button>
+      <app-button [add]="true" (click)="addWeight()" btnText="Add"></app-button>
     </div>
     <div
       class="portion__item"
@@ -76,26 +74,23 @@
           formControlName="price"
           placeholder="Price of the portion"
         />
-        <button
-          type="button"
-          class="btn btn-small btn-cancel"
+        <app-button
+          [cancel]="true"
+          [small]="true"
           (click)="deletePortion(i)"
-        >
-          Delete
-        </button>
+          btnText="Delete"
+        ></app-button>
       </ng-container>
     </div>
   </div>
   <div class="btn-container">
-    <button
-      type="submit"
-      class="btn btn-submit"
-      [disabled]="!dishForm.valid || !dishForm.dirty"
+    <app-button
+      [submit]="true"
+      [isDisabled]="!dishForm.valid || !dishForm.dirty"
+      btnText="Submit"
     >
-      Submit
-    </button>
-    <button type="button" class="btn btn-cancel" (click)="cancelEditing()">
-      Cancel
-    </button>
+    </app-button>
+    <app-button [cancel]="true" (click)="cancelEditing()" btnText="Cancel">
+    </app-button>
   </div>
 </form>

@@ -23,15 +23,13 @@
     </select>
   </div>
   <div class="btn-container">
-    <button
-      type="submit"
-      class="btn btn-submit"
-      [disabled]="!categoryForm.valid || !categoryForm.dirty"
+    <app-button
+      [submit]="true"
+      [isDisabled]="!categoryForm.valid || !categoryForm.dirty"
+      btnText="Submit"
     >
-      Submit
-    </button>
-    <button type="button" class="btn btn-cancel" (click)="cancelEditing()">
-      Cancel
-    </button>
+    </app-button>
+    <app-button [cancel]="true" (click)="cancelEditing()" btnText="Cancel">
+    </app-button>
   </div>
 </form>

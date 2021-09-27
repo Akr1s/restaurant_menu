@@ -122,3 +122,17 @@ input:checked + .slider:before {
   border: 1px solid #727070;
   cursor: pointer;
 }
+
+.portion__item {
+  display: flex;
+
+  app-button {
+    margin-left: auto;
+  }
+  input + input {
+    margin-left: 0.5rem;
+  }
+}
+.portion__item + .portion__item {
+  margin-top: 0.5rem;
+}
