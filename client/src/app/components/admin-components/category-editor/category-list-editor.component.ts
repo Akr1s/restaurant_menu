@@ -8,8 +8,8 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./category-list-editor.component.scss'],
 })
 export class CategoryEditorComponent implements OnInit {
-  @Input() listTitle: string;
-  @Input() listItemTitle: string;
+  listTitle: string = 'Categories list';
+  listItemTitle: string = 'Category';
   listItems: Array<CategoryInterface> = [];
 
   selectedListItem: CategoryInterface;

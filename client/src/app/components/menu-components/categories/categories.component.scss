@@ -37,7 +37,7 @@
 .activeCategory {
   color: var(--active-category);
 }
-@media screen and (max-width: 900px) {
+@media (max-width: 900px) {
   .nav-container ul {
     display: none;
   }
@@ -45,7 +45,7 @@
     display: block;
   }
 }
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
   .dropdown {
     width: 70%;
   }

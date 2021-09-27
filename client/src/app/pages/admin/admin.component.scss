@@ -1,4 +1,51 @@
-.editor-container {
-  background-color: var(--admin-bg);
-  color: var(--text-secondary-color);
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.editor {
+  flex: 1;
+  &__container {
+    background-color: var(--admin-bg);
+    color: var(--text-secondary-color);
+  }
+  &__navigation {
+    flex-wrap: wrap;
+  }
+  &__li {
+    &:hover {
+      background-color: #e54029;
+    }
+  }
+  &__link {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem;
+  }
+  &__li + &__li {
+    margin-left: 1rem;
+  }
+}
+.navigation-container {
+  background-color: var(--secondary-color);
+}
+
+.active-link {
+  color: var(--active-route);
+}
+@media (max-width: 400px) {
+  .editor {
+    &__navigation {
+      flex-direction: column;
+    }
+    &__li {
+      width: 100%;
+    }
+    &__li + &__li {
+      margin-left: 0;
+      margin-top: 0.5rem;
+    }
+  }
 }

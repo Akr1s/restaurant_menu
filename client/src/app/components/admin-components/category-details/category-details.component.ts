@@ -49,11 +49,20 @@ export class CategoryDetailsComponent implements OnInit, OnChanges {
   }
 
   async deleteCategory() {
-    const responseCode = await this.categoriesService.deleteCategory(
-      this.selectedListItem.id
-    );
-    if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
-      alert('Category deleted');
+    const isConfirmed = confirm('Are you sure?');
+    let responseCode = RESPONSE_CODES.DELETE_ERROR;
+    if (isConfirmed) {
+      try {
+        responseCode = await this.categoriesService.deleteCategory(
+          this.selectedListItem.id
+        );
+        if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
+          alert('Category deleted');
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
+    return responseCode;
   }
 }

@@ -58,12 +58,21 @@ export class DishDetailsComponent implements OnInit, OnChanges {
   }
 
   async deleteDish() {
-    const responseCode = await this.dishService.deleteDish(
-      this.selectedListItem.id
-    );
-    if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
-      alert('Dish deleted');
+    const isConfirmed = confirm('Are you sure?');
+    let responseCode = RESPONSE_CODES.DELETE_ERROR;
+    if (isConfirmed) {
+      try {
+        responseCode = await this.dishService.deleteDish(
+          this.selectedListItem.id
+        );
+        if (responseCode === RESPONSE_CODES.DELETE_SUCCESS) {
+          alert('Dish deleted');
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
+    return responseCode;
   }
 
   checkImageLink(dish: DishInterface) {

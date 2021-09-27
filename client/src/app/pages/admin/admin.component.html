@@ -1,12 +1,37 @@
 <app-header></app-header>
 <section class="editor">
-  <div class="container editor-container">
-    <info-editor></info-editor>
-    <category-list-editor
-      listTitle="Categories list"
-      listItemTitle="Category"
-    ></category-list-editor>
-    <dishes-editor listTitle="Dishes list" listItemTitle="Dish"></dishes-editor>
+  <header>
+    <div class="container navigation-container">
+      <ul class="editor__navigation flex-center">
+        <li class="editor__li flex-center">
+          <a
+            class="editor__link"
+            [routerLink]="['info']"
+            routerLinkActive="active-link"
+            >Information</a
+          >
+        </li>
+        <li class="editor__li flex-center">
+          <a
+            class="editor__link"
+            [routerLink]="['categories']"
+            routerLinkActive="active-link"
+            >Categories</a
+          >
+        </li>
+        <li class="editor__li flex-center">
+          <a
+            class="editor__link"
+            [routerLink]="['dishes']"
+            routerLinkActive="active-link"
+            >Dishes</a
+          >
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="container editor__container">
+    <router-outlet></router-outlet>
   </div>
 </section>
 <app-footer></app-footer>

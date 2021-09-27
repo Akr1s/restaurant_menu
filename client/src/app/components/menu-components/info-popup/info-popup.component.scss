@@ -49,17 +49,17 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
   .popup {
     min-width: auto;
   }
 }
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .popup {
     font-size: 20px;
   }
 }
-@media screen and (max-width: 900px) {
+@media (max-width: 900px) {
   .info-popup {
     top: 0;
     left: 2000px;
@@ -81,7 +81,7 @@
     border-radius: 5px;
   }
 }
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
   .popup {
     width: 100vw;
     left: 50%;

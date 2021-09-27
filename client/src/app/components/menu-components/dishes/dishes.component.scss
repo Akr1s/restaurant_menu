@@ -1,3 +1,10 @@
+:host {
+  flex: 1;
+}
+.dishes,
+.dishes-container {
+  min-height: 100%;
+}
 .dishes-container {
   background-color: var(--body-color);
 }

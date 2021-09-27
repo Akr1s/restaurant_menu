@@ -38,7 +38,7 @@
   transform: rotate(-45deg);
 }
 
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .scroll {
     transform: scale(2) rotate(-45deg);
   }

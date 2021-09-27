@@ -12,7 +12,7 @@
   margin: 1rem 0rem;
 }
 
-@media screen and (max-width: 760px) {
+@media (max-width: 760px) {
   .categories-content {
     flex-direction: column;
     justify-content: center;

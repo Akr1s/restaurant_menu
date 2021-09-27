@@ -1,8 +1,10 @@
 <app-header [info]="true"></app-header>
-<app-categories
-  [selectedCategory]="selectedCategory"
-  (categoryChangeEvent)="changeCategory($event)"
-></app-categories>
-<app-dishes [selectedCategory]="selectedCategory"></app-dishes>
-<scroll-to-top></scroll-to-top>
+<main>
+  <app-categories
+    [selectedCategory]="selectedCategory"
+    (categoryChangeEvent)="changeCategory($event)"
+  ></app-categories>
+  <app-dishes [selectedCategory]="selectedCategory"></app-dishes>
+  <scroll-to-top></scroll-to-top>
+</main>
 <app-footer></app-footer>

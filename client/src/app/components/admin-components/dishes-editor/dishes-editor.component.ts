@@ -8,8 +8,8 @@ import { DishesService } from 'src/app/services/dishes.service';
   styleUrls: ['./dishes-editor.component.scss'],
 })
 export class DishesEditorComponent implements OnInit {
-  @Input() listTitle: string;
-  @Input() listItemTitle: string;
+  listTitle: string = 'Dishes list';
+  listItemTitle: string = 'Dish';
   listItems: Array<DishInterface> = [];
 
   selectedListItem: DishInterface;
