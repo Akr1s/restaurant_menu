@@ -8,6 +8,20 @@
     display: none;
   }
 }
+.list-items {
+  position: relative;
+}
+.list-items::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: url("../../../../assets/scroll.svg");
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  animation: bounce 2s infinite ease-in-out;
+}
 .item-title {
   height: 50px;
   border: 1px solid black;
@@ -27,5 +41,16 @@
 @media (max-width: 760px) {
   .list-items {
     margin-bottom: 1rem;
+  }
+}
+@keyframes bounce {
+  from {
+    top: 0.5rem;
+  }
+  50% {
+    top: 1rem;
+  }
+  to {
+    top: 0.5rem;
   }
 }

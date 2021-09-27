@@ -35,7 +35,7 @@ export class CategoryItemsComponent implements OnInit, OnChanges {
     if (event.target) {
       const target = event.target as HTMLInputElement;
       this.filteredList = this.listItems.filter((item) =>
-        item.name.includes(target.value)
+        item.name.toLocaleLowerCase().includes(target.value.toLocaleLowerCase())
       );
     }
   }
