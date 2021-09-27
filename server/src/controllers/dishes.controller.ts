@@ -19,7 +19,7 @@ const {
 
 const getAllDishes = (req: Request, res: Response) => {
   const options = {
-    query: "SELECT * FROM DISHES",
+    query: "SELECT * FROM DISHES ORDER BY CREATED_DATE ASC",
     errorCode: DISHES_GET_ERROR,
     single: false,
   };
@@ -29,7 +29,7 @@ const getAllDishes = (req: Request, res: Response) => {
 const getAllDishesFromCategory = (req: Request, res: Response) => {
   const { id } = req.params;
   const options = {
-    query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT='${id}') AND SHOW=TRUE`,
+    query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT='${id}') AND SHOW=TRUE ORDER BY CREATED_DATE ASC`,
     errorCode: DISHES_GET_ERROR,
     single: false,
   };

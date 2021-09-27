@@ -22,7 +22,7 @@ const cloudinary_config_1 = __importDefault(require("../config/cloudinary.config
 const { DISHES_GET_ERROR, ADD_ERROR, ADD_SUCCESS, UPDATE_SUCCESS, UPDATE_ERROR, DELETE_ERROR, DELETE_SUCCESS, } = responseCodes_1.RESPONSE_CODES;
 const getAllDishes = (req, res) => {
     const options = {
-        query: "SELECT * FROM DISHES",
+        query: "SELECT * FROM DISHES ORDER BY CREATED_DATE ASC",
         errorCode: DISHES_GET_ERROR,
         single: false,
     };
@@ -31,7 +31,7 @@ const getAllDishes = (req, res) => {
 const getAllDishesFromCategory = (req, res) => {
     const { id } = req.params;
     const options = {
-        query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT='${id}') AND SHOW=TRUE`,
+        query: `SELECT * FROM DISHES WHERE CATEGORY IN (SELECT ID FROM CATEGORIES WHERE PARENT='${id}') AND SHOW=TRUE ORDER BY CREATED_DATE ASC`,
         errorCode: DISHES_GET_ERROR,
         single: false,
     };
