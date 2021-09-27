@@ -28,6 +28,7 @@ import { InfoFormComponent } from './components/admin-components/info-form/info-
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryFormComponent } from './components/admin-components/category-form/category-form.component';
 import { DishFormComponent } from './components/admin-components/dish-form/dish-form.component';
+import { ScrollToTopComponent } from './components/menu-components/scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DishFormComponent } from './components/admin-components/dish-form/dish-
     InfoFormComponent,
     CategoryFormComponent,
     DishFormComponent,
+    ScrollToTopComponent,
   ],
   imports: [
     BrowserModule,

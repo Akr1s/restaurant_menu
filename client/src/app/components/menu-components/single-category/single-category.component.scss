@@ -11,3 +11,10 @@
     text-align: center;
   }
 }
+
+@media print {
+  .category-title {
+    text-align: center;
+    padding-left: 0;
+  }
+}

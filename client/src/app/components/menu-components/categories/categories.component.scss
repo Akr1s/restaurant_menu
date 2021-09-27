@@ -34,6 +34,9 @@
   display: none;
 }
 
+.activeCategory {
+  color: var(--active-category);
+}
 @media screen and (max-width: 900px) {
   .nav-container ul {
     display: none;
@@ -47,6 +50,8 @@
     width: 70%;
   }
 }
-.activeCategory {
-  color: var(--active-category);
+@media print {
+  .nav-container {
+    display: none;
+  }
 }

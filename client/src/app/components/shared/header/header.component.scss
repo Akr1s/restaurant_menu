@@ -35,3 +35,12 @@
     }
   }
 }
+@media print {
+  .header-container {
+    justify-content: center;
+
+    p.info {
+      display: none;
+    }
+  }
+}
