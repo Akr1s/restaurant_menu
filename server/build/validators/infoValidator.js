@@ -16,6 +16,6 @@ const validateInfo = (body) => {
         return responseCodes_1.RESPONSE_CODES.INFO_TEL_ERROR;
     if ((0, validatorHelpers_1.stringIsIncorrect)(wifi, 15))
         return responseCodes_1.RESPONSE_CODES.INFO_WIFI_ERROR;
-    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESSFUL;
+    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESS;
 };
 exports.validateInfo = validateInfo;

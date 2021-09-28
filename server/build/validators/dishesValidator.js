@@ -18,6 +18,6 @@ const validateDish = (body) => {
         responseCodes_1.RESPONSE_CODES.DISHES_SHOW_ERROR;
     if ((0, validatorHelpers_1.objectIsEmpty)(weights))
         return responseCodes_1.RESPONSE_CODES.DISHES_WEIGHTS_ERROR;
-    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESSFUL;
+    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESS;
 };
 exports.validateDish = validateDish;

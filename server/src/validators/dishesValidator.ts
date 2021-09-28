@@ -28,5 +28,5 @@ export const validateDish = (body: DishInterface): number => {
   if (stringIsIncorrect(img, 255)) return RESPONSE_CODES.DISHES_IMG_ERROR;
   if (wrongType(show, "boolean")) RESPONSE_CODES.DISHES_SHOW_ERROR;
   if (objectIsEmpty(weights)) return RESPONSE_CODES.DISHES_WEIGHTS_ERROR;
-  return RESPONSE_CODES.VALIDATION_SUCCESSFUL;
+  return RESPONSE_CODES.VALIDATION_SUCCESS;
 };

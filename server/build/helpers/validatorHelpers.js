@@ -40,7 +40,7 @@ const objectConfigurationTest = (body, amountOfProperties, ...propertiesList) =>
         return responseCodes_1.RESPONSE_CODES.PROPERTY_IS_MISSING;
     if ((0, exports.objectHasAdditionalProperties)(body, amountOfProperties))
         return responseCodes_1.RESPONSE_CODES.BODY_HAS_ADDITIONAL_PROPERTIES;
-    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESSFUL;
+    return responseCodes_1.RESPONSE_CODES.VALIDATION_SUCCESS;
 };
 exports.objectConfigurationTest = objectConfigurationTest;
 const stringIsIncorrect = (property, maxLength) => {

@@ -25,10 +25,11 @@ import { DishDetailsComponent } from './components/admin-components/dish-details
 import { InfoEditorComponent } from './components/admin-components/info-editor/info-editor.component';
 import { InfoViewComponent } from './components/admin-components/info-view/info-view.component';
 import { InfoFormComponent } from './components/admin-components/info-form/info-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryFormComponent } from './components/admin-components/category-form/category-form.component';
 import { DishFormComponent } from './components/admin-components/dish-form/dish-form.component';
 import { ScrollToTopComponent } from './components/menu-components/scroll-to-top/scroll-to-top.component';
+import { InputComponent } from './components/admin-components/shared/input/input.component';
 
 @NgModule({
   declarations: [
@@ -57,12 +58,14 @@ import { ScrollToTopComponent } from './components/menu-components/scroll-to-top
     CategoryFormComponent,
     DishFormComponent,
     ScrollToTopComponent,
+    InputComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

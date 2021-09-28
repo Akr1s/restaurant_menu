@@ -1,20 +1,16 @@
 <form class="editor-form" [formGroup]="infoForm" (ngSubmit)="onSubmit()">
-  <div class="input-wrapper">
-    <label for="title">Title: </label>
-    <input id="title" type="text" formControlName="title" required />
-  </div>
-  <div class="input-wrapper">
-    <label for="address">Address: </label>
-    <input id="address" type="text" formControlName="address" required />
-  </div>
-  <div class="input-wrapper">
-    <label for="tel">Manager phone: </label>
-    <input id="tel" type="text" formControlName="tel" required />
-  </div>
-  <div class="input-wrapper">
-    <label for="wifi">Wi-Fi password: </label>
-    <input id="wifi" type="text" formControlName="wifi" />
-  </div>
+  <app-input formControlName="title" label="Title: " id="title"></app-input>
+  <app-input
+    formControlName="address"
+    label="Address: "
+    id="address"
+  ></app-input>
+  <app-input formControlName="tel" label="Manager phone: " id="tel"></app-input>
+  <app-input
+    formControlName="wifi"
+    label="Wifi password: "
+    id="wifi"
+  ></app-input>
   <div class="buttons-container">
     <app-button
       type="submit"
@@ -29,4 +25,5 @@
       btnText="Cancel"
     ></app-button>
   </div>
+  {{ infoForm.value | json }}
 </form>

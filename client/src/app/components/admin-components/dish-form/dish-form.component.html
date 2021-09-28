@@ -1,9 +1,6 @@
 <form class="editor-form" [formGroup]="dishForm" (ngSubmit)="onSubmit()">
   <h4 class="form__title">{{ title }}</h4>
-  <div class="input-wrapper">
-    <label for="title">Name: </label>
-    <input id="title" type="text" formControlName="name" required />
-  </div>
+  <app-input formControlName="name" label="Name: " id="name"></app-input>
   <div class="input-wrapper text-area-wrapper">
     <label for="address">Description: </label>
     <textarea
