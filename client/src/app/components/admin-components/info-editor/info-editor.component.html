@@ -1,5 +1,5 @@
 <section class="info-editor">
-  <h3 class="editor-title">Information</h3>
+  <h3 class="editor__title">Information</h3>
   <info-view [info]="info"></info-view>
   <info-form
     [info]="info"
@@ -7,7 +7,7 @@
     [cancelEditing]="cancelEditing"
   ></info-form>
   <ng-template #editBtn>
-    <div class="btn-edit-container flex-center">
+    <div class="buttons-container">
       <app-button
         [ok]="true"
         (click)="enableEditing()"

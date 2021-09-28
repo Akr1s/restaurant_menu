@@ -1,5 +1,5 @@
-<form class="dish-form" [formGroup]="dishForm" (ngSubmit)="onSubmit()">
-  <h4 class="form-title">{{ title }}</h4>
+<form class="editor-form" [formGroup]="dishForm" (ngSubmit)="onSubmit()">
+  <h4 class="form__title">{{ title }}</h4>
   <div class="input-wrapper">
     <label for="title">Name: </label>
     <input id="title" type="text" formControlName="name" required />
@@ -84,7 +84,7 @@
       </ng-container>
     </div>
   </div>
-  <div class="btn-container">
+  <div class="buttons-container">
     <app-button
       [submit]="true"
       [isDisabled]="!dishForm.valid || !dishForm.dirty"

@@ -1,5 +1,5 @@
 <section class="category-editor">
-  <h3 class="editor-title">{{ listTitle }}</h3>
+  <h3 class="editor__title">{{ listTitle }}</h3>
   <div class="categories-content">
     <category-list-items
       [listItems]="listItems"
@@ -32,7 +32,7 @@
     ></category-form>
   </ng-template>
   <ng-template #controls>
-    <div class="btn-add-container flex-center">
+    <div class="buttons-container">
       <app-button
         [ok]="true"
         (click)="enableAdding()"
