@@ -30,6 +30,7 @@ import { CategoryFormComponent } from './components/admin-components/category-fo
 import { DishFormComponent } from './components/admin-components/dish-form/dish-form.component';
 import { ScrollToTopComponent } from './components/menu-components/scroll-to-top/scroll-to-top.component';
 import { InputComponent } from './components/admin-components/shared/input/input.component';
+import { CheckboxComponent } from './components/admin-components/shared/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { InputComponent } from './components/admin-components/shared/input/input
     DishFormComponent,
     ScrollToTopComponent,
     InputComponent,
+    CheckboxComponent,
   ],
   imports: [
     BrowserModule,

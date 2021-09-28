@@ -35,15 +35,7 @@
       X
     </button>
   </div>
-  <div class="input-wrapper">
-    <div class="checkbox-wrapper">
-      Show:
-      <label class="switch" for="show">
-        <input type="checkbox" id="show" formControlName="show" />
-        <span class="slider round"></span>
-      </label>
-    </div>
-  </div>
+  <app-checkbox formControlName="show" label="Show: "></app-checkbox>
   <div class="input-wrapper">
     <label for="category">Category: </label>
     <select formControlName="category" id="category" required>

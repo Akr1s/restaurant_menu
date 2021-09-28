@@ -2,37 +2,36 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-checkbox',
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => CheckboxComponent),
       multi: true,
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor {
-  @Input() id: string;
+export class CheckboxComponent implements ControlValueAccessor {
   @Input() label: string = '';
-  @Input() placeholder: string = '';
 
   constructor() {}
-  private _value: string = '';
-  disabled = false;
 
-  public get value(): string {
+  disabled: boolean = false;
+  private _value: boolean;
+
+  public get value() {
     return this._value;
   }
 
-  public set value(v: string) {
+  public set value(v: boolean) {
     this._value = v;
     this.onChange(this._value);
     this.onTouched();
   }
 
-  writeValue(value: string): void {
+  writeValue(value: boolean): void {
     this._value = value;
   }
 
@@ -44,7 +43,7 @@ export class InputComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 

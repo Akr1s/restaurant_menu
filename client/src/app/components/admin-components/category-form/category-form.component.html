@@ -1,15 +1,7 @@
 <form class="editor-form" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
   <h4 class="form__title">{{ title }}</h4>
   <app-input formControlName="name" label="Name: " id="name"></app-input>
-  <div class="input-wrapper">
-    <div class="checkbox-wrapper">
-      Show:
-      <label class="switch" for="show">
-        <input type="checkbox" id="show" formControlName="show" />
-        <span class="slider round"></span>
-      </label>
-    </div>
-  </div>
+  <app-checkbox formControlName="show" label="Show: "></app-checkbox>
   <div class="input-wrapper">
     <label for="tel">Parent: </label>
     <select formControlName="parent">
