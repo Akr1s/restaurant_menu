@@ -1,5 +1,6 @@
 <nav>
   <div class="container nav-container">
+    <div *ngIf="loading" class="loading">Loading...</div>
     <ul class="categories-horizontal">
       <li
         *ngFor="let category of primaryCategoriesList"

@@ -18,7 +18,7 @@ import { DishesService } from 'src/app/services/dishes.service';
 export class DishesListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() category: PrimaryCategoryInterface;
   dishesList: DishInterface[] = [];
-  loading: boolean;
+  loading: boolean = true;
   first: any;
 
   constructor(private dishesService: DishesService) {}

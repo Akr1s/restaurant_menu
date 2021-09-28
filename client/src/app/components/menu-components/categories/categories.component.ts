@@ -9,6 +9,7 @@ import categoryAll from 'src/app/constants/categoryAll';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
+  loading: boolean = true;
   @Input() selectedCategory: PrimaryCategoryInterface;
 
   primaryCategoriesList: PrimaryCategoryInterface[] = [];
@@ -37,10 +38,10 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.categoriesService
-      .getPrimaryCategories()
-      .subscribe(
-        (data: any) => (this.primaryCategoriesList = [categoryAll, ...data])
-      );
+    this.loading = true;
+    this.categoriesService.getPrimaryCategories().subscribe((data: any) => {
+      this.primaryCategoriesList = [categoryAll, ...data];
+      this.loading = false;
+    });
   }
 }
