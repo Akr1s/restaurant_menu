@@ -6,6 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DishInterface } from 'src/app/interfaces/dish';
 import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import { DishesService } from 'src/app/services/dishes.service';
@@ -19,13 +20,13 @@ export class DishesListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() category: PrimaryCategoryInterface;
   dishesList: DishInterface[] = [];
   loading: boolean = true;
-  first: any;
+  sub: Subscription;
 
   constructor(private dishesService: DishesService) {}
 
   getDishes(id: string) {
     this.loading = true;
-    this.first = this.dishesService
+    this.sub = this.dishesService
       .getDishesByCategoryId(id)
       .subscribe((data: DishInterface[]) => {
         this.dishesList = data;
@@ -42,6 +43,6 @@ export class DishesListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.first.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

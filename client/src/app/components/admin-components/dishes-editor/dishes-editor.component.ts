@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DishInterface } from 'src/app/interfaces/dish';
 import { DishesService } from 'src/app/services/dishes.service';
 
@@ -7,10 +8,11 @@ import { DishesService } from 'src/app/services/dishes.service';
   templateUrl: './dishes-editor.component.html',
   styleUrls: ['./dishes-editor.component.scss'],
 })
-export class DishesEditorComponent implements OnInit {
+export class DishesEditorComponent implements OnInit, OnDestroy {
   listTitle: string = 'Dishes list';
   listItemTitle: string = 'Dish';
   listItems: Array<DishInterface> = [];
+  sub: Subscription;
 
   selectedListItem: DishInterface;
 
@@ -20,10 +22,12 @@ export class DishesEditorComponent implements OnInit {
   constructor(private dishesService: DishesService) {}
 
   loadDishes() {
-    this.dishesService.dishData.subscribe((data: DishInterface[]) => {
-      this.listItems = data;
-      this.selectedListItem = data[0];
-    });
+    this.sub = this.dishesService.dishData.subscribe(
+      (data: DishInterface[]) => {
+        this.listItems = data;
+        this.selectedListItem = data[0];
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -47,4 +51,8 @@ export class DishesEditorComponent implements OnInit {
   public cancelAdding = () => {
     this.isAdding = false;
   };
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

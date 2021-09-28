@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { DishInterface } from 'src/app/interfaces/dish';
 import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
@@ -18,7 +19,7 @@ import { DishesService } from 'src/app/services/dishes.service';
   templateUrl: './dish-form.component.html',
   styleUrls: ['./dish-form.component.scss'],
 })
-export class DishFormComponent implements OnInit {
+export class DishFormComponent implements OnInit, OnDestroy {
   @Input() cancelEditing: () => void;
   @Input() dish: DishInterface;
   @Input() title: string;
@@ -28,6 +29,7 @@ export class DishFormComponent implements OnInit {
   categoriesList: Array<PrimaryCategoryInterface> = [];
   weightsArray: Array<string[]> = [];
   previewSource: string = '';
+  sub: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -50,7 +52,7 @@ export class DishFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.categoriesService.allNonPrimaryCategoriesData.subscribe(
+    this.sub = this.categoriesService.allNonPrimaryCategoriesData.subscribe(
       (data: PrimaryCategoryInterface[]) => {
         this.categoriesList = data;
       }
@@ -136,7 +138,7 @@ export class DishFormComponent implements OnInit {
   convertWeights(): WeightsInterface {
     const values = this.weights.value;
     const count = values.length;
-    const result: any = {};
+    const result: { [key: string]: string } = {};
     for (let i = 0; i < count; i++) {
       const key: string = values[i]['portion'];
       const value: string = values[i]['price'];
@@ -164,5 +166,9 @@ export class DishFormComponent implements OnInit {
   clearPreviewImage() {
     this.previewSource = '';
     this.dishForm.controls.img.setValue('');
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

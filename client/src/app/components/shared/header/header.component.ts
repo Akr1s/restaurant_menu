@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { InfoInterface } from 'src/app/interfaces/info';
 import { InfoService } from 'src/app/services/info.service';
 
@@ -7,16 +8,17 @@ import { InfoService } from 'src/app/services/info.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class Header {
+export class Header implements OnInit, OnDestroy {
   @Input() info!: boolean;
   isModalOpened: boolean = false;
+  sub: Subscription;
 
   title: string = 'Restaurant';
 
   constructor(private infoService: InfoService) {}
 
   ngOnInit() {
-    this.infoService.infoData.subscribe((data: InfoInterface) => {
+    this.sub = this.infoService.infoData.subscribe((data: InfoInterface) => {
       this.title = data.title;
     });
   }
@@ -32,4 +34,7 @@ export class Header {
   public closeModal = (): void => {
     this.isModalOpened = false;
   };
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

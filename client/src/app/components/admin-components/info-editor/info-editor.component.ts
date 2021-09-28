@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { InfoInterface } from 'src/app/interfaces/info';
 import { InfoService } from 'src/app/services/info.service';
 
@@ -7,15 +8,16 @@ import { InfoService } from 'src/app/services/info.service';
   templateUrl: './info-editor.component.html',
   styleUrls: ['./info-editor.component.scss'],
 })
-export class InfoEditorComponent implements OnInit {
+export class InfoEditorComponent implements OnInit, OnDestroy {
   info: InfoInterface;
 
   isEditing: boolean = false;
+  sub: Subscription;
 
   constructor(private infoService: InfoService) {}
 
   ngOnInit(): void {
-    this.infoService.infoData.subscribe((data: InfoInterface) => {
+    this.sub = this.infoService.infoData.subscribe((data: InfoInterface) => {
       this.info = data;
     });
   }
@@ -27,4 +29,8 @@ export class InfoEditorComponent implements OnInit {
   public cancelEditing = () => {
     this.isEditing = false;
   };
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

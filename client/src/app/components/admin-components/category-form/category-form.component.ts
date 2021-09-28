@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import categoryAll from 'src/app/constants/categoryAll';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { CategoryInterface } from 'src/app/interfaces/category';
@@ -11,7 +12,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss'],
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent implements OnInit, OnDestroy {
   @Input() cancelEditing: () => void;
   @Input() category: CategoryInterface;
   @Input() title: string;
@@ -20,6 +21,7 @@ export class CategoryFormComponent implements OnInit {
 
   categoriesList: Array<PrimaryCategoryInterface>;
   selectValue: string | null = null;
+  sub: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +36,7 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit(): void {
     //filter
-    this.categoriesService.allPrimaryCategoriesData.subscribe(
+    this.sub = this.categoriesService.allPrimaryCategoriesData.subscribe(
       (data: PrimaryCategoryInterface[]) => {
         this.categoriesList = data.filter(
           (category: PrimaryCategoryInterface) =>
@@ -71,5 +73,9 @@ export class CategoryFormComponent implements OnInit {
 
   pathFormData() {
     this.categoryForm.patchValue({ ...this.category });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

@@ -2,7 +2,7 @@ export interface CategoryInterface {
   id: string;
   name: string;
   show: boolean;
-  parent: any;
+  parent: string;
   created_date: string;
   updated_date: string;
 }

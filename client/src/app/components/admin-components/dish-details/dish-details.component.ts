@@ -2,9 +2,11 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { DishInterface } from 'src/app/interfaces/dish';
 import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
@@ -16,7 +18,7 @@ import { DishesService } from 'src/app/services/dishes.service';
   templateUrl: './dish-details.component.html',
   styleUrls: ['./dish-details.component.scss'],
 })
-export class DishDetailsComponent implements OnInit, OnChanges {
+export class DishDetailsComponent implements OnInit, OnChanges, OnDestroy {
   @Input() listItemTitle: string;
   @Input() selectedListItem: DishInterface;
   @Input() enableEditing: () => void;
@@ -25,6 +27,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
   categoryList: PrimaryCategoryInterface[] = [];
   itemCategory: string = 'Null';
   dishImageString: string;
+  sub: Subscription;
 
   constructor(
     private dishService: DishesService,
@@ -33,7 +36,7 @@ export class DishDetailsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.dishImageString = this.checkImageLink(this.selectedListItem);
-    this.categoriesService.allNonPrimaryCategoriesData.subscribe(
+    this.sub = this.categoriesService.allNonPrimaryCategoriesData.subscribe(
       (data: PrimaryCategoryInterface[]) => {
         this.categoryList = data;
         this.itemCategory = this.getCategoryNameById(
@@ -79,5 +82,9 @@ export class DishDetailsComponent implements OnInit, OnChanges {
     let image = dish.img;
     if (!image.startsWith('http')) image = 'Long base64 string';
     return image;
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

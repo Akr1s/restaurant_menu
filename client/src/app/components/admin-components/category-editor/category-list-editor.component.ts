@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CategoryInterface } from 'src/app/interfaces/category';
 import { CategoriesService } from 'src/app/services/categories.service';
 
@@ -7,7 +8,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
   templateUrl: './category-list-editor.component.html',
   styleUrls: ['./category-list-editor.component.scss'],
 })
-export class CategoryEditorComponent implements OnInit {
+export class CategoryEditorComponent implements OnInit, OnDestroy {
   listTitle: string = 'Categories list';
   listItemTitle: string = 'Category';
   listItems: Array<CategoryInterface> = [];
@@ -16,11 +17,12 @@ export class CategoryEditorComponent implements OnInit {
 
   isEditing: boolean = false;
   isAdding: boolean = false;
+  sub: Subscription;
 
   constructor(private categoriesService: CategoriesService) {}
 
   loadCategories() {
-    this.categoriesService.allCategoriesData.subscribe(
+    this.sub = this.categoriesService.allCategoriesData.subscribe(
       (data: CategoryInterface[]) => {
         this.listItems = data;
         this.selectedListItem = data[0];
@@ -49,4 +51,7 @@ export class CategoryEditorComponent implements OnInit {
   public cancelAdding = () => {
     this.isAdding = false;
   };
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

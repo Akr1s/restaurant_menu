@@ -40,7 +40,7 @@ export class CategoriesService {
       });
   }
 
-  getSingleCategory(id: string): any {
+  getSingleCategory(id: string): CategoryInterface {
     const categories = [...this.allCategoriesData.value];
     return categories.filter(
       (category: CategoryInterface) => category.id === id
