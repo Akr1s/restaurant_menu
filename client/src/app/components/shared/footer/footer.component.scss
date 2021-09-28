@@ -1,12 +1,12 @@
 .footer-container {
   background-color: var(--secondary-color);
 }
-.footer-text {
+.footer__text {
   font-size: 36px;
   margin: 0;
 }
 @media (max-width: 600px) {
-  .footer-text {
+  .footer__text {
     font-size: 24px;
   }
 }

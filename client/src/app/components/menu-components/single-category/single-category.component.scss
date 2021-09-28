@@ -1,19 +1,19 @@
 .single-category + .single-category {
   margin-top: 2rem;
 }
-.category-title {
+.single-category__title {
   padding-left: 10%;
   margin-bottom: 1rem;
 }
 @media (max-width: 900px) {
-  .category-title {
+  .single-category__title {
     padding-left: 0;
     text-align: center;
   }
 }
 
 @media print {
-  .category-title {
+  .single-category__title {
     text-align: center;
     padding-left: 0;
   }

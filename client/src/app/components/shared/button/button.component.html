@@ -1,13 +1,13 @@
 <button
   class="btn"
   [ngClass]="{
-    'btn-ok': ok,
-    'btn-submit': submit,
-    'btn-cancel': cancel,
-    'btn-small': small,
+    btn_ok: ok,
+    btn_submit: submit,
+    btn_cancel: cancel,
+    btn_small: small,
     'btn-add': add,
-    'btn-close': close,
-    'btn-largeFont': largeFont
+    btn_close: close,
+    btn_largeFont: largeFont
   }"
   [type]="submit ? 'submit' : 'button'"
   [disabled]="isDisabled"

@@ -1,4 +1,6 @@
 <section class="single-category" *ngFor="let category of primaryCategoriesList">
-  <h2 class="category-title">Category: {{ category.name | titlecase }}</h2>
+  <h2 class="single-category__title">
+    Category: {{ category.name | titlecase }}
+  </h2>
   <app-dishes-list [category]="category"> </app-dishes-list>
 </section>

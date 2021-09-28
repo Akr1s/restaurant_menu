@@ -1,12 +1,12 @@
-<article class="dish-item">
-  <img [src]="dish.img" [alt]="dish.name" class="poster" />
+<article class="dish">
+  <img [src]="dish.img" [alt]="dish.name" class="dish__poster" />
   <div class="description">
-    <h3 class="dish-name">{{ dish.name }}</h3>
-    <p class="description-text">
+    <h3 class="dish__name">{{ dish.name }}</h3>
+    <p class="description__text">
       {{ dish.description || "No description is provided" }}
     </p>
     <div class="details">
-      <p class="category">Category: {{ categoryName }}</p>
+      <p class="dish__category">Category: {{ categoryName }}</p>
       <ul class="weights">
         <li *ngFor="let item of dish.weights | keyvalue">
           {{ item.key }} : {{ item.value }}

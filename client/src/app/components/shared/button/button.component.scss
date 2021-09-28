@@ -11,24 +11,24 @@
     cursor: not-allowed;
   }
 }
-.btn-submit {
-  background-color: var(--btn-submit);
+.btn_submit {
+  background-color: var(--btn_submit);
 }
-.btn-ok {
-  background-color: var(--btn-ok);
+.btn_ok {
+  background-color: var(--btn_ok);
 }
-.btn-cancel {
+.btn_cancel {
   background-color: var(--btn-danger);
 }
-.btn-add {
-  background-color: var(--btn-submit);
+.btn_add {
+  background-color: var(--btn_submit);
 }
-.btn-close {
+.btn_close {
   background-color: var(--primary-color);
 }
-.btn-small {
+.btn_small {
   width: 150px;
 }
-.btn-largeFont {
+.btn_largeFont {
   font-size: 22px;
 }
