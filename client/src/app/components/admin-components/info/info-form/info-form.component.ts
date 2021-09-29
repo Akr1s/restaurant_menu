@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { InfoInterface } from 'src/app/interfaces/info';
 import { InfoService } from 'src/app/services/info.service';
+import { checkEmptyString } from 'src/app/validators/checkEmptyString';
 
 @Component({
   selector: 'info-form',
@@ -16,10 +17,22 @@ export class InfoFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private infoService: InfoService) {}
 
   infoForm = this.fb.group({
-    title: ['', [Validators.maxLength(25), Validators.required]],
-    address: ['', [Validators.maxLength(50), Validators.required]],
-    tel: ['', [Validators.maxLength(15), Validators.required]],
-    wifi: ['', [Validators.maxLength(63)]],
+    title: [
+      '',
+      [Validators.maxLength(25), Validators.required, checkEmptyString()],
+    ],
+    address: [
+      '',
+      [Validators.maxLength(50), Validators.required, checkEmptyString()],
+    ],
+    tel: [
+      '',
+      [Validators.maxLength(15), Validators.required, checkEmptyString()],
+    ],
+    wifi: [
+      '',
+      [Validators.maxLength(63), Validators.required, checkEmptyString()],
+    ],
   });
 
   async onSubmit() {

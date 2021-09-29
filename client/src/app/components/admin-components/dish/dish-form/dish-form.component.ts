@@ -13,6 +13,10 @@ import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import { WeightsInterface } from 'src/app/interfaces/weights';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { DishesService } from 'src/app/services/dishes.service';
+import { checkEmptyString } from 'src/app/validators/checkEmptyString';
+
+const weightRegex = /^\d{0,8}(\.\d{1,4})?[a-zA-Z]+$/;
+const priceRegex = /^\d{0,8}(\.\d{1,4})?[$]$/;
 
 @Component({
   selector: 'dish-form',
@@ -38,15 +42,26 @@ export class DishFormComponent implements OnInit, OnDestroy {
   ) {}
 
   dishForm = this.fb.group({
-    name: ['', [Validators.maxLength(30), Validators.required]],
-    description: ['', Validators.required],
+    name: [
+      '',
+      [Validators.maxLength(30), Validators.required, checkEmptyString()],
+    ],
+    description: ['', [Validators.maxLength(255)]],
     img: ['', Validators.required],
-    show: ['', Validators.required],
+    show: [false],
     category: ['', Validators.required],
     weights: this.fb.array([
       new FormGroup({
-        portion: new FormControl('', [Validators.required]),
-        price: new FormControl('', [Validators.required]),
+        portion: new FormControl('', [
+          Validators.required,
+          checkEmptyString(),
+          Validators.pattern(weightRegex),
+        ]),
+        price: new FormControl('', [
+          Validators.required,
+          checkEmptyString(),
+          Validators.pattern(priceRegex),
+        ]),
       }),
     ]),
   });
@@ -65,7 +80,6 @@ export class DishFormComponent implements OnInit, OnDestroy {
     }
     this.convertWeights();
   }
-
   fillWeights(count: number): void {
     for (let i = 0; i < count - 1; i++) {
       this.addWeight();

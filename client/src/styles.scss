@@ -61,6 +61,12 @@ body {
   }
 }
 
+.validation {
+  small {
+    color: colors.$btn-danger;
+  }
+}
+
 .input__title,
 .weights-title {
   font-weight: bold;

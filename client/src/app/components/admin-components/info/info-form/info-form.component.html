@@ -1,16 +1,74 @@
 <form class="editor-form" [formGroup]="infoForm" (ngSubmit)="onSubmit()">
   <app-input formControlName="title" label="Title: " id="title"></app-input>
+  <div
+    *ngIf="infoForm.controls.title.touched && infoForm.controls.title.invalid"
+    class="validation"
+  >
+    <small *ngIf="infoForm.controls.title.errors?.required"
+      >Title field is required</small
+    >
+    <small *ngIf="infoForm.controls.title.errors?.maxlength"
+      >Title field length should be less than 25 symbols</small
+    >
+    <small *ngIf="infoForm.controls.title.errors?.emptyString"
+      >Title cannot contain spaces only</small
+    >
+  </div>
   <app-input
     formControlName="address"
     label="Address: "
     id="address"
   ></app-input>
+  <div
+    *ngIf="
+      infoForm.controls.address.touched && infoForm.controls.address.invalid
+    "
+    class="validation"
+  >
+    <small *ngIf="infoForm.controls.address.errors?.required"
+      >Address field is required</small
+    >
+    <small *ngIf="infoForm.controls.address.errors?.maxlength"
+      >Address field length should be less than 50 symbols</small
+    >
+    <small *ngIf="infoForm.controls.address.errors?.emptyString"
+      >Address cannot contain spaces only</small
+    >
+  </div>
   <app-input formControlName="tel" label="Manager phone: " id="tel"></app-input>
+  <div
+    *ngIf="infoForm.controls.tel.touched && infoForm.controls.tel.invalid"
+    class="validation"
+  >
+    <small *ngIf="infoForm.controls.tel.errors?.required"
+      >Phone field is required</small
+    >
+    <small *ngIf="infoForm.controls.tel.errors?.maxlength"
+      >Phone field length should be less than 15 symbols</small
+    >
+    <small *ngIf="infoForm.controls.tel.errors?.emptyString"
+      >Phone cannot contain spaces only</small
+    >
+  </div>
   <app-input
     formControlName="wifi"
     label="Wifi password: "
     id="wifi"
   ></app-input>
+  <div
+    *ngIf="infoForm.controls.wifi.touched && infoForm.controls.wifi.invalid"
+    class="validation"
+  >
+    <small *ngIf="infoForm.controls.wifi.errors?.required"
+      >Wifi field is required</small
+    >
+    <small *ngIf="infoForm.controls.wifi.errors?.maxlength"
+      >Wifi field length should be less than 63 symbols</small
+    >
+    <small *ngIf="infoForm.controls.wifi.errors?.emptyString"
+      >Wifi cannot contain spaces only</small
+    >
+  </div>
   <div class="buttons-container">
     <app-button
       type="submit"

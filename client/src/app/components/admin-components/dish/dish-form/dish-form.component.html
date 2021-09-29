@@ -1,14 +1,34 @@
 <form class="editor-form" [formGroup]="dishForm" (ngSubmit)="onSubmit()">
   <h4 class="form__title">{{ title }}</h4>
   <app-input formControlName="name" label="Name: " id="name"></app-input>
+  <div
+    *ngIf="dishForm.controls.name.touched && dishForm.controls.name.invalid"
+    class="validation"
+  >
+    <small *ngIf="dishForm.controls.name.errors?.required"
+      >Name field is required</small
+    >
+    <small *ngIf="dishForm.controls.name.errors?.maxlength"
+      >Name field length should be less than 30 symbols</small
+    >
+    <small *ngIf="dishForm.controls.name.errors?.emptyString"
+      >Name cannot contain spaces only</small
+    >
+  </div>
   <div class="form-item-wrapper text-area-wrapper">
-    <label for="address">Description: </label>
-    <textarea
-      id="address"
-      type="text"
-      formControlName="description"
-      required
-    ></textarea>
+    <label for="desc">Description: </label>
+    <textarea id="desc" type="text" formControlName="description"></textarea>
+  </div>
+  <div
+    *ngIf="
+      dishForm.controls.description.touched &&
+      dishForm.controls.description.invalid
+    "
+    class="validation"
+  >
+    <small *ngIf="dishForm.controls.description.errors?.maxlength"
+      >Description field length should be less than 255 symbols</small
+    >
   </div>
   <div class="form-item-wrapper" *ngIf="!previewSource">
     <label for="image">Image: </label>
@@ -16,7 +36,6 @@
       id="image"
       type="file"
       formControlName="img"
-      required
       (change)="handleImageInputChange($event)"
       accept="image/*"
     />
@@ -59,16 +78,8 @@
     >
       <ng-container [formGroupName]="i">
         <div class="portion__container">
-          <input
-            type="text"
-            formControlName="portion"
-            placeholder="Name a portion"
-          />
-          <input
-            type="text"
-            formControlName="price"
-            placeholder="Price of the portion"
-          />
+          <input type="text" formControlName="portion" placeholder="100gr" />
+          <input type="text" formControlName="price" placeholder="100$" />
         </div>
         <app-button
           [cancel]="true"

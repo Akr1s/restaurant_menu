@@ -1,6 +1,22 @@
 <form class="editor-form" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
   <h4 class="form__title">{{ title }}</h4>
   <app-input formControlName="name" label="Name: " id="name"></app-input>
+  <div
+    *ngIf="
+      categoryForm.controls.name.touched && categoryForm.controls.name.invalid
+    "
+    class="validation"
+  >
+    <small *ngIf="categoryForm.controls.name.errors?.required"
+      >Name field is required</small
+    >
+    <small *ngIf="categoryForm.controls.name.errors?.maxlength"
+      >Name field length should be less than 30 symbols</small
+    >
+    <small *ngIf="categoryForm.controls.name.errors?.emptyString"
+      >Name cannot contain spaces only</small
+    >
+  </div>
   <app-checkbox formControlName="show" label="Show: "></app-checkbox>
   <div class="form-item-wrapper">
     <label for="tel">Parent: </label>

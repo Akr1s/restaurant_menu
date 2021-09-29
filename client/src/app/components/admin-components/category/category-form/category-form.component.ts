@@ -6,6 +6,7 @@ import { RESPONSE_CODES } from 'src/app/constants/responseCodes';
 import { CategoryInterface } from 'src/app/interfaces/category';
 import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { checkEmptyString } from 'src/app/validators/checkEmptyString';
 
 @Component({
   selector: 'category-form',
@@ -29,8 +30,11 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   ) {}
 
   categoryForm = this.fb.group({
-    name: ['', [Validators.maxLength(30), Validators.required]],
-    show: [false, Validators.required],
+    name: [
+      '',
+      [Validators.maxLength(30), Validators.required, checkEmptyString()],
+    ],
+    show: [false],
     parent: [null],
   });
 
