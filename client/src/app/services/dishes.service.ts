@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { dishMock } from '../constants/dataMocks';
 import routes from '../constants/dishServiceRoutes';
 import { RESPONSE_CODES } from '../constants/responseCodes';
 import { DishInterface } from '../interfaces/dish';
@@ -11,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
   providedIn: 'root',
 })
 export class DishesService {
-  dishData = new BehaviorSubject<DishInterface[]>([dishMock]);
+  dishData = new BehaviorSubject<Array<DishInterface>>([]);
 
   constructor(private http: HttpClient) {
     this.getAllDishes();

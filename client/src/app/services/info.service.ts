@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { infoMock } from '../constants/dataMocks';
+import { defaultInfo } from '../constants/defaultInfo';
 import infoServiceRoutes from '../constants/infoServiceRoutes';
 import { RESPONSE_CODES } from '../constants/responseCodes';
 import { InfoInterface } from '../interfaces/info';
@@ -10,7 +10,7 @@ import { InfoInterface } from '../interfaces/info';
   providedIn: 'root',
 })
 export class InfoService {
-  infoData = new BehaviorSubject<InfoInterface>(infoMock);
+  infoData = new BehaviorSubject<InfoInterface>(defaultInfo);
 
   constructor(private http: HttpClient) {
     this.getInfoData();

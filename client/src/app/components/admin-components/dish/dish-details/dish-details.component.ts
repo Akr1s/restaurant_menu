@@ -35,19 +35,21 @@ export class DishDetailsComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.dishImageString = this.checkImageLink(this.selectedListItem);
-    this.sub = this.categoriesService.allNonPrimaryCategoriesData.subscribe(
-      (data: PrimaryCategoryInterface[]) => {
-        this.categoryList = data;
-        this.itemCategory = this.getCategoryNameById(
-          this.selectedListItem.category
-        );
-      }
-    );
+    if (this.selectedListItem) {
+      this.sub = this.categoriesService.allNonPrimaryCategoriesData.subscribe(
+        (data: PrimaryCategoryInterface[]) => {
+          this.categoryList = data;
+          this.itemCategory = this.getCategoryNameById(
+            this.selectedListItem.category
+          );
+        }
+      );
+      this.dishImageString = this.checkImageLink(this.selectedListItem);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.selectedListItem) {
+    if (changes.selectedListItem && changes.selectedListItem.currentValue) {
       this.dishImageString = this.checkImageLink(this.selectedListItem);
       this.itemCategory = this.getCategoryNameById(
         changes.selectedListItem.currentValue.category
@@ -85,6 +87,8 @@ export class DishDetailsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

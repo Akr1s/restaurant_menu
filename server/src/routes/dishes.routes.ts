@@ -12,7 +12,6 @@ const {
   createDishDBCall,
   updateDishDBCall,
   uploadImage,
-  checkDuplicateDishUpdate,
 } = controller;
 
 router.post(
@@ -27,7 +26,7 @@ router.put(
   "/:id",
   uploadImage,
   performDishValidation,
-  checkDuplicateDishUpdate,
+  checkDuplicateDish,
   updateDishDBCall
 );
 router.delete("/:id", deleteDish);

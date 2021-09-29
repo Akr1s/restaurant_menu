@@ -9,7 +9,6 @@ const {
   getAllCategories,
   updateCategoryDBCall,
   getPrimaryCategories,
-  checkDuplicateCategoryUpdate,
 } = controller;
 
 const router = promiseRouter();
@@ -23,7 +22,7 @@ router.post(
 );
 router.put(
   "/:id",
-  checkDuplicateCategoryUpdate,
+  checkDuplicateCategory,
   performCategoryValidation,
   updateCategoryDBCall
 );

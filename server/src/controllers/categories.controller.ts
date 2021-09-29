@@ -55,24 +55,6 @@ const checkDuplicateCategory = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name } = req.body;
-  const duplicateCheckResult = await duplicateCheck(
-    name,
-    "SELECT NAME FROM CATEGORIES"
-  );
-  if (duplicateCheckResult !== RESPONSE_CODES.ADD_SUCCESS) {
-    return res
-      .status(STATUS_CODES.VALIDATION_ERROR)
-      .send(`${duplicateCheckResult}`);
-  }
-  next();
-};
-
-const checkDuplicateCategoryUpdate = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
   const { name, id } = req.body;
   const duplicateCheckResult = await duplicateCheck(
     name,
@@ -140,5 +122,4 @@ export default {
   performCategoryValidation,
   createCategoryDBCall,
   checkDuplicateCategory,
-  checkDuplicateCategoryUpdate,
 };
