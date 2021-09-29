@@ -1,25 +1,46 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DishInterface } from 'src/app/interfaces/dish';
+import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
+import { DishesService } from 'src/app/services/dishes.service';
 
 @Component({
   selector: 'app-single-category',
   templateUrl: './single-category.component.html',
   styleUrls: ['./single-category.component.scss'],
 })
-export class SingleCategoryComponent implements OnInit, OnDestroy {
-  primaryCategoriesList: PrimaryCategoryInterface[];
+export class SingleCategoryComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() category: PrimaryCategoryInterface;
+  @Input() allSelected: boolean;
+  dishesList: DishInterface[] = [];
+  loading: boolean = true;
   sub: Subscription;
 
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private dishesService: DishesService) {}
+
+  getDishes(id: string) {
+    this.loading = true;
+    this.sub = this.dishesService
+      .getDishesByCategoryId(id)
+      .subscribe((data: DishInterface[]) => {
+        this.dishesList = data;
+        this.loading = false;
+      });
+  }
 
   ngOnInit(): void {
-    this.sub = this.categoriesService
-      .getPrimaryCategories()
-      .subscribe((data: PrimaryCategoryInterface[]) => {
-        this.primaryCategoriesList = data;
-      });
+    this.getDishes(this.category.id);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.getDishes(changes.category.currentValue.id);
   }
 
   ngOnDestroy() {

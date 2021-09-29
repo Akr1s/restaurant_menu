@@ -1,10 +1,17 @@
 <section class="dishes">
   <div class="container dishes-container">
-    <app-single-category
-      *ngIf="selectedCategory.name === 'All'; else dishesList"
-    ></app-single-category>
+    <ng-container *ngIf="selectedCategory.name === 'All'; else dishesList">
+      <app-single-category
+        [category]="category"
+        *ngFor="let category of primaryCategoriesList"
+        [allSelected]="true"
+      ></app-single-category>
+    </ng-container>
     <ng-template #dishesList>
-      <app-dishes-list [category]="selectedCategory"></app-dishes-list>
+      <app-single-category
+        [category]="selectedCategory"
+        [allSelected]="false"
+      ></app-single-category>
     </ng-template>
   </div>
 </section>

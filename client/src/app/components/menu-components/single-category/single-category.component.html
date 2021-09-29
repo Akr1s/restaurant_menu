@@ -1,6 +1,20 @@
-<section class="single-category" *ngFor="let category of primaryCategoriesList">
-  <h2 class="single-category__title">
-    Category: {{ category.name | titlecase }}
-  </h2>
-  <app-dishes-list [category]="category"> </app-dishes-list>
+<section class="single-category">
+  <div
+    class="single-category__container"
+    *ngIf="allSelected && dishesList.length"
+  >
+    <h2 class="single-category__title">
+      Category: {{ category.name | titlecase }}
+    </h2>
+    <div *ngIf="loading; else showList" class="loading">Loading...</div>
+    <ng-template #showList>
+      <app-dishes-list [dishesList]="dishesList"></app-dishes-list>
+    </ng-template>
+  </div>
+  <ng-container *ngIf="!allSelected">
+    <div *ngIf="loading; else showList" class="loading">Loading...</div>
+    <ng-template #showList>
+      <app-dishes-list [dishesList]="dishesList"></app-dishes-list>
+    </ng-template>
+  </ng-container>
 </section>

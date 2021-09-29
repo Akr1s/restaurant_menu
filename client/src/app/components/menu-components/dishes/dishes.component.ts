@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-dishes',
@@ -9,7 +11,20 @@ import { PrimaryCategoryInterface } from 'src/app/interfaces/primaryCategory';
 export class DishesComponent implements OnInit {
   @Input() selectedCategory: PrimaryCategoryInterface;
 
-  constructor() {}
+  primaryCategoriesList: PrimaryCategoryInterface[];
+  sub: Subscription;
 
-  ngOnInit(): void {}
+  constructor(private categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.sub = this.categoriesService
+      .getPrimaryCategories()
+      .subscribe((data: PrimaryCategoryInterface[]) => {
+        this.primaryCategoriesList = data;
+      });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }
