@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Aclonica&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aclonica&family=Open+Sans:wght@500&display=swap");
 @import url("./app/style/_reset.scss");
 @import url("./app/style/_variables.scss");
 
@@ -50,33 +50,20 @@ body {
   text-align: center;
 }
 
-.input-wrapper {
-  padding: 1rem;
-}
-
-.items-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.form-item-wrapper {
   padding: 1rem;
   border: 1px solid var(--admin-form-border-color);
+
+  select {
+    padding: 0.25rem;
+  }
 }
-.label__static {
-  margin-bottom: 0.5rem;
-  text-align: center;
+
+.input__title,
+.weights-title {
   font-weight: bold;
 }
-.label__variable {
-  word-wrap: anywhere;
-}
-.sub-category {
-  margin: 0.5rem 0rem;
-}
+
 @media (max-width: 760px) {
   .editor-form {
     width: 75%;

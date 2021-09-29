@@ -1,7 +1,7 @@
 <form class="editor-form" [formGroup]="dishForm" (ngSubmit)="onSubmit()">
   <h4 class="form__title">{{ title }}</h4>
   <app-input formControlName="name" label="Name: " id="name"></app-input>
-  <div class="input-wrapper text-area-wrapper">
+  <div class="form-item-wrapper text-area-wrapper">
     <label for="address">Description: </label>
     <textarea
       id="address"
@@ -10,7 +10,7 @@
       required
     ></textarea>
   </div>
-  <div class="input-wrapper" *ngIf="!previewSource">
+  <div class="form-item-wrapper" *ngIf="!previewSource">
     <label for="image">Image: </label>
     <input
       id="image"
@@ -22,11 +22,15 @@
     />
   </div>
   <div
-    class="image-preview flex-center"
+    class="image-preview flex-center form-item-wrapper"
     *ngIf="previewSource"
     title="Image preview"
   >
-    <img [src]="previewSource" alt="Preview image" />
+    <img
+      [src]="previewSource"
+      alt="Preview image"
+      class="image-preview__image"
+    />
     <button
       type="button"
       class="delete-image flex-center"
@@ -36,7 +40,7 @@
     </button>
   </div>
   <app-checkbox formControlName="show" label="Show: "></app-checkbox>
-  <div class="input-wrapper">
+  <div class="form-item-wrapper">
     <label for="category">Category: </label>
     <select formControlName="category" id="category" required>
       <option [ngValue]="category.id" *ngFor="let category of categoriesList">
@@ -44,26 +48,28 @@
       </option>
     </select>
   </div>
-  <div class="portion-container input-wrapper" formArrayName="weights">
+  <div class="portion-container form-item-wrapper" formArrayName="weights">
     <div class="portions__header">
       <span>Portions</span>
       <app-button [add]="true" (click)="addWeight()" btnText="Add"></app-button>
     </div>
     <div
-      class="portion__item"
+      class="portion__item form-item-wrapper"
       *ngFor="let portionForm of weights.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <input
-          type="text"
-          formControlName="portion"
-          placeholder="Name a portion"
-        />
-        <input
-          type="text"
-          formControlName="price"
-          placeholder="Price of the portion"
-        />
+        <div class="portion__container">
+          <input
+            type="text"
+            formControlName="portion"
+            placeholder="Name a portion"
+          />
+          <input
+            type="text"
+            formControlName="price"
+            placeholder="Price of the portion"
+          />
+        </div>
         <app-button
           [cancel]="true"
           [small]="true"

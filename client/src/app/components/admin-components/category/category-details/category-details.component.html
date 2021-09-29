@@ -1,9 +1,15 @@
 <div class="category-wrapper flex-center">
   <h3 class="sub-category">{{ listItemTitle }}</h3>
   <div class="category-detail" *ngIf="selectedListItem">
-    <p class="category__name">Name: {{ selectedListItem.name }}</p>
-    <p class="category__parent">Parent: {{ parentName }}</p>
-    <p class="category__show">Show: {{ selectedListItem.show }}</p>
+    <p class="category__name">
+      <span class="input__title">Name: </span> {{ selectedListItem.name }}
+    </p>
+    <p class="category__parent">
+      <span class="input__title">Parent: </span>{{ parentName }}
+    </p>
+    <p class="category__show">
+      <span class="input__title">Show: </span>{{ selectedListItem.show }}
+    </p>
   </div>
   <div class="buttons-container">
     <app-button

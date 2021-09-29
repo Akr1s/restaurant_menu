@@ -1,11 +1,22 @@
 <div class="dish-wrapper flex-center">
   <h3 class="sub-category">{{ listItemTitle }}</h3>
   <div class="dish-detail" *ngIf="selectedListItem">
-    <p class="dish-name">Name: {{ selectedListItem.name }}</p>
-    <p class="dish-desc">Description: {{ selectedListItem.description }}</p>
-    <p class="dish-image">Img link: {{ dishImageString }}</p>
-    <p class="dish-name">Show: {{ selectedListItem.show }}</p>
-    <p class="dish-name">Category: {{ itemCategory }}</p>
+    <p class="dish-name">
+      <span class="input__title">Name: </span>{{ selectedListItem.name }}
+    </p>
+    <p class="dish-desc">
+      <span class="input__title">Description: </span
+      >{{ selectedListItem.description }}
+    </p>
+    <p class="dish-image">
+      <span class="input__title">Img link: </span>{{ dishImageString }}
+    </p>
+    <p class="dish-name">
+      <span class="input__title">Show: </span>{{ selectedListItem.show }}
+    </p>
+    <p class="dish-name">
+      <span class="input__title">Category: </span>{{ itemCategory }}
+    </p>
     <div class="weights">
       <p class="weights-title">Weights</p>
       <p

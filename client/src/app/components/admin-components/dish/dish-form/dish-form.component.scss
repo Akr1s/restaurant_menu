@@ -21,29 +21,40 @@
 }
 
 .image-preview {
-  width: 300px;
   margin: 0 auto;
   position: relative;
+  width: 100%;
+
+  &__image {
+    width: 300px;
+    object-fit: contain;
+  }
 }
 .delete-image {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1rem;
+  right: 1rem;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 1px solid #727070;
   cursor: pointer;
 }
+.portion__item,
+.portion__container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
 
 .portion__item {
-  display: flex;
-
+  input {
+    padding: 0.25rem;
+  }
   app-button {
     margin-left: auto;
-  }
-  input + input {
-    margin-left: 0.5rem;
   }
 }
 .portion__item + .portion__item {

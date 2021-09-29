@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { Menu } from './pages/menu/menu.component';
 import { Admin } from './pages/admin/admin.component';
 import { NotFound } from './components/shared/not_found/not_found.component';
-import { CategoryEditorComponent } from './components/admin-components/category-editor/category-list-editor.component';
-import { DishesEditorComponent } from './components/admin-components/dishes-editor/dishes-editor.component';
-import { InfoEditorComponent } from './components/admin-components/info-editor/info-editor.component';
+import { CategoryEditorComponent } from './components/admin-components/category/category-editor/category-list-editor.component';
+import { DishesEditorComponent } from './components/admin-components/dish/dishes-editor/dishes-editor.component';
+import { InfoEditorComponent } from './components/admin-components/info/info-editor/info-editor.component';
 
 const routes: Routes = [
   { path: '', component: Menu },

@@ -39,14 +39,30 @@
     margin-bottom: 1rem;
   }
 }
+
 .label {
   flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid #ddd;
   & + & {
     margin: 1rem 0rem;
   }
   .info-label {
     margin-right: 0.25rem;
   }
+}
+
+.label__static {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+.label__variable {
+  word-wrap: anywhere;
 }
 
 @media (min-width: 1200px) {
