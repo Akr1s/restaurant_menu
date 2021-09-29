@@ -1,10 +1,12 @@
+@use "../../../style/colors";
+
 :host {
   height: 0px;
   display: block;
 }
 .scroll {
   &:hover {
-    color: #aaa;
+    color: colors.$scroll-hover;
   }
 
   position: fixed;
@@ -12,7 +14,7 @@
   bottom: 2rem;
   right: 2rem;
   vertical-align: middle;
-  color: #666;
+  color: colors.$scroll;
   box-sizing: border-box;
   width: 20px;
   height: 20px;

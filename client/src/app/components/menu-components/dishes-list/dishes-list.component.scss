@@ -1,8 +1,10 @@
+@use "../../../style/colors";
+
 .no-dishes {
   text-align: center;
   margin-top: 1rem;
   font-size: 20px;
-  color: var(--secondary-color);
+  color: colors.$secondary-color;
 }
 .loading {
   min-height: 300px;

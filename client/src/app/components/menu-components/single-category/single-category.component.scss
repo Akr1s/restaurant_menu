@@ -1,3 +1,5 @@
+@use "../../../style/colors";
+
 .single-category + .single-category {
   margin-top: 2rem;
 }
@@ -5,6 +7,19 @@
   padding-left: 10%;
   margin-bottom: 1rem;
 }
+
+.no-dishes {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 20px;
+  color: colors.$secondary-color;
+}
+.loading {
+  min-height: 300px;
+  font-size: 36px;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   .single-category__title {
     padding-left: 0;

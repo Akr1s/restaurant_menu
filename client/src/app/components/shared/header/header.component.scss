@@ -1,7 +1,9 @@
+@use "../../../style/colors";
+
 .header-container {
   display: flex;
   justify-content: space-between;
-  background-color: var(--primary-color);
+  background-color: colors.$primary-color;
   align-items: center;
 
   h1,
@@ -19,7 +21,7 @@
     cursor: pointer;
 
     icon {
-      color: var(--text-color);
+      color: colors.$text-color;
     }
   }
   p.hide {

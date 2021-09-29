@@ -1,5 +1,7 @@
+@use "../../../style/colors";
+
 .nav-container {
-  background-color: var(--body-color);
+  background-color: colors.$body-color;
   padding-bottom: 0;
 
   ul {
@@ -7,7 +9,7 @@
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 2px solid colors.$primary-color;
     padding-bottom: 1rem;
 
     li {
@@ -24,7 +26,7 @@
 .dropdown {
   padding: 10px;
   border: none;
-  border-right: 10px solid var(--text-color);
+  border-right: 10px solid colors.$text-color;
   outline: none;
   width: 50%;
   border-radius: 4px;
@@ -35,7 +37,7 @@
 }
 
 .activeCategory {
-  color: var(--active-category);
+  color: colors.$active-category;
 }
 @media (max-width: 900px) {
   .nav-container ul {

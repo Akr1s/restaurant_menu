@@ -1,6 +1,9 @@
+@use "../../style/colors";
+@use "../../style/fonts";
+
 :host {
   min-height: 100vh;
-  font-family: var(--admin-font);
+  font-family: fonts.$admin-font;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -13,19 +16,19 @@
   &__container {
     width: 100%;
     flex: 1;
-    background-color: var(--admin-bg);
-    color: var(--text-secondary-color);
+    background-color: colors.$admin-bg;
+    color: colors.$text-secondary-color;
   }
   &__navigation {
     flex-wrap: wrap;
   }
   &__li {
     &:hover {
-      background-color: #e54029;
+      background-color: colors.$editor-li;
     }
   }
   &__link {
-    color: var(--text-color);
+    color: colors.$text-color;
     text-decoration: none;
     display: block;
     padding: 0.5rem;
@@ -35,11 +38,11 @@
   }
 }
 .navigation-container {
-  background-color: var(--secondary-color);
+  background-color: colors.$secondary-color;
 }
 
 .active-link {
-  color: var(--active-route);
+  color: colors.$active-route;
 }
 @media (max-width: 400px) {
   .editor {

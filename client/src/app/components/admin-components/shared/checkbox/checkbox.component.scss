@@ -1,6 +1,8 @@
+@use "../../../../style/colors";
+
 .checkbox-wrapper {
   padding: 1rem;
-  border: 1px solid var(--admin-form-border-color);
+  border: 1px solid colors.$admin-form-border-color;
   display: flex;
   align-items: center;
 }
@@ -26,7 +28,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: colors.$slider-background;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -38,17 +40,17 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: colors.$default;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: colors.$slider-color;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px colors.$slider-color;
 }
 
 input:checked + .slider:before {

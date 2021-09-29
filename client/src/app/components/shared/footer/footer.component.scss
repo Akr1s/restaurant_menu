@@ -1,5 +1,7 @@
+@use "../../../style/colors";
+
 .footer-container {
-  background-color: var(--secondary-color);
+  background-color: colors.$secondary-color;
 }
 .footer__text {
   font-size: 36px;

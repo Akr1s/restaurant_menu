@@ -1,14 +1,16 @@
+@use "./app/style/reset";
+@use "./app/style/sizes";
+@use "./app/style/colors";
+@use "./app/style/fonts";
 @import url("https://fonts.googleapis.com/css2?family=Aclonica&family=Open+Sans:wght@500&display=swap");
-@import url("./app/style/_reset.scss");
-@import url("./app/style/_variables.scss");
 
 body {
-  font-family: var(--main-font, sans-serif);
-  color: var(--text-color);
+  font-family: fonts.$main-font;
+  color: colors.$text-color;
 }
 
 .container {
-  max-width: var(--container-width);
+  max-width: sizes.$container-width;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -52,7 +54,7 @@ body {
 
 .form-item-wrapper {
   padding: 1rem;
-  border: 1px solid var(--admin-form-border-color);
+  border: 1px solid colors.$admin-form-border-color;
 
   select {
     padding: 0.25rem;

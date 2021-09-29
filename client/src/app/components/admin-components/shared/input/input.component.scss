@@ -1,6 +1,8 @@
+@use "../../../../style/colors";
+
 .input-wrapper {
   padding: 1rem;
-  border: 1px solid var(--admin-form-border-color);
+  border: 1px solid colors.$admin-form-border-color;
 
   input {
     padding: 0.25rem;

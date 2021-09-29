@@ -1,3 +1,5 @@
+@use "../../../style/colors";
+
 h1 {
-  color: var(--text-secondary-color);
+  color: colors.$text-secondary-color;
 }

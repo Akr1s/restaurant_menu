@@ -1,6 +1,8 @@
+@use "../../../../style/colors";
+
 .list-container {
   height: 150px;
-  border: 1px solid black;
+  border: 1px solid colors.$default-dark;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -24,11 +26,11 @@
 }
 .item-title {
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid colors.$default-dark;
   cursor: pointer;
 }
 .selected {
-  background-color: var(--selected-item-color);
+  background-color: colors.$selected-item-color;
 }
 
 .input-wrapper {

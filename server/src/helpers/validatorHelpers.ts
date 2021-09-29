@@ -1,10 +1,10 @@
 import { RESPONSE_CODES } from "../constants/responseCodes";
 
-const propertyIsMissing = (property: unknown): boolean => {
+const propertyIsMissing = (property: any): boolean => {
   return property == undefined;
 };
 
-export const propertiesAreMissing = (...properties: unknown[]): boolean => {
+export const propertiesAreMissing = (...properties: any[]): boolean => {
   return properties.some((prop) => propertyIsMissing(prop));
 };
 
@@ -12,7 +12,7 @@ export const objectIsEmpty = (obj: object): boolean => {
   return Object.keys(obj).length === 0;
 };
 
-export const wrongType = (property: unknown, type: string): boolean => {
+export const wrongType = (property: any, type: string): boolean => {
   return typeof property !== type;
 };
 
@@ -27,7 +27,7 @@ export const stringLengthExceeds = (
   return param.length > maxLength;
 };
 
-export const isUndefined = (param: unknown): boolean => {
+export const isUndefined = (param: any): boolean => {
   return param === undefined;
 };
 

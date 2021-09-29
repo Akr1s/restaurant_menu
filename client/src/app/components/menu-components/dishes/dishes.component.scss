@@ -1,7 +1,14 @@
+@use "../../../style/colors";
+
 .dishes,
 .dishes-container {
   height: 100%;
 }
 .dishes-container {
-  background-color: var(--body-color);
+  background-color: colors.$body-color;
+}
+@media (max-width: 400px) {
+  .dishes-container {
+    padding: 1rem 0.25rem;
+  }
 }
