@@ -40,8 +40,12 @@ export class DishesService {
       if (responseCode === RESPONSE_CODES.UPDATE_SUCCESS) {
         this.dishData.next(this.localDishListUpdate(dish, id));
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.error === RESPONSE_CODES.DUPLICATE_ENTITY) {
+        alert('Name field should be unique!');
+      } else {
+        console.log(error);
+      }
     }
     return responseCode;
   }
@@ -56,8 +60,12 @@ export class DishesService {
       if (responseCode === RESPONSE_CODES.ADD_SUCCESS) {
         this.dishData.next(this.localDishListAdd(dish));
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.error === RESPONSE_CODES.DUPLICATE_ENTITY) {
+        alert('Name field should be unique!');
+      } else {
+        console.log(error);
+      }
     }
     return responseCode;
   }

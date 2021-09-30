@@ -61,8 +61,12 @@ export class CategoriesService {
         this.allCategoriesData.next(this.localCategoryListUpdate(category, id));
         this.fillLists();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.error === RESPONSE_CODES.DUPLICATE_ENTITY) {
+        alert('Name field should be unique!');
+      } else {
+        console.log(error);
+      }
     }
     return responseCode;
   }
@@ -78,8 +82,12 @@ export class CategoriesService {
         this.allCategoriesData.next(this.localCategoryListAdd(category));
         this.fillLists();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.error === RESPONSE_CODES.DUPLICATE_ENTITY) {
+        alert('Name field should be unique!');
+      } else {
+        console.log(error);
+      }
     }
     return responseCode;
   }
