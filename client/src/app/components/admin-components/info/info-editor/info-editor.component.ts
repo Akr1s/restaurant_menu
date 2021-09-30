@@ -6,7 +6,6 @@ import { InfoService } from 'src/app/services/info.service';
 @Component({
   selector: 'info-editor',
   templateUrl: './info-editor.component.html',
-  styleUrls: ['./info-editor.component.scss'],
 })
 export class InfoEditorComponent implements OnInit, OnDestroy {
   info: InfoInterface;

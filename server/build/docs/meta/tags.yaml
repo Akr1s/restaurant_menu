@@ -1,0 +1,7 @@
+tags:
+  - name: Category
+    description: Category of dishes
+  - name: Dish
+    description: Dish in the restaurant
+  - name: Info
+    description: Information of the restaurant

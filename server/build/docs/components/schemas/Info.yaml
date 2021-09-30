@@ -1,0 +1,17 @@
+Info:
+  type: object
+  properties:
+    address:
+      type: string
+      nullable: false
+    title:
+      type: string
+      nullable: false
+    wifi:
+      type: string
+      nullable: false
+    tel:
+      type: string
+      nullable: false
+  xml:
+    name: Info

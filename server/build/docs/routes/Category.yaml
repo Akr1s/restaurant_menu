@@ -1,0 +1,136 @@
+Category:
+  /categories:
+    get:
+      summary: Get all categories
+      tags:
+        - Category
+      description: |-
+        Get all dish categories
+      responses:
+        "200":
+          description: Obtained all a categories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Categories"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "40"
+  /categories/add:
+    post:
+      summary: Create new category
+      tags:
+        - Category
+      description: |-
+        Create new category
+      requestBody:
+        description: category info
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "201":
+          description: Category was crated
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "71"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "72"
+        "422":
+          description: Validation error 1 - BODY_IS_EMPTY 2 - PROPERTY_IS_MISSING 3 - BODY_HAS_ADDITIONAL_PROPERTIES 41 - CATEGORIES_NAME_ERROR 42 - CATEGORIES_SHOW_ERROR 999 - DUPLICATE_ENTITY
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "1"
+  /categories/primary:
+    get:
+      summary: Get primary categories
+      tags:
+        - Category
+      description: |-
+        Obtained primary categories
+      responses:
+        "200":
+          description: Obtained category children
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrimaryCategories"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "40"
+  /categories/{id}:
+    put:
+      summary: Update category with id
+      tags:
+        - Category
+      description: |-
+        Update category with id
+      requestBody:
+        description: category info
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "200":
+          description: "Category was updated"
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "81"
+        "422":
+          description: Validation error 1 - BODY_IS_EMPTY 2 - PROPERTY_IS_MISSING 3 - BODY_HAS_ADDITIONAL_PROPERTIES 41 - CATEGORIES_NAME_ERROR 42 - CATEGORIES_SHOW_ERROR 999 - DUPLICATE_ENTITY
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "1"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "82"
+    delete:
+      summary: Delete category with id
+      tags:
+        - Category
+      description: |-
+        Delete category with id
+      responses:
+        "200":
+          description: Category was deleted
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "91"
+        "500":
+          description: "Something went wrong"
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "92"

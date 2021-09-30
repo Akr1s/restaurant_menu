@@ -1,0 +1,136 @@
+Dish:
+  /Dish:
+    get:
+      summary: Get a Dish
+      tags:
+        - Dish
+      description: |-
+        Get all a Dish
+      responses:
+        "200":
+          description: Obtained all a Dish
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dishs'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+    post:
+      summary: Creates new Dish
+      tags:
+        - Dish
+      description: |-
+        Creates new Dish
+      requestBody:
+        description: Dish info
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dish'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dish'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+  /Dish?{params}:
+    get:
+      summary: Get a Dish by params
+      tags:
+        - Dish
+      description: |-
+        Get all a Dish by param
+      responses:
+        "200":
+          description: Obtained all a Dish by param
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dishs'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+  /Dish/category?{params}&role={role}:
+    get:
+      summary: Get a Dish with category by params
+      tags:
+        - Dish
+      description: |-
+        Obtained a category with Dish
+      parameters:
+        - in: path
+          name: role
+          schema:
+            type: string
+          name: params
+          schema: 
+            type: string
+      responses:
+        "200":
+          description: Obtained Dish with category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DishWithCategory'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+  /Dish/{DishId}:
+    get:
+      summary: Get a Dish
+      tags:
+        - Dish
+      description: |-
+        Obtained a Dish with corresponding Dish id
+      parameters:
+        - in: path
+          name: DishId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Obtained real estate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dish'
+        "400":
+          $ref: '#/components/responses/400BadRequest'
+    put:
+      summary: Updates a Dish
+      tags:
+        - Dish
+      description: |-
+        Updates a Dish with corresponding Dish by id
+      parameters:
+        - in: path
+          name: DishId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dish was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dish'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      summary: Deletes existing Dish
+      tags:
+        - Dish
+      description: |-
+        Delete a Dish by Id
+      parameters:
+        - in: path
+          name: DishId
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 'The permission was deleted successfully'
+        '400':
+          $ref: '#/components/responses/400BadRequest'

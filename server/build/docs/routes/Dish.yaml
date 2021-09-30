@@ -1,0 +1,136 @@
+Dish:
+  /dishes:
+    get:
+      summary: Get all dishes
+      tags:
+        - Dish
+      description: |-
+        Get all dishes
+      responses:
+        "200":
+          description: Obtained all dishes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dishes"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "50"
+  /dishes/add:
+    post:
+      summary: Create new Dish
+      tags:
+        - Dish
+      description: |-
+        Create new Dish
+      requestBody:
+        description: Create new dish
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dish"
+      responses:
+        "201":
+          description: Dish was created
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "71"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "72"
+        "422":
+          description: Validation error 1 - BODY_IS_EMPTY 2 - PROPERTY_IS_MISSING 3 - BODY_HAS_ADDITIONAL_PROPERTIES 51 - DISHES_NAME_ERROR 52 - DISHES_DESCRIPTION_ERROR 53 - DISHES_IMG_ERROR 54 - DISHES_SHOW_ERROR 56 - DISHES_WEIGHTS_ERROR 999 - DUPLICATE_ENTITY
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "1"
+  /dishes/select/{id}:
+    get:
+      summary: Get all dishes from a category with id
+      tags:
+        - Dish
+      description: |-
+        Get all dishes from a category with id
+      responses:
+        "200":
+          description: Get all dishes from a category with id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dishes"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "50"
+  /dishes/{id}:
+    put:
+      summary: Update dish with id
+      tags:
+        - Dish
+      description: |-
+        Update dish with id
+      requestBody:
+        description: Create new dish
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dish"
+      responses:
+        "200":
+          description: Dish was updated
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "81"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "82"
+        "422":
+          description: Validation error 1 - BODY_IS_EMPTY 2 - PROPERTY_IS_MISSING 3 - BODY_HAS_ADDITIONAL_PROPERTIES 51 - DISHES_NAME_ERROR 52 - DISHES_DESCRIPTION_ERROR 53 - DISHES_IMG_ERROR 54 - DISHES_SHOW_ERROR 56 - DISHES_WEIGHTS_ERROR 999 - DUPLICATE_ENTITY
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "1"
+    delete:
+      summary: Delete dish with id
+      tags:
+        - Dish
+      description: |-
+        Delete dish with id
+      responses:
+        "200":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "91"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "92"

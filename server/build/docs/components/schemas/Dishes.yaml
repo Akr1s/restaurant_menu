@@ -1,0 +1,31 @@
+Dishes:
+  type: array
+  items:
+    type: object
+    properties:
+      name:
+        type: string
+        nullable: false
+        unique: true
+      description:
+        type: string
+        nullable: false
+      show:
+        type: boolean
+        nullable: false
+      category:
+        type: string
+        nullable: true
+      image:
+        type: string
+        nullable: false
+      weights:
+        type: object
+        nullable: false
+        properties:
+          weight:
+            type: string
+          price:
+            type: string
+  xml:
+    name: Dishes

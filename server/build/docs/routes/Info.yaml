@@ -1,0 +1,57 @@
+Info:
+  /info:
+    get:
+      summary: Get info of the restaurant
+      tags:
+        - Info
+      description: |-
+        Get info of the restaurant
+      responses:
+        "200":
+          description: Obtained info of the restaurant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Info"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "60"
+    put:
+      summary: Update info of the restaurant
+      tags:
+        - Info
+      description: |-
+        Update info of the restaurant
+      requestBody:
+        description: restaurant info
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Info"
+      responses:
+        "200":
+          description: Info was updated
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "81"
+        "500":
+          description: Something went wrong
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "82"
+        "422":
+          description: Validation error 1 - BODY_IS_EMPTY 2 - PROPERTY_IS_MISSING 3 - BODY_HAS_ADDITIONAL_PROPERTIES 61 - INFO_TITLE_ERROR 62 - INFO_ADDRESS_ERROR 63 - INFO_TEL_ERROR 64 - INFO_WIFI_ERROR
+          content:
+            text/plain:
+              schema:
+                responseCode: string
+                example: "1"
